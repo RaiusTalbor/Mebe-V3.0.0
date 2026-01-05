@@ -1,60 +1,77 @@
 # Motorsportmeisterschaftsberechner
 # Mebe V3.0.0
 
-#Variablen
-global name, pfad, pfadFahrer, pfadRennkalender, rennkalender, fahrerliste
-name = ""
-pfad = "Datenbank/" + name + ".dat"
-pfadRennkalender = "Datenbank/" + name + "Strecken.dat"
-pfadFahrer = "Datenbank/" + name + "Fahrer.dat"
-rennkalender = []
-fahrerliste = []
+import Daten
 
-#getter
-def getname():
-    return name
+class Meisterschaft:
+    name = ""
+    pfad = "Datenbank/" + name + ".dat"
+    pfadRennkalender = "Datenbank/" + name + "Strecken.dat"
+    pfadFahrer = "Datenbank/" + name + "Fahrer.dat"
+    rennkalender = []
+    fahrerliste = []
 
-def getpfad():
-    return pfad
+    def __init__(self):
 
-def getpfadRennkalender():
-    return pfadRennkalender
+        #Variablen
+        name = ""
+        self.pfad = "Datenbank/" + name + ".dat"
+        self.pfadRennkalender = "Datenbank/" + name + "Strecken.dat"
+        self.pfadFahrer = "Datenbank/" + name + "Fahrer.dat"
+        self.rennkalender = []
+        self.fahrerliste = []
 
-def getpfadFahrer():
-    return pfadFahrer
+    #getter
+    def getname(self):
+        return self.name
 
-def getrennkalender():
-    return rennkalender
+    def getpfad(self):
+        return self.pfad
 
-def getfahrerliste():
-    return fahrerliste
+    def getpfadRennkalender(self):
+        return self.pfadRennkalender
 
-#setter
-def setname(übergabe):
-    global name
-    name = übergabe
+    def getpfadFahrer(self):
+        return self.pfadFahrer
 
-def setpfad(übergabe):
-    global pfad
-    pfad = übergabe
+    def getrennkalender(self):
+        return self.rennkalender
 
-def setpfadRennkalender(übergabe):
-    global pfadRennkalender
-    pfadRennkalender = übergabe
+    def getfahrerliste(self):
+        return self.fahrerliste
 
-def setpfadFahrer(übergabe):
-    global pfadFahrer
-    pfadFahrer = übergabe
+    #setter
+    def setname(self, übergabe):
+        self.name = übergabe
 
-def setrennkalender(übergabe):
-    global rennkalende
-    rennkalender = übergabe
-    
+    def setpfad(self, übergabe):
+        self.pfad = "Datenbank/" + übergabe + ".dat"
 
-def setfahrerliste(übergabe):
-    global fahrerliste
-    fahrerliste = übergabe
+    def setpfadRennkalender(self, übergabe):
+        self.pfadRennkalender = "Datenbank/" + übergabe + "Strecken.dat"
 
-#speichern
+    def setpfadFahrer(self, übergabe):
+        self.pfadFahrer = "Datenbank/" + übergabe + "Fahrer.dat"
 
-#laden - an die komischen Speicherlisten denken!
+    def setrennkalender(self, übergabe):
+        self.rennkalender = übergabe        
+
+    def setfahrerliste(self, übergabe):
+        self.fahrerliste = übergabe
+
+    #speichern
+    def speichern(self):
+        Daten.schreiben(self.pfadFahrer, self.fahrerliste)
+        Daten.schreiben(self.pfadRennkalender, self.rennkalender)
+        Daten.schreiben(self.pfad, [self.pfadRennkalender, self.pfadFahrer])
+
+    #laden
+    def laden(self, übergabe):
+        self.name = übergabe
+
+        self.setpfad(self.name)
+        self.setpfadFahrer(self.name)
+        self.setpfadRennkalender(self.name)
+
+        self.rennkalender = Daten.lesen(self.pfadRennkalender)
+        self.fahrerliste = Daten.lesen(self.pfadFahrer)
