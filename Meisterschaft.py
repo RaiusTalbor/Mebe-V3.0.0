@@ -31,22 +31,28 @@ def getfahrerliste():
 
 #setter
 def setname(übergabe):
+    global name
     name = übergabe
 
 def setpfad(übergabe):
+    global pfad
     pfad = übergabe
 
 def setpfadRennkalender(übergabe):
+    global pfadRennkalender
     pfadRennkalender = übergabe
 
 def setpfadFahrer(übergabe):
+    global pfadFahrer
     pfadFahrer = übergabe
 
 def setrennkalender(übergabe):
+    global rennkalende
     rennkalender = übergabe
     
 
 def setfahrerliste(übergabe):
+    global fahrerliste
     fahrerliste = übergabe
 
 #speichern
