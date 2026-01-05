@@ -11,15 +11,15 @@ class Meisterschaft:
     rennkalender = []
     fahrerliste = []
 
-    def __init__(self):
+    def __init__(self, name, rennkalender, fahrerliste):
 
         #Variablen
-        name = ""
+        self.name = name
         self.pfad = "Datenbank/" + name + ".dat"
         self.pfadRennkalender = "Datenbank/" + name + "Strecken.dat"
         self.pfadFahrer = "Datenbank/" + name + "Fahrer.dat"
-        self.rennkalender = []
-        self.fahrerliste = []
+        self.rennkalender = rennkalender
+        self.fahrerliste = fahrerliste
 
     #getter
     def getname(self):
@@ -66,9 +66,7 @@ class Meisterschaft:
         Daten.schreiben(self.pfad, [self.pfadRennkalender, self.pfadFahrer])
 
     #laden
-    def laden(self, übergabe):
-        self.name = übergabe
-
+    def laden(self):
         self.setpfad(self.name)
         self.setpfadFahrer(self.name)
         self.setpfadRennkalender(self.name)
