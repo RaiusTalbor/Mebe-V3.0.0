@@ -1,5 +1,5 @@
 # Motorsportmeisterschaftsberechner
-# Mebe V2.0.0
+# Mebe V3.0.0
 # Untermenü bearbeiten - Meisterschaften, Strecken, Fahrer, Fahrzeuge editieren
 
 import time
@@ -18,7 +18,7 @@ def test():
 
 def bearbeiten():
     fensterBearbeiten = Toplevel()
-    fensterBearbeiten.title("Bearbeiten - Mebe V2.0.0")
+    fensterBearbeiten.title("Bearbeiten - Mebe V3.0.0")
     fensterBearbeiten.geometry("800x600")
 
     #Frames

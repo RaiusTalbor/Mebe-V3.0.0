@@ -1,5 +1,5 @@
 # Motorsportmeisterschaftsberechner
-# Mebe V2.0.0
+# Mebe V3.0.0
 # Lesen, Schreiben von Dateien
 
 import pickle

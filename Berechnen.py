@@ -1,5 +1,5 @@
 # Motorsportmeisterschaftsberechner
-# Mebe V2.0.0
+# Mebe V3.0.0
 #berechnet eine Meisterschaft und gibt das Ergebnis aus
 
 import pickle
@@ -7,7 +7,6 @@ import random
 import time
 from tkinter import *
 import os
-import MebeV1 as M1 #Mebe1-Integrierung
 import Daten    #Lesen, Schreiben von Dateien
 
 def auswahl():
@@ -30,7 +29,7 @@ def berechnen():
     global labelInfo
 
     fensterBerechnen = Toplevel()
-    fensterBerechnen.title("Berechnen - Mebe V2.0.0")
+    fensterBerechnen.title("Berechnen - Mebe V3.0.0")
     fensterBerechnen.geometry("800x600")
 
     #Frames

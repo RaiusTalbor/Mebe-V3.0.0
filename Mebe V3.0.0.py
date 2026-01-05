@@ -1,5 +1,7 @@
 # Motorsportmeisterschaftsberechner
-# Mebe V2.0.0
+# Mebe V3.0.0
+# basierend auf Mebe V2.0.0 Stand 05.01.2025
+# teilweise neu gebaut zur Verbesserung der Struktur
 
 import pickle
 import random
@@ -8,7 +10,6 @@ from tkinter import *
 import Daten    #Lesen, Schreiben von Dateien
 
 #Mebe-Module und Funktionen
-import MebeV1 as M1 #Mebe1-Integrierung
 import Erstellen
 import Bearbeiten
 import Berechnen
@@ -17,7 +18,7 @@ import Berechnen
 
 #beendet das Program sauber
 def beenden():
-    labelInfo.config(text="Mebe V2.0.0 wird beendet! Auf Wiedersehen!")
+    labelInfo.config(text="Mebe V3.0.0 wird beendet! Auf Wiedersehen!")
     labelInfo.update_idletasks()
     time.sleep(1)
     fenster.destroy()
@@ -30,11 +31,11 @@ def test():
 # ----------View
 
 fenster = Tk()
-fenster.title("Mebe V2.0.0")
+fenster.title("Mebe V3.0.0")
 fenster.geometry("800x600")
 
 labelTitel = Label(master=fenster,
-                   text="Mebe V2.0.0",
+                   text="Mebe V3.0.0",
                    font=('', 18))
 labelTitel.pack()
 

@@ -1,5 +1,5 @@
 # Motorsportmeisterschaftsberechner
-# Mebe V2.0.0
+# Mebe V3.0.0
 # Untermenü Meisterschaften - zeigt Meisterschaften an, bearbeiten können
 
 import pickle
@@ -12,7 +12,7 @@ import os
 
 def Meisterschaften():
     fensterMeisterschaften = Toplevel()
-    fensterMeisterschaften.title("Meisterschaften - Mebe V2.0.0")
+    fensterMeisterschaften.title("Meisterschaften - Mebe V3.0.0")
     fensterMeisterschaften.geometry("800x600")
 
     #Frames
