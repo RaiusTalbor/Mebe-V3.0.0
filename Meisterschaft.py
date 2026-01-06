@@ -11,8 +11,15 @@ class Meisterschaft:
     rennkalender = []
     fahrerliste = []
 
-    def __init__(self, name, rennkalender, fahrerliste):
+    def __init__(self):
+        self.name = ""
+        self.pfad = "Datenbank/" + "" + ".dat"
+        self.pfadRennkalender = "Datenbank/" + "" + "Strecken.dat"
+        self.pfadFahrer = "Datenbank/" + "" + "Fahrer.dat"
+        self.rennkalender = []
+        self.fahrerliste = []
 
+    def __init__(self, name, rennkalender, fahrerliste):
         #Variablen
         self.name = name
         self.pfad = "Datenbank/" + name + ".dat"
