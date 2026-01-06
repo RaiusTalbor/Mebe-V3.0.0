@@ -36,16 +36,7 @@ class Fahrer:
     def __init__(self, name):
         self.name= name
         self.pfad = "Datenbank/Fahrer/" + name + ".dat"
-        self.gebjahr = 1970
-        self.erstesrennen = 1988
-        self.aggressivität = 0
-        self.geschicklichkeit = 0
-        self.grundkönnen = 0
-        self.vorliebe = 0
-        self.durchschnittlicheplatzierung = 20
-        self.fahrzeug = ""
-        self.fahrzeugpfad = ""
-        self.seitWannFahrzeug = 1988
+        self.laden()
 
     def __init__(self, name, gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug):
         self.name= name
@@ -61,7 +52,15 @@ class Fahrer:
         self.fahrzeugpfad = "Datenbank/Fahrzeuge/" + fahrzeug + ".dat"
         self.seitWannFahrzeug = seitWannFahrzeug
 
+    def __init__(self, pfadübergabe):
+        self.pfad = pfadübergabe
+        pfadübergabe = pfadübergabe.replace("Datenbank/Fahrer/", "")
+        pfadübergabe = pfadübergabe.replace(".dat", "")
+        self.name = pfadübergabe
+        self.laden()
+
     #getter
+
     #setter
     def setpfad(self, name):
         self.pfad = "Datenbank/Fahrzeuge/" + name + ".dat"

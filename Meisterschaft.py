@@ -18,6 +18,23 @@ class Meisterschaft:
         self.pfadFahrer = "Datenbank/" + "" + "Fahrer.dat"
         self.rennkalender = []
         self.fahrerliste = []
+    
+    def __init__(self, name):
+        self.name= name
+        self.pfad = "Datenbank/" + name + ".dat"
+        self.laden()
+
+    def __init__(self, pfadübergabe):
+        if (pfadübergabe.endswith('Fahrer.dat')):
+             pfadübergabe = pfadübergabe.replace("Fahrer.dat", "")  
+        if (pfadübergabe.endswith('Strecken.dat')):
+             pfadübergabe = pfadübergabe.replace("Strecken.dat", "") 
+
+        self.pfad = pfadübergabe
+        pfadübergabe = pfadübergabe.replace("Datenbank/", "")
+        pfadübergabe = pfadübergabe.replace(".dat", "")
+        self.name = pfadübergabe
+        self.laden()
 
     def __init__(self, name, rennkalender, fahrerliste):
         #Variablen

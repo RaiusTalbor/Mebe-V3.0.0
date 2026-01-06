@@ -24,10 +24,14 @@ class Strecke:
     def __init__(self, name):
         self.name= name
         self.pfad = "Datenbank/Strecken/" + name + ".dat"
-        self.rekordhalter = ""
-        self.pfadrekordhalter = ""
-        self.streckentyp = 0
-        self.schwierigkeit = 0
+        self.laden()
+
+    def __init__(self, pfadübergabe):
+        self.pfad = pfadübergabe
+        pfadübergabe = pfadübergabe.replace("Datenbank/Strecken/", "")
+        pfadübergabe = pfadübergabe.replace(".dat", "")
+        self.name = pfadübergabe
+        self.laden()
 
     def __init__(self, name, rekordhalter, streckentyp, schwierigkeit):
         self.name= name
@@ -38,6 +42,7 @@ class Strecke:
         self.schwierigkeit = schwierigkeit
 
     #getter
+
     #setter
     def setpfad(self, name):
         self.pfad = "Datenbank/Strecken/" + name + ".dat"

@@ -20,8 +20,14 @@ class Fahrzeug:
     def __init__(self, name):
         self.name = name
         self.pfad = "Datenbank/Fahrzeuge/" + name + ".dat"
-        self.leistung = 0
-        self.wendigkeit = 0
+        self.laden()
+
+    def __init__(self, pfadübergabe):
+        self.pfad = pfadübergabe
+        pfadübergabe = pfadübergabe.replace("Datenbank/Fahrzeuge/", "")
+        pfadübergabe = pfadübergabe.replace(".dat", "")
+        self.name = pfadübergabe
+        self.laden()
 
     def __init__(self, name, leistung, wendigkeit):
         self.name = name
@@ -30,6 +36,7 @@ class Fahrzeug:
         self.wendigkeit = wendigkeit
 
     #getter
+
     #setter
     def setpfad(self, name):
         self.pfad = "Datenbank/Fahrzeuge/" + name + ".dat"
