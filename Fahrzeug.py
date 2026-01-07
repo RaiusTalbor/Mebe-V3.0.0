@@ -6,32 +6,32 @@ import Daten
 class Fahrzeug:
     
     #Variablen
-    pfad = ""
-    name= ""
+    pfad = ''
+    name= ''
     leistung = 0
     wendigkeit = 0
 
     def __init__(self):
-        self.pfad = ""
-        self.name= ""
+        self.pfad = ''
+        self.name= ''
         self.leistung = 0
         self.wendigkeit = 0
 
-    def __init__(self, name):
+    def ladenName(self, name):
         self.name = name
-        self.pfad = "Datenbank/Fahrzeuge/" + name + ".dat"
+        self.pfad = 'Datenbank/Fahrzeuge/' + name + '.dat'
         self.laden()
 
-    def __init__(self, pfadübergabe):
+    def ladenPfad(self, pfadübergabe):
         self.pfad = pfadübergabe
-        pfadübergabe = pfadübergabe.replace("Datenbank/Fahrzeuge/", "")
-        pfadübergabe = pfadübergabe.replace(".dat", "")
+        pfadübergabe = pfadübergabe.replace('Datenbank/Fahrzeuge/', '')
+        pfadübergabe = pfadübergabe.replace('.dat', '')
         self.name = pfadübergabe
         self.laden()
 
-    def __init__(self, name, leistung, wendigkeit):
+    def erstellen(self, name, leistung, wendigkeit):
         self.name = name
-        self.pfad = "Datenbank/Fahrzeuge/" + name + ".dat"
+        self.pfad = 'Datenbank/Fahrzeuge/' + name + '.dat'
         self.leistung = leistung
         self.wendigkeit = wendigkeit
 
@@ -39,7 +39,7 @@ class Fahrzeug:
 
     #setter
     def setpfad(self, name):
-        self.pfad = "Datenbank/Fahrzeuge/" + name + ".dat"
+        self.pfad = 'Datenbank/Fahrzeuge/' + name + '.dat'
 
     #speichern
     def speichern(self):

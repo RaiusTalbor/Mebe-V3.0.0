@@ -6,8 +6,8 @@ import Daten
 class Fahrer:
     
     #Variablen
-    pfad = ""
-    name= ""
+    pfad = ''
+    name= ''
     gebjahr = 1970
     erstesrennen = 1988
     aggressivität = 0
@@ -15,13 +15,13 @@ class Fahrer:
     grundkönnen = 0
     vorliebe = 0
     durchschnittlicheplatzierung = 20
-    fahrzeug = ""
-    fahrzeugpfad = ""
+    fahrzeug = ''
+    fahrzeugpfad = ''
     seitWannFahrzeug = 1988
 
     def __init__(self):
-        self.pfad = ""
-        self.name= ""
+        self.pfad = ''
+        self.name= ''
         self.gebjahr = 1970
         self.erstesrennen = 1988
         self.aggressivität = 0
@@ -29,18 +29,25 @@ class Fahrer:
         self.grundkönnen = 0
         self.vorliebe = 0
         self.durchschnittlicheplatzierung = 20
-        self.fahrzeug = ""
-        self.fahrzeugpfad = ""
+        self.fahrzeug = ''
+        self.fahrzeugpfad = ''
         self.seitWannFahrzeug = 1988
 
-    def __init__(self, name):
+    def ladenName(self, name):
         self.name= name
-        self.pfad = "Datenbank/Fahrer/" + name + ".dat"
+        self.pfad = 'Datenbank/Fahrer/' + name + '.dat'
         self.laden()
 
-    def __init__(self, name, gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug):
+    def ladenPfad(self, pfadübergabe):
+        self.pfad = pfadübergabe
+        pfadübergabe = pfadübergabe.replace('Datenbank/Fahrer/', '')
+        pfadübergabe = pfadübergabe.replace('.dat', '')
+        self.name = pfadübergabe
+        self.laden()
+
+    def erstellen(self, name, gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug):
         self.name= name
-        self.pfad = "Datenbank/Fahrer/" + name + ".dat"
+        self.pfad = 'Datenbank/Fahrer/' + name + '.dat'
         self.gebjahr = gebjahr
         self.erstesrennen = erstesrennen
         self.aggressivität = aggressivität
@@ -49,24 +56,17 @@ class Fahrer:
         self.vorliebe = vorliebe
         self.durchschnittlicheplatzierung = durchschnittlicheplatzierung
         self.fahrzeug = fahrzeug
-        self.fahrzeugpfad = "Datenbank/Fahrzeuge/" + fahrzeug + ".dat"
+        self.fahrzeugpfad = 'Datenbank/Fahrzeuge/' + fahrzeug + '.dat'
         self.seitWannFahrzeug = seitWannFahrzeug
-
-    def __init__(self, pfadübergabe):
-        self.pfad = pfadübergabe
-        pfadübergabe = pfadübergabe.replace("Datenbank/Fahrer/", "")
-        pfadübergabe = pfadübergabe.replace(".dat", "")
-        self.name = pfadübergabe
-        self.laden()
 
     #getter
 
     #setter
     def setpfad(self, name):
-        self.pfad = "Datenbank/Fahrzeuge/" + name + ".dat"
+        self.pfad = 'Datenbank/Fahrzeuge/' + name + '.dat'
 
     def setpfadFahrzeug(self, übergabe):
-        self.fahrzeugpfadpfad = "Datenbank/Fahrzeuge/" + übergabe + ".dat"
+        self.fahrzeugpfadpfad = 'Datenbank/Fahrzeuge/' + übergabe + '.dat'
 
     #speichern
     def speichern(self):
@@ -81,7 +81,7 @@ class Fahrer:
         self.geschicklichkeit = attributliste[3]
         self.grundkönnen = attributliste[4]
         self.vorliebe = attributliste[5]
-        self.durchschnittlicheplatzierung = attributliste[5]
-        self.fahrzeug = attributliste[6]
-        self.fahrzeugpfad = "Datenbank/Fahrzeuge/" + self.fahrzeug + ".dat"
-        self.seitWannFahrzeug = attributliste[7]
+        self.durchschnittlicheplatzierung = attributliste[6]
+        self.fahrzeug = attributliste[7]
+        self.fahrzeugpfad = 'Datenbank/Fahrzeuge/' + self.fahrzeug + '.dat'
+        self.seitWannFahrzeug = attributliste[8]

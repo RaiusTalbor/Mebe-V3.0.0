@@ -6,38 +6,38 @@ import Daten
 class Strecke:
     
     #Variablen
-    pfad = ""
-    name= ""
-    rekordhalter = ""
-    pfadrekordhalter = ""
+    pfad = ''
+    name= ''
+    rekordhalter = ''
+    pfadrekordhalter = ''
     streckentyp = 0
     schwierigkeit = 0
 
     def __init__(self):
-        self.pfad = ""
-        self.name= ""
-        self.rekordhalter = ""
-        self.pfadrekordhalter = ""
+        self.pfad = ''
+        self.name= ''
+        self.rekordhalter = ''
+        self.pfadrekordhalter = ''
         self.streckentyp = 0
         self.schwierigkeit = 0
 
-    def __init__(self, name):
+    def ladenName(self, name):
         self.name= name
-        self.pfad = "Datenbank/Strecken/" + name + ".dat"
+        self.pfad = 'Datenbank/Strecken/' + name + '.dat'
         self.laden()
 
-    def __init__(self, pfadübergabe):
+    def ladenPfad(self, pfadübergabe):
         self.pfad = pfadübergabe
-        pfadübergabe = pfadübergabe.replace("Datenbank/Strecken/", "")
-        pfadübergabe = pfadübergabe.replace(".dat", "")
+        pfadübergabe = pfadübergabe.replace('Datenbank/Strecken/', '')
+        pfadübergabe = pfadübergabe.replace('.dat', '')
         self.name = pfadübergabe
         self.laden()
 
-    def __init__(self, name, rekordhalter, streckentyp, schwierigkeit):
+    def erstellen(self, name, rekordhalter, streckentyp, schwierigkeit):
         self.name= name
-        self.pfad = "Datenbank/Strecken/" + name + ".dat"
+        self.pfad = 'Datenbank/Strecken/' + name + '.dat'
         self.rekordhalter = rekordhalter
-        self.pfadrekordhalter = "Datenbank/Fahrer/" + rekordhalter + ".dat"
+        self.pfadrekordhalter = 'Datenbank/Fahrer/' + rekordhalter + '.dat'
         self.streckentyp = streckentyp
         self.schwierigkeit = schwierigkeit
 
@@ -45,11 +45,11 @@ class Strecke:
 
     #setter
     def setpfad(self, name):
-        self.pfad = "Datenbank/Strecken/" + name + ".dat"
+        self.pfad = 'Datenbank/Strecken/' + name + '.dat'
 
     def setrekordhalter(self, übergabe):
         self.rekordhalter = übergabe
-        self.pfadrekordhalter = "Datenbank/Fahrer/" + übergabe + ".dat"
+        self.pfadrekordhalter = 'Datenbank/Fahrer/' + übergabe + '.dat'
 
     #speichern
     def speichern(self):
@@ -60,6 +60,6 @@ class Strecke:
     def laden(self):
         attributliste = Daten.lesen(self.pfad)
         self.rekordhalter = attributliste[0]
-        self.pfadrekordhalter = "Datenbank/Fahrer/" + self.rekordhalter + ".dat"
+        self.pfadrekordhalter = 'Datenbank/Fahrer/' + self.rekordhalter + '.dat'
         self.streckentyp = attributliste[1]
         self.schwierigkeit = attributliste[2]

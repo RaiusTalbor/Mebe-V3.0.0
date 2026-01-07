@@ -4,44 +4,44 @@
 import Daten
 
 class Meisterschaft:
-    name = ""
-    pfad = "Datenbank/" + name + ".dat"
-    pfadRennkalender = "Datenbank/" + name + "Strecken.dat"
-    pfadFahrer = "Datenbank/" + name + "Fahrer.dat"
+    name = ''
+    pfad = 'Datenbank/' + name + '.dat'
+    pfadRennkalender = 'Datenbank/' + name + 'Strecken.dat'
+    pfadFahrer = 'Datenbank/' + name + 'Fahrer.dat'
     rennkalender = []
     fahrerliste = []
 
     def __init__(self):
-        self.name = ""
-        self.pfad = "Datenbank/" + "" + ".dat"
-        self.pfadRennkalender = "Datenbank/" + "" + "Strecken.dat"
-        self.pfadFahrer = "Datenbank/" + "" + "Fahrer.dat"
+        self.name = ''
+        self.pfad = 'Datenbank/' + '' + '.dat'
+        self.pfadRennkalender = 'Datenbank/' + '' + 'Strecken.dat'
+        self.pfadFahrer = 'Datenbank/' + '' + 'Fahrer.dat'
         self.rennkalender = []
         self.fahrerliste = []
     
-    def __init__(self, name):
+    def ladenName(self, name):
         self.name= name
-        self.pfad = "Datenbank/" + name + ".dat"
+        self.pfad = 'Datenbank/' + name + '.dat'
         self.laden()
 
-    def __init__(self, pfadübergabe):
+    def ladenPfad(self, pfadübergabe):
         if (pfadübergabe.endswith('Fahrer.dat')):
-             pfadübergabe = pfadübergabe.replace("Fahrer.dat", "")  
+             pfadübergabe = pfadübergabe.replace('Fahrer.dat', '')  
         if (pfadübergabe.endswith('Strecken.dat')):
-             pfadübergabe = pfadübergabe.replace("Strecken.dat", "") 
+             pfadübergabe = pfadübergabe.replace('Strecken.dat', '') 
 
         self.pfad = pfadübergabe
-        pfadübergabe = pfadübergabe.replace("Datenbank/", "")
-        pfadübergabe = pfadübergabe.replace(".dat", "")
+        pfadübergabe = pfadübergabe.replace('Datenbank/', '')
+        pfadübergabe = pfadübergabe.replace('.dat', '')
         self.name = pfadübergabe
         self.laden()
 
-    def __init__(self, name, rennkalender, fahrerliste):
+    def erstellen(self, name, rennkalender, fahrerliste):
         #Variablen
         self.name = name
-        self.pfad = "Datenbank/" + name + ".dat"
-        self.pfadRennkalender = "Datenbank/" + name + "Strecken.dat"
-        self.pfadFahrer = "Datenbank/" + name + "Fahrer.dat"
+        self.pfad = 'Datenbank/' + name + '.dat'
+        self.pfadRennkalender = 'Datenbank/' + name + 'Strecken.dat'
+        self.pfadFahrer = 'Datenbank/' + name + 'Fahrer.dat'
         self.rennkalender = rennkalender
         self.fahrerliste = fahrerliste
 
@@ -69,18 +69,32 @@ class Meisterschaft:
         self.name = übergabe
 
     def setpfad(self, übergabe):
-        self.pfad = "Datenbank/" + übergabe + ".dat"
+        self.pfad = 'Datenbank/' + übergabe + '.dat'
 
     def setpfadRennkalender(self, übergabe):
-        self.pfadRennkalender = "Datenbank/" + übergabe + "Strecken.dat"
+        self.pfadRennkalender = 'Datenbank/' + übergabe + 'Strecken.dat'
 
     def setpfadFahrer(self, übergabe):
-        self.pfadFahrer = "Datenbank/" + übergabe + "Fahrer.dat"
+        self.pfadFahrer = 'Datenbank/' + übergabe + 'Fahrer.dat'
 
-    def setrennkalender(self, übergabe):
-        self.rennkalender = übergabe        
+    #wenn Liste mit Namen übergeben wird, wird ins richtige Speicherformat gebracht
+    def setrennkalenderName(self, übergabe):
+        for i in range(0, len(übergabe)):
+            übergabe[i] = 'Datenbank/Strecke/' + übergabe[i] + '.dat'
 
-    def setfahrerliste(self, übergabe):
+        self.rennkalender = übergabe      
+
+    def setrennkalenderPfad(self, übergabe):
+        self.rennkalender = übergabe     
+
+    #wenn Liste mit Namen übergeben wird, wird ins richtige Speicherformat gebracht
+    def setfahrerlisteName(self, übergabe):
+        for i in range(0, len(übergabe)):
+            übergabe[i] = 'Datenbank/Fahrer/' + übergabe[i] + '.dat'
+        
+        self.fahrerliste = übergabe
+
+    def setfahrerlistePfad(self, übergabe):
         self.fahrerliste = übergabe
 
     #speichern
