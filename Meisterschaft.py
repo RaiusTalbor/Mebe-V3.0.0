@@ -4,6 +4,9 @@
 import Daten
 
 class Meisterschaft:
+    #stellt eine Meisterschaft dar - zur einfacheren und zentraleren Verwaltung der Meisterschaften
+
+    #Attribute
     name = ''
     pfad = 'Datenbank/' + name + '.dat'
     pfadRennkalender = 'Datenbank/' + name + 'Strecken.dat'
@@ -11,6 +14,7 @@ class Meisterschaft:
     rennkalender = []
     fahrerliste = []
 
+    #Initialisieren mit Standardwerten
     def __init__(self):
         self.name = ''
         self.pfad = 'Datenbank/' + '' + '.dat'
@@ -19,12 +23,15 @@ class Meisterschaft:
         self.rennkalender = []
         self.fahrerliste = []
     
+    #wenn Name geg., Objekt kann eindeutig und vollständig richtig aus Datei geladen werden (mit richtigen Attributen für Objekt)
     def ladenName(self, name):
         self.name= name
         self.pfad = 'Datenbank/' + name + '.dat'
         self.laden()
 
+    #wenn Pfad geg., Objekt kann eindeutig und vollständig richtig aus Datei geladen werden (mit richtigen Attributen für Objekt)
     def ladenPfad(self, pfadübergabe):
+        #kann auch die zugeordneten Pfade verarbeiten
         if (pfadübergabe.endswith('Fahrer.dat')):
              pfadübergabe = pfadübergabe.replace('Fahrer.dat', '')  
         if (pfadübergabe.endswith('Strecken.dat')):
@@ -36,6 +43,7 @@ class Meisterschaft:
         self.name = pfadübergabe
         self.laden()
 
+    #wenn Parameter übergeben werden, kann neue Meisterschaft erstellt werden --> es existiert aber nur lokal
     def erstellen(self, name, rennkalender, fahrerliste):
         #Variablen
         self.name = name
@@ -77,7 +85,7 @@ class Meisterschaft:
     def setpfadFahrer(self, übergabe):
         self.pfadFahrer = 'Datenbank/' + übergabe + 'Fahrer.dat'
 
-    #wenn Liste mit Namen übergeben wird, wird ins richtige Speicherformat gebracht
+    #wenn Liste mit Namen übergeben wird, wird ins richtige Speicherformat (in Pfade überführt) gebracht
     def setrennkalenderName(self, übergabe):
         for i in range(0, len(übergabe)):
             übergabe[i] = 'Datenbank/Strecke/' + übergabe[i] + '.dat'
@@ -87,7 +95,7 @@ class Meisterschaft:
     def setrennkalenderPfad(self, übergabe):
         self.rennkalender = übergabe     
 
-    #wenn Liste mit Namen übergeben wird, wird ins richtige Speicherformat gebracht
+    #wenn Liste mit Namen übergeben wird, wird ins richtige Speicherformat (in Pfade überführt) gebracht
     def setfahrerlisteName(self, übergabe):
         for i in range(0, len(übergabe)):
             übergabe[i] = 'Datenbank/Fahrer/' + übergabe[i] + '.dat'
@@ -103,7 +111,7 @@ class Meisterschaft:
         Daten.schreiben(self.pfadRennkalender, self.rennkalender)
         Daten.schreiben(self.pfad, [self.pfadRennkalender, self.pfadFahrer])
 
-    #laden
+    #laden aus Datei
     def laden(self):
         self.setpfad(self.name)
         self.setpfadFahrer(self.name)
