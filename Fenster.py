@@ -2,6 +2,7 @@
 # Mebe V3.0.0
 
 from tkinter import *
+import time
 
 class Fenster:
     #Blueprint für jedes Fenster, welches existiert
@@ -50,6 +51,13 @@ class Fenster:
 
         self.labelInfo = Label(self.frameInfo, text="", font=('', 15))
         self.labelInfo.pack()
+
+        self.fenster.mainloop()
+
+    def beenden(self):
+        self.setInfo('Mebe V3.0.0 wird beendet! Auf Wiedersehen!')
+        time.sleep(1)
+        self.fenster.destroy()
 
     def neuesFenster(self, titel):
         #sollte auf das alte System zurückgesprungen werden müssen, aber bitte möglichst nicht verwenden

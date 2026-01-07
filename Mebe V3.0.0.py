@@ -5,23 +5,22 @@
 
 import pickle
 import random
-import time
 from tkinter import *
 import Daten    #Lesen, Schreiben von Dateien
 
 #Mebe-Module und Funktionen
-import Erstellen
-import Bearbeiten
+#import Erstellen
+#import Bearbeiten
 import Berechnen
+
+#Mebe Prozesse
+import Fenster
 
 # ----------Knopffunktionen
 
 #beendet das Program sauber
 def beenden():
-    labelInfo.config(text="Mebe V3.0.0 wird beendet! Auf Wiedersehen!")
-    labelInfo.update_idletasks()
-    time.sleep(1)
-    fenster.destroy()
+    prozess.beenden()
 
 # ----------pass für Testzwecke
 
@@ -30,25 +29,7 @@ def test():
 
 # ----------View
 
-fenster = Tk()
-fenster.title("Mebe V3.0.0")
-fenster.geometry("800x600")
-
-labelTitel = Label(master=fenster,
-                   text="Mebe V3.0.0",
-                   font=('', 18))
-labelTitel.pack()
-
-# ----------Frames
-
-#frameTitel = Frame(master=fenster)
-#frameTitel.pack()
-
-frameButtons = Frame(master=fenster)
-frameButtons.pack()
-
-frameInfo = Frame(master=fenster)
-frameInfo.pack()
+prozess = Fenster.Fenster()
 
 # Hauptmenü - Steuereinheit Mebe V2 ------------------------------------------
 
@@ -79,27 +60,18 @@ frameInfo.pack()
 #buttonFahrer.pack()
 
 #erstellen einer Meisterschaft
-buttonErstellen = Button(master=frameButtons,
-                         text="Erstellen",
-                         command=Erstellen.erstellen)
-buttonErstellen.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+buttonErstellen = Button(text="Erstellen", command=test)
+prozess.hinzufügenButton(buttonErstellen)
 
-buttonBearbeiten = Button(master=frameButtons,
-                         text="Bearbeiten",
-                         command=Bearbeiten.bearbeiten)
-buttonBearbeiten.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+buttonBearbeiten = Button(text="Bearbeiten", command=test)
+prozess.hinzufügenButton(buttonBearbeiten)
 
 #berechnen einer Meisterschaft
-buttonBerechnen = Button(master=frameButtons,
-                         text="Berechnen",
-                         command=Berechnen.berechnen)
-buttonBerechnen.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+buttonBerechnen = Button(text="Berechnen", command=Berechnen.berechnen)
+prozess.hinzufügenButton(buttonBerechnen)
 
 #Hilfe zu Mebe
-buttonHilfe = Button(master=frameButtons,
-                     text="Hilfe",
-                     command=test)
-buttonHilfe.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+buttonHilfe = Button(text="Hilfe", command=test)
 
 # Mebe 2 hat Mebe 1 implementiert, was bedeutet, dass Mebe 1 in Mebe 2 integriert und unabhängig funktioniert
 # die alten Daten und das vereinfachte Programm können verwendet werden
@@ -109,14 +81,5 @@ buttonHilfe.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
 #buttonMebe1.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
 
 #Programm beenden
-buttonBeenden = Button(master=frameButtons,
-                       text="Beenden",
-                       command=beenden)
-buttonBeenden.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
-
-# ----------------------------------------------------------------------------
-
-labelInfo = Label(frameInfo, text="", font=('', 15))
-labelInfo.pack()
-
-fenster.mainloop()
+buttonBeenden = Button(text="Beenden", command=beenden)
+prozess.hinzufügenButton(buttonBeenden)
