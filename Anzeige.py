@@ -71,7 +71,7 @@ class Fenster:
     def löscheButtons(self):
         for i in self.listebuttons:
             i.destroy()
-            self.listebuttons[i]='' #löschen!!
+            self.listebuttons.remove(i)
 
     def hinzufügenButton(self, textübergabe, commandübergabe):
         button = Button(master=self.frameButtons, text=textübergabe, command=commandübergabe)
