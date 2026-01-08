@@ -6,9 +6,10 @@ import pickle
 import random
 import time
 from tkinter import *
-import MebeV1 as M1 #Mebe1-Integrierung
 import Daten    #Lesen, Schreiben von Dateien
 import os
+
+from MebeV3 import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 
 def Meisterschaften():
     fensterMeisterschaften = Toplevel()
@@ -23,10 +24,7 @@ def Meisterschaften():
     #frameButtons.pack()
     frameInteraktion.pack()
 
-    labelTitelMeisterschaften = Label(master=frameInfo,
-                   text="Meisterschaften",
-                   font=('', 15))
-    labelTitelMeisterschaften.pack()
+    prozess.setTitelFrame("Meisterschaften")
 
     VerzeichnisMeisterschaftenohnefilter = os.listdir('Datenbank')
     VerzeichnisMeisterschaften = []

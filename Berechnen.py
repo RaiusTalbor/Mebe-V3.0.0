@@ -2,12 +2,13 @@
 # Mebe V3.0.0
 #berechnet eine Meisterschaft und gibt das Ergebnis aus
 
-import pickle
 import random
 import time
 from tkinter import *
 import os
 import Daten    #Lesen, Schreiben von Dateien
+
+from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 
 def auswahl():
     global meisterschaft
@@ -18,8 +19,7 @@ def auswahl():
 
     #Ausgabe, dass Meisterschaft gerade berechnet wird
     anzeige = "Meisterschaft '" + meisterschaftAusgewählt + "' wird berechnet..."
-    labelInfo.config(text = anzeige)
-    labelInfo.update_idletasks()
+    prozess.setInfo(anzeige)
 
     berechnenStarten(meisterschaftAusgewählt)
 
