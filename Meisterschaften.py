@@ -12,16 +12,10 @@ import os
 from MebeV3 import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 
 def Meisterschaften():
-    fensterMeisterschaften = Toplevel()
-    fensterMeisterschaften.title("Meisterschaften - Mebe V3.0.0")
-    fensterMeisterschaften.geometry("800x600")
-
     #Frames
-    frameInfo = Frame(fensterMeisterschaften)
-    #frameButtons = Frame(fensterMeisterschaften)
-    frameInteraktion = Frame(fensterMeisterschaften)
+    frameInfo = Frame(prozess.frameAnzeige)
+    frameInteraktion = Frame(prozess.frameAnzeige)
     frameInfo.pack()
-    #frameButtons.pack()
     frameInteraktion.pack()
 
     prozess.setTitelFrame("Meisterschaften")
