@@ -31,7 +31,7 @@ def test():
 
 prozess = Fenster.Fenster()
 
-# Hauptmenü - Steuereinheit Mebe V2 ------------------------------------------
+# Hauptmenü - Steuereinheit Mebe V3 ------------------------------------------
 
 #buttonSerien = Button(master=fenster,
 #                      text="Serien",
@@ -70,12 +70,7 @@ prozess.hinzufügenButton("Berechnen", Berechnen.berechnen)
 #Hilfe zu Mebe
 prozess.hinzufügenButton("Hilfe", test)
 
-# Mebe 2 hat Mebe 1 implementiert, was bedeutet, dass Mebe 1 in Mebe 2 integriert und unabhängig funktioniert
-# die alten Daten und das vereinfachte Programm können verwendet werden
-#buttonMebe1 = Button(master=frameButtons,
-#                       text="Mebe 1",
-#                       command=M1.RunMebe)
-#buttonMebe1.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+# Mebe 2 hat Mebe 1 implementiert, was bedeutet, dass Mebe 1 in Mebe 2 integriert und unabhängig funktioniert - Feature wurde entfernt wegen fehlenden Mehrwert - Mebe 3 basiert von der Berechnung auf M1
 
 #Programm beenden
 prozess.hinzufügenButton("Beenden", beenden)
