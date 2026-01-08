@@ -6,14 +6,6 @@ import Daten
 class Meisterschaft:
     #stellt eine Meisterschaft dar - zur einfacheren und zentraleren Verwaltung der Meisterschaften
 
-    #Attribute
-    name = ''
-    pfad = 'Datenbank/' + name + '.dat'
-    pfadRennkalender = 'Datenbank/' + name + 'Strecken.dat'
-    pfadFahrer = 'Datenbank/' + name + 'Fahrer.dat'
-    rennkalender = []
-    fahrerliste = []
-
     #Initialisieren mit Standardwerten
     def __init__(self):
         self.name = ''

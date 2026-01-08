@@ -60,18 +60,15 @@ prozess = Fenster.Fenster()
 #buttonFahrer.pack()
 
 #erstellen einer Meisterschaft
-buttonErstellen = Button(text="Erstellen", command=test)
-prozess.hinzufügenButton(buttonErstellen)
+prozess.hinzufügenButton("Erstellen", test)
 
-buttonBearbeiten = Button(text="Bearbeiten", command=test)
-prozess.hinzufügenButton(buttonBearbeiten)
+prozess.hinzufügenButton("Bearbeiten", test)
 
 #berechnen einer Meisterschaft
-buttonBerechnen = Button(text="Berechnen", command=Berechnen.berechnen)
-prozess.hinzufügenButton(buttonBerechnen)
+prozess.hinzufügenButton("Berechnen", Berechnen.berechnen)
 
 #Hilfe zu Mebe
-buttonHilfe = Button(text="Hilfe", command=test)
+prozess.hinzufügenButton("Hilfe", test)
 
 # Mebe 2 hat Mebe 1 implementiert, was bedeutet, dass Mebe 1 in Mebe 2 integriert und unabhängig funktioniert
 # die alten Daten und das vereinfachte Programm können verwendet werden
@@ -81,5 +78,6 @@ buttonHilfe = Button(text="Hilfe", command=test)
 #buttonMebe1.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
 
 #Programm beenden
-buttonBeenden = Button(text="Beenden", command=beenden)
-prozess.hinzufügenButton(buttonBeenden)
+prozess.hinzufügenButton("Beenden", beenden)
+
+prozess.fenster.mainloop()

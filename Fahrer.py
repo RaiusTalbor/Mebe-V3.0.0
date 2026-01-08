@@ -5,20 +5,6 @@ import Daten
 
 class Fahrer:
     #stellt einen Fahrer dar - zur einfacheren und zentraleren Verwaltung der Fahrer besonders beim erstellen und speichern
-    
-    #Attribute
-    pfad = ''
-    name= ''
-    gebjahr = 1970
-    erstesrennen = 1988
-    aggressivität = 0
-    geschicklichkeit = 0
-    grundkönnen = 0
-    vorliebe = 0
-    durchschnittlicheplatzierung = 20
-    fahrzeug = ''
-    fahrzeugpfad = ''
-    seitWannFahrzeug = 1988
 
     #Initialisieren mit Standardwerten
     def __init__(self):

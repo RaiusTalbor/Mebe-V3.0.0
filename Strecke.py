@@ -5,14 +5,6 @@ import Daten
 
 class Strecke:
     #stellt eine Strecke dar - zur einfacheren und zentraleren Verwaltung der Strecken besonders beim erstellen und speichern
-    
-    #Attribute
-    pfad = ''
-    name= ''
-    rekordhalter = ''
-    pfadrekordhalter = ''
-    streckentyp = 0
-    schwierigkeit = 0
 
     #Initialisieren mit Standardwerten
     def __init__(self):

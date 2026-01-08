@@ -7,29 +7,6 @@ import time
 class Fenster:
     #Blueprint für jedes Fenster, welches existiert
 
-    fenster = Tk()
-    fenster.title("Mebe V3.0.0")
-    fenster.geometry("800x600")
-
-    labelTitel = Label(master=fenster,
-                    text="Mebe V3.0.0",
-                    font=('', 18))
-    labelTitel.pack()
-
-    frameButtons = Frame(master=fenster)
-    frameButtons.pack()
-
-    frameAnzeige = Frame(master=fenster)
-    frameAnzeige.pack()
-
-    frameInfo = Frame(master=fenster)
-    frameInfo.pack()
-
-    titel = ''
-    buttons = []
-    übergebeneFrames = []
-    info = ''
-
     def __init__(self):
         self.fenster = Tk()
         self.fenster.title("Mebe V3.0.0")
@@ -51,8 +28,6 @@ class Fenster:
 
         self.labelInfo = Label(self.frameInfo, text="", font=('', 15))
         self.labelInfo.pack()
-
-        self.fenster.mainloop()
 
     def beenden(self):
         self.setInfo('Mebe V3.0.0 wird beendet! Auf Wiedersehen!')
@@ -88,8 +63,8 @@ class Fenster:
         for i in self.buttons:
             i.destroy()
 
-    def hinzufügenButton(self, button):
-        button.config(master = self.frameButtons)
+    def hinzufügenButton(self, textübergabe, commandübergabe):
+        button = Button(master=self.frameButtons, text=textübergabe, command=commandübergabe)
         button.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
         #update_idletasks() nötig?
 

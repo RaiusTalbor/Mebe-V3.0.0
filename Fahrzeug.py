@@ -5,12 +5,6 @@ import Daten
 
 class Fahrzeug:
     #stellt ein Fahrzeug dar - zur einfacheren und zentraleren Verwaltung der Fahrzeugen besonders beim erstellen und speichern
-    
-    #Attribute
-    pfad = ''
-    name= ''
-    leistung = 0
-    wendigkeit = 0
 
     #Initialisieren mit Standardwerten
     def __init__(self):
