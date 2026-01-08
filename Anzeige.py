@@ -35,6 +35,9 @@ class Fenster:
         self.labelInfo = Label(self.frameInfo, text="", font=('', 15), wraplength = 800)
         self.labelInfo.pack()
 
+        self.listebuttons=[]
+        self.übergebeneFrames=[]
+
     def beenden(self):
         self.setInfo('Mebe V3.0.0 wird beendet! Auf Wiedersehen!')
         time.sleep(1)
@@ -76,8 +79,8 @@ class Fenster:
     def hinzufügenButton(self, textübergabe, commandübergabe):
         button = Button(master=self.frameButtons, text=textübergabe, command=commandübergabe)
         button.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
-        self.listebuttons.append(button)
         button.update_idletasks()
+        self.listebuttons.append(button)
 
     def setTitelFrame(self, übergabe):
         self.labelTitel.config(text=übergabe)
