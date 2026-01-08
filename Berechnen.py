@@ -28,31 +28,21 @@ def berechnen():
     global fensterBerechnen
     global labelInfo
 
-    fensterBerechnen = Toplevel()
-    fensterBerechnen.title("Berechnen - Mebe V3.0.0")
-    fensterBerechnen.geometry("800x600")
+    prozess.löscheButtons()
 
     #Frames
-    frameInfo = Frame(master=fensterBerechnen)
-    frameButtons = Frame(master=fensterBerechnen)
-    frameInteraktion = Frame(master=fensterBerechnen)
-    frameAnzeige = Frame(master = fensterBerechnen)
-    frameInfo.pack()
-    frameButtons.pack()
+    frameInteraktion = Frame(master=prozess.frameAnzeige)
+    frameAnzeige = Frame(master = prozess.frameAnzeige)
     frameInteraktion.pack()
     frameAnzeige.pack()
 
-    labelTitel = Label(master=frameInfo,
-                    text="Berechnen einer Meisterschaft",
-                    font=('', 15))
-    labelTitel.pack()
+    prozess.setTitelFrame("Berechnen einer Meisterschaft")
 
     #Auswahl der Meisterschaft
 
-    buttonAuswahl = Button(master = frameButtons, text = "Meisterschaft auswählen", command = auswahl)
-    buttonAuswahl.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
-    buttonZurück = Button(master = frameButtons, text = "Zurück", command = fensterBerechnen.destroy)
-    buttonZurück.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+    prozess.hinzufügenButton("Meisterschaft auswählen", auswahl)
+    #buttonZurück = Button(master = frameButtons, text = "Zurück", command = prozess.frameAnzeige.destroy)
+    #buttonZurück.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
 
     VerzeichnisMeisterschaftenohnefilter = os.listdir('Datenbank')
     VerzeichnisMeisterschaften = []
@@ -79,8 +69,9 @@ def berechnen():
 
     meisterschaft.set(VerzeichnisMeisterschaften[0])
 
-    labelInfo = Label (master = frameAnzeige, text = "", font = ("",13), wraplength = 800)
-    labelInfo.pack()
+    #labelInfo = Label (master = frameAnzeige, text = "", font = ("",13), wraplength = 800)
+    #labelInfo.pack()
+    prozess.setInfo("")
 
 # Sortieren und richtig anordnen------------------------------------------------------------------------
 def strecke_berechnen(streckendaten_moment, fahrerdaten):  # , fahrzeugdaten):
@@ -419,6 +410,6 @@ def berechnenStarten(meisterschaft):
     # geht auch komplizierter, mit Textverarbeitung etc.//txt und html?
     # die Liste wird wiedergegeben
 
-    labelInfo.config(text = Rangliste)
+    prozess.setInfo(Rangliste)
 
     #zurück ins Menü   

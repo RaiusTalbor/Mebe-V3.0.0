@@ -32,7 +32,7 @@ class Fenster:
         self.frameInfo = Frame(master=self.fenster)
         self.frameInfo.pack()
 
-        self.labelInfo = Label(self.frameInfo, text="", font=('', 15))
+        self.labelInfo = Label(self.frameInfo, text="", font=('', 15), wraplength = 800)
         self.labelInfo.pack()
 
     def beenden(self):
@@ -64,15 +64,20 @@ class Fenster:
         self.labelInfo = Label(self.frameInfo, text="", font=('', 15))
         self.labelInfo.pack()
 
+        self.listebuttons=[]
+        self.übergebeneFrames=[]
+
     #managen der Buttons
     def löscheButtons(self):
-        for i in self.buttons:
+        for i in self.listebuttons:
             i.destroy()
+            self.listebuttons[i]='' #löschen!!
 
     def hinzufügenButton(self, textübergabe, commandübergabe):
         button = Button(master=self.frameButtons, text=textübergabe, command=commandübergabe)
         button.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
-        #update_idletasks() nötig?
+        self.listebuttons.append(button)
+        button.update_idletasks()
 
     def setTitelFrame(self, übergabe):
         self.labelTitel.config(text=übergabe)
