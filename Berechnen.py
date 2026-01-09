@@ -26,12 +26,6 @@ def berechnen():
 
     prozess.löscheButtons()
 
-    #Frames
-    frameInteraktion = Frame(master=prozess.frameAnzeige)
-    frameAnzeige = Frame(master = prozess.frameAnzeige)
-    frameInteraktion.pack()
-    frameAnzeige.pack()
-
     prozess.setTitelFrame("Berechnen einer Meisterschaft")
 
     #Auswahl der Meisterschaft
@@ -58,15 +52,13 @@ def berechnen():
         anzeige = VerzeichnisMeisterschaften[i]
         anzeige = anzeige.replace('.dat', '')
 
-        radiobuttonMeisterschaft = Radiobutton(master=frameInteraktion, text=f"{anzeige}", 
+        radiobuttonMeisterschaft = Radiobutton(master=prozess.frameAnzeige, text=f"{anzeige}", 
                                                value=anzeige, variable = meisterschaft)
         radiobuttonMeisterschaft.pack()
 
     meisterschaft.set(VerzeichnisMeisterschaften[0])
 
-    #labelInfo = Label (master = frameAnzeige, text = "", font = ("",13), wraplength = 800)
-    #labelInfo.pack()
-    prozess.setInfo("")
+    prozess.löscheInfo()
 
 # Sortieren und richtig anordnen------------------------------------------------------------------------
 def strecke_berechnen(streckendaten_moment, fahrerdaten):  # , fahrzeugdaten):
@@ -404,5 +396,6 @@ def berechnenStarten(meisterschaft):
     # die Liste wird wiedergegeben
 
     prozess.setInfo(Rangliste)
+    prozess.labelInfo.config(font=('', 13)) #sonst zu groß, zurückgesetzt löscheInfo
 
     #zurück ins Menü   

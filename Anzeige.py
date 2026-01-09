@@ -35,6 +35,10 @@ class Fenster:
         self.frameAnzeige = Frame(master=self.fenster)
         self.frameAnzeige.pack()
 
+        #für die geteilte Anzeige - werden noch nicht gepackt --> nicht sichtbar
+        self.frameAnzeige1 = Frame(master=self.frameAnzeige)
+        self.frameAnzeige2 = Frame(master=self.frameAnzeige)
+
         self.frameInfo = Frame(master=self.fenster)
         self.frameInfo.pack()
 
@@ -49,7 +53,18 @@ class Fenster:
         time.sleep(1)
         self.fenster.destroy()
 
-    #managen der Buttons
+    #Info -----------------------------------
+    def setInfo(self, info):
+        self.info = info 
+        self.labelInfo.config(text=info, font=('', 15), wraplength = 800)
+        self.labelInfo.update_idletasks()
+
+    def löscheInfo(self):
+        self.info = '' 
+        self.labelInfo.config(text=self.info)
+        self.labelInfo.update_idletasks()
+
+    #Buttons ----------------------------------
     def löscheButtons(self):
         for i in self.listebuttons:
             if i.kategorie != "Hauptmenü":
@@ -74,29 +89,6 @@ class Fenster:
         self.labelTitel.config(text=übergabe)
         self.labelTitel.update_idletasks()
 
-    #managen der Info 
-    def setInfo(self, info):
-        self.info = info 
-        self.labelInfo.config(text=info)
-        self.labelInfo.update_idletasks()
-
-    def löscheInfo(self):
-        self.info = '' 
-        self.labelInfo.config(text=self.info)
-        self.labelInfo.update_idletasks()
-
-    #managen des Anzeigefelds
-    #ACHTUNG NICHT TRIVIAL!!!
-    def zeige(self, frame):
-        #fügt Frame zur Frameliste hinzu
-        self.übergebeneFrames.append(frame)
-
-    def aktualisiereFenster(self):
-        for i in self.übergebeneFrames:
-            i.config(master=self.frameAnzeige)
-            i.pack()
-        self.fenster.update_idletasks()
-
     def zurückButton(self):
         #globaler Zurück-Button, da immer dasselbe
         prozess.hinzufügenButton("Zurück", prozess.hauptmenü)
@@ -104,11 +96,31 @@ class Fenster:
     def hauptmenü(self):
         self.löscheButtons()
         self.löscheInfo()
-        #self.löscheAnzeige oder irgendwie so
+        self.löscheframeInhalt()
 
         #wieder hinzufügen der Buttons
         for i in self.hauptmenuebuttons:
             i.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
             self.listebuttons.append(i)
+
+    #Anzeige ----------------------------------------
+    def löscheframeInhalt(self):
+        for widget in self.frameAnzeige.winfo_children():
+            widget.destroy()
+
+        self.frameAnzeige.update_idletasks()
+
+    def zeige2frames(self):
+        #um die geteilte Anzeige zu nutzen, muss sie explizit aktiviert und deaktiviert werden
+        self.frameAnzeige1.pack(fill=BOTH, expand=True, side=LEFT)
+        self.frameAnzeige2.pack(fill=BOTH, expand=True, side=RIGHT)
+
+    def zeige1frame(self):
+        self.frameAnzeige1.pack_forget()
+        self.frameAnzeige2.pack_forget()
+        self.frameAnzeige1.update_idletasks()
+        self.frameAnzeige2.update_idletasks()
+
+    #scrollbar...
 
 prozess = Fenster()
