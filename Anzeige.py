@@ -14,6 +14,12 @@ class Fenster:
     #Blueprint für jedes Fenster, welches existiert
 
     def __init__(self):
+        self.start = 0
+        self.hauptmenuebuttons = []
+        #Hauptmenübuttons sind besondere Buttons, die sich in button.kategorie unterscheiden. Sie haben die Kategorie "Hauptmenü".
+        #Alle Buttons, die in MebeV3.py erstellt werden, bekommen diese Kategorie, da beim Laden dieses Moduls prozess.start=0 ist. Dadurch wird beim Hinzufügen der Buttons, solange start=0, diese Eigenschaft zugewiesen und permanent in die Liste hauptmenübuttons geschrieben. Nach erstmaligen (und damit letztmaligen Durchlaufen) von MebeV3.py wird start auf 1 gesetzt (für immer), damit keine weiteren Hauptmenübuttons hinzugefügt werden können. Alle anderen Buttons werden demnach normal behandelt.
+        #Alle Buttons mit dieser speziellen Kategorie werden nie gelöscht, sondern nur versteckt. So kann man (über die Liste geht der Zugriff nicht verloren) sie immer wieder hinzufügen, wenn sie benötigt werden (destroy vernichtet sie für immer).
+
         self.fenster = Tk()
         self.fenster.title("Mebe V3.0.0")
         self.fenster.geometry("800x600")
@@ -43,44 +49,26 @@ class Fenster:
         time.sleep(1)
         self.fenster.destroy()
 
-    def neuesFenster(self, titel):
-        #sollte auf das alte System zurückgesprungen werden müssen, aber bitte möglichst nicht verwenden
-
-        self.fenster = Tk()
-        self.fenster.title(titel)
-        self.fenster.geometry("800x600")
-
-        self.labelTitel = Label(master=self.fenster,
-                        text=titel,
-                        font=('', 18))
-        self.labelTitel.pack()
-
-        self.frameButtons = Frame(master=self.fenster)
-        self.frameButtons.pack()
-
-        self.frameAnzeige = Frame(master=self.fenster)
-        self.frameAnzeige.pack()
-
-        self.frameInfo = Frame(master=self.fenster)
-        self.frameInfo.pack()
-
-        self.labelInfo = Label(self.frameInfo, text="", font=('', 15))
-        self.labelInfo.pack()
-
-        self.listebuttons=[]
-        self.übergebeneFrames=[]
-
     #managen der Buttons
     def löscheButtons(self):
         for i in self.listebuttons:
-            i.destroy()
+            if i.kategorie != "Hauptmenü":
+                i.destroy()
+            else:
+                i.pack_forget() #alle mit dieser Kategorie werden versteckt, nicht zerstört
 
         self.listebuttons = []
 
     def hinzufügenButton(self, textübergabe, commandübergabe):
         button = Button(master=self.frameButtons, text=textübergabe, command=commandübergabe)
         button.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+        button.kategorie = "Button"
         self.listebuttons.append(button)
+
+        #Sonderbehandlung Buttons aus MebeV3.py
+        if self.start == 0:
+            self.hauptmenuebuttons.append(button)
+            button.kategorie = "Hauptmenü"
 
     def setTitelFrame(self, übergabe):
         self.labelTitel.config(text=übergabe)
@@ -108,5 +96,19 @@ class Fenster:
             i.config(master=self.frameAnzeige)
             i.pack()
         self.fenster.update_idletasks()
+
+    def zurückButton(self):
+        #globaler Zurück-Button, da immer dasselbe
+        prozess.hinzufügenButton("Zurück", prozess.hauptmenü)
+
+    def hauptmenü(self):
+        self.löscheButtons()
+        self.löscheInfo()
+        #self.löscheAnzeige oder irgendwie so
+
+        #wieder hinzufügen der Buttons
+        for i in self.hauptmenuebuttons:
+            i.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+            self.listebuttons.append(i)
 
 prozess = Fenster()

@@ -36,4 +36,6 @@ prozess.hinzufügenButton("Hilfe", test) #Hilfe zu Mebe
 
 prozess.hinzufügenButton("Beenden", prozess.beenden) #Programm beenden
 
+prozess.start = 1
+
 prozess.fenster.mainloop() #hier, da sonst beim Laden fest hängt

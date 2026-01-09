@@ -37,8 +37,7 @@ def berechnen():
     #Auswahl der Meisterschaft
 
     prozess.hinzufügenButton("Meisterschaft auswählen", auswahl)
-    #buttonZurück = Button(master = frameButtons, text = "Zurück", command = prozess.frameAnzeige.destroy)
-    #buttonZurück.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+    prozess.zurückButton()
 
     VerzeichnisMeisterschaftenohnefilter = os.listdir('Datenbank')
     VerzeichnisMeisterschaften = []
