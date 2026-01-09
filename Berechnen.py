@@ -31,29 +31,16 @@ def berechnen():
     #Auswahl der Meisterschaft
 
     prozess.hinzufügenButton("Meisterschaft auswählen", auswahl)
-    prozess.zurückButton()
+    prozess.zurückButton() 
 
-    VerzeichnisMeisterschaftenohnefilter = os.listdir('Datenbank')
-    VerzeichnisMeisterschaften = []
+    VerzeichnisMeisterschaften = Daten.listeMeisterschaftsnamen()
 
-    #für alle Dateien, die nicht auf 'Strecken.dat' oder 'Fahrer.dat', aber auf '.dat' enden, wird zur Liste hinzugefügt
-    for i in range(0, len(VerzeichnisMeisterschaftenohnefilter)):
-        if (not VerzeichnisMeisterschaftenohnefilter[i].endswith('Fahrer.dat') 
-            and not VerzeichnisMeisterschaftenohnefilter[i].endswith('Strecken.dat') 
-            and VerzeichnisMeisterschaftenohnefilter[i].endswith('.dat')):
-
-            VerzeichnisMeisterschaften.append(VerzeichnisMeisterschaftenohnefilter[i])
-
+    #radios
     meisterschaft = StringVar()
     #zeige alle Meisterschaften als Button an
     for i in range(0, len(VerzeichnisMeisterschaften)):
 
-        #richtige Anzeige ohne .dat
-        anzeige = VerzeichnisMeisterschaften[i]
-        anzeige = anzeige.replace('.dat', '')
-
-        radiobuttonMeisterschaft = Radiobutton(master=prozess.frameAnzeige, text=f"{anzeige}", 
-                                               value=anzeige, variable = meisterschaft)
+        radiobuttonMeisterschaft = Radiobutton(master=prozess.frameAnzeige, text=f"{VerzeichnisMeisterschaften[i]}", value=VerzeichnisMeisterschaften[i], variable = meisterschaft)
         radiobuttonMeisterschaft.pack()
 
     meisterschaft.set(VerzeichnisMeisterschaften[0])
