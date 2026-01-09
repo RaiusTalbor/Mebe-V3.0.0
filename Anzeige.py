@@ -74,12 +74,12 @@ class Fenster:
     def löscheButtons(self):
         for i in self.listebuttons:
             i.destroy()
-            self.listebuttons.remove(i)
+
+        self.listebuttons = []
 
     def hinzufügenButton(self, textübergabe, commandübergabe):
         button = Button(master=self.frameButtons, text=textübergabe, command=commandübergabe)
         button.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
-        button.update_idletasks()
         self.listebuttons.append(button)
 
     def setTitelFrame(self, übergabe):

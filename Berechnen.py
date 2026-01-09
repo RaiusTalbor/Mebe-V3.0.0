@@ -12,8 +12,6 @@ from Anzeige import prozess #das Objekt wird global importiert und für alle jed
 
 def auswahl():
     global meisterschaft
-    global fensterBerechnen
-    global labelInfo
 
     meisterschaftAusgewählt = meisterschaft.get()
 
@@ -25,8 +23,6 @@ def auswahl():
 
 def berechnen():
     global meisterschaft
-    global fensterBerechnen
-    global labelInfo
 
     prozess.löscheButtons()
 
@@ -219,8 +215,6 @@ def strecke_berechnen(streckendaten_moment, fahrerdaten):  # , fahrzeugdaten):
     return Ergebnisliste  # , Unfall, Rennergebnis?
 
 def berechnenStarten(meisterschaft):
-    global fensterBerechnen
-    global labelInfo
 
     pfad = 'Datenbank/' + meisterschaft + '.dat'
 
