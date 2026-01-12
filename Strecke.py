@@ -12,8 +12,8 @@ class Strecke:
         self.name= ''
         self.rekordhalter = ''
         self.pfadrekordhalter = ''
-        self.streckentyp = 0
-        self.schwierigkeit = 0
+        self.streckentyp = 1
+        self.schwierigkeit = 1
 
     #wenn Name geg., Objekt kann eindeutig und vollständig richtig aus Datei geladen werden (mit richtigen Attributen für Objekt)
     def ladenName(self, name):

@@ -123,4 +123,8 @@ class Fenster:
 
     #scrollbar...
 
+    def hinzufügenLabel(self, text):
+        label = Label(master = self.frameAnzeige, text = text)
+        label.pack()
+
 prozess = Fenster()
