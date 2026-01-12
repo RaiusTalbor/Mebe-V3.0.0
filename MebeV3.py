@@ -4,7 +4,7 @@
 # teilweise neu gebaut zur Verbesserung der Struktur
 
 #Mebe-Module und Funktionen
-#import Erstellen
+import Erstellen
 #import Bearbeiten
 import Berechnen
 
@@ -26,7 +26,7 @@ def test():
 # alle ansehen und bearbeiten, Serien hinzufügen?
 # Mebe 2 hat Mebe 1 implementiert, was bedeutet, dass Mebe 1 in Mebe 2 integriert und unabhängig funktioniert - Feature wurde entfernt wegen fehlenden Mehrwert - Mebe 3 basiert von der Berechnung auf M1
 
-prozess.hinzufügenButton("Erstellen", test) #erstellen einer Meisterschaft
+prozess.hinzufügenButton("Erstellen", Erstellen.erstellen) #erstellen einer Meisterschaft
 
 prozess.hinzufügenButton("Bearbeiten", test)
 

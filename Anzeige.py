@@ -91,7 +91,7 @@ class Fenster:
 
     def zurückButton(self):
         #globaler Zurück-Button, da immer dasselbe
-        prozess.hinzufügenButton("Zurück", prozess.hauptmenü)
+        prozess.hinzufügenButton("Zurück zum Hauptmenü", prozess.hauptmenü)
 
     def hauptmenü(self):
         self.löscheButtons()
