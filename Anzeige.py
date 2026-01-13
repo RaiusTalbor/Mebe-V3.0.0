@@ -48,6 +48,8 @@ class Fenster:
         self.listebuttons=[]
         self.übergebeneFrames=[]
 
+        self.checkpoint = [self.frameAnzeige, self.gespeicherteButtons] #speichert einen Frame, damit er wiederhergestellt werden kann
+
     def beenden(self):
         self.setInfo('Mebe V3.0.0 wird beendet! Auf Wiedersehen!')
         time.sleep(1)
@@ -93,6 +95,8 @@ class Fenster:
         #globaler Zurück-Button, da immer dasselbe
         prozess.hinzufügenButton("Zurück zum Hauptmenü", prozess.hauptmenü)
 
+    #noch einen, um zum Frame davor zurückzukehren
+
     def hauptmenü(self):
         self.löscheButtons()
         self.löscheInfo()
@@ -120,6 +124,29 @@ class Fenster:
         self.frameAnzeige2.pack_forget()
         self.frameAnzeige1.update_idletasks()
         self.frameAnzeige2.update_idletasks()
+
+    def speicherCheckpoint(self):
+        #speichert Checkpoint und übergibt Buttons und Frame frei
+
+        self.checkpoint = [self.frameAnzeige, self.listeButtons]
+
+        self.frameAnzeige.pack_forget()
+
+        for i in self.listebuttons:
+            i.pack_forget()
+
+    def wiederherstellenCheckpoint(self):
+        self.löscheframeInhalt()
+        self.löscheButtons()
+        self.löscheInfo()
+
+        self.frameAnzeige = self.checkpoint[0]
+
+        buttons = self.checkpoint[1]
+        
+        for i in buttons:
+            i.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
+            self.listebuttons.append(i)
 
     #scrollbar...
 

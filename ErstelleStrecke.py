@@ -6,19 +6,41 @@ from tkinter import *
 
 from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 import Strecke
+import Daten
 
 def speichern():
-    pass
+    global strecke, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
+
+    #Radios
+    global kurvig
+    global ausgeglichen
+    global schnell
+
+    #Informationen aus Widgets holen
+    strecke.rekordhalter = entryRekordhalterAuswählen.get()
+
+    strecke.streckentyp = int(streckentyp.get())
+
+    strecke.schwierigkeit = scaleSchwierigkeit.get()
+
+    strecke.speichern()
+
+    prozess.wiederherstellenCheckpoint() #zurück an Hauptprozess
 
 def erstellen(name):
     #erstellen und bearbeiten einer Strecke
+    global strecke, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
 
-    #Fenster initialisiren
-    prozess.löscheButtons()
+    #Radios
+    global kurvig
+    global ausgeglichen
+    global schnell
+
+    #Fenster initialisieren
+    prozess.speicherCheckpoint()
+
     prozess.zurückButton() #TODO nochmal überlegen
     prozess.hinzufügenButton("Speichern", speichern)
-
-    prozess.löscheframeInhalt()
     
     #Auswahl, ob bearbeiten oder nicht
     if name == "":
@@ -69,3 +91,35 @@ def erstellen(name):
 
     scaleSchwierigkeit.set(strecke.schwierigkeit)
     scaleSchwierigkeit.update_idletasks()
+
+# fügt Fahrer in Entry aus fahrerAuswahl ein --> Name ist definitiv richtig; gibt checkpoint wieder zurück
+def fügeFahrerein():
+    global Fahrer, strecke,entryRekordhalterAuswählen
+
+    #vielleicht vorher leeren
+    entryRekordhalterAuswählen.insert(0, Fahrer.get())
+    strecke.setrekordhalter = Fahrer.get()
+
+    prozess.wiederherstellenCheckpoint()
+
+# alle Fahrer angezeigen. Mit Radiobuttons Auswahl des Fahrers aus Datenbank möglich
+def FahrerAuswählen():
+    global Fahrer, strecke
+
+    prozess.speicherCheckpoint()
+
+    listeFahrer = Daten.listeNamen("Fahrer")
+
+    prozess.hinzufügenButton("Fahrer auswählen", fügeFahrerein)
+
+    Fahrer = StringVar()
+    #für jedes Element der Liste (also alle Fahrer) wird ein Radiobutton erzeugt
+    for i in range(0, len(listeFahrer)):
+
+        #formated String in Radiobutton wird gesetzt
+        textFahrer = listeFahrer[i]
+
+        radioFahrer = Radiobutton(master = prozess.frameAnzeige, text = listeFahrer[i], value = str(listeFahrer[i]), variable = Fahrer)
+        radioFahrer.pack()
+
+    Fahrer.set(strecke.rekordhalter)
