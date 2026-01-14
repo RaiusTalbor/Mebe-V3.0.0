@@ -84,6 +84,7 @@ class Meisterschaft:
 
         self.rennkalender = übergabe      
 
+    #setzt Rennkalender aus Pfadliste
     def setrennkalenderPfad(self, übergabe):
         self.rennkalender = übergabe     
 
@@ -94,8 +95,15 @@ class Meisterschaft:
         
         self.fahrerliste = übergabe
 
+    #setzt Fahrerliste aus Pfadliste
     def setfahrerlistePfad(self, übergabe):
         self.fahrerliste = übergabe
+
+    def setPfade(self):
+        #setzt alle nötigen Pfade selbst über seinen Namen
+        self.setpfad(self.name)
+        self.setpfadFahrer(self.name)
+        self.setpfadRennkalender(self.name)
 
     #speichern
     def speichern(self):
