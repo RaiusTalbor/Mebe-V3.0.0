@@ -150,7 +150,7 @@ def aktualisiereFenster():
         listeRechts = fahrerliste
         
         #entfernt alle Inhalte, die rechts schon vorkommen
-        for i in rennkalenderListe:
+        for i in fahrerliste:
             liste.remove(i)
 
     #alle Radios links hinzufügen
@@ -226,6 +226,8 @@ def fahrereinfügen():
             radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=fahrerliste[i], value=fahrerliste[i], variable=radioAuswahlRechts)
             radioStrecken.pack(anchor='w')
         radioAuswahlRechts.set(fahrerliste[0])
+
+    aktualisiereFenster() #warum keine Ahnung, aber sonst werden die falschen Radiobuttons angezeigt
 
 def erstelleElement():
     global varweiter
