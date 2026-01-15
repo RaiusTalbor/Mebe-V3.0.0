@@ -102,6 +102,7 @@ class Fenster:
         self.löscheButtons()
         self.löscheInfo()
         self.löscheframeInhalt()
+        self.setTitelFrame("Mebe V3.0.0")
 
         #wieder hinzufügen der Buttons
         for i in self.hauptmenuebuttons:

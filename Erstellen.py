@@ -47,10 +47,9 @@ def weiter():
     elif varweiter == 3: #Fahrer hinzufügen
         fahrereinfügen()
     elif varweiter == 4: #Speichern und erstellen beenden
-        pass  
+        prozess.hauptmenü() #da sonst diese Funktion weiter und er hängt fest  
 
 #einem speziellen Erstellen-Code wird immer ein Wert übergeben: ein entsprechender Pfad oder "leer". Bei leer wird etwas neues erstellt, mit Pfad wird dieser geladen und die Werte von dem Ding gespeichert
-#Achtung: varweiter ist eins höher, weil varweiter in weiter() um 1 erhöht wird, wenn es durchläuft
 
 def sammeln():
     #sammelt bei vaweiter die Eingaben ein und speichert die zwischen
@@ -84,7 +83,7 @@ def sammeln():
 
     elif varweiter == 4: #Speichern und erstellen beenden
         meisterschaft.speichern()
-        prozess.hauptmenü()
+
     else:
         pass
 
