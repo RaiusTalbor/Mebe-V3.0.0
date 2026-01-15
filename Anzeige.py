@@ -111,14 +111,14 @@ class Fenster:
     #Anzeige ----------------------------------------
     def löscheframeInhalt(self):
         for widget in self.frameAnzeige.winfo_children():
-            widget.destroy()
+            widget.pack_forget()
 
         self.frameAnzeige.update_idletasks()
 
     def zeige2frames(self):
         #um die geteilte Anzeige zu nutzen, muss sie explizit aktiviert und deaktiviert werden
         self.frameAnzeige1.pack(fill=BOTH, expand=True, side=LEFT)
-        self.frameAnzeige2.pack(fill=BOTH, expand=True, side=RIGHT)
+        self.frameAnzeige2.pack(fill=BOTH, expand=True, side=LEFT)
 
     def zeige1frame(self):
         self.frameAnzeige1.pack_forget()

@@ -75,7 +75,7 @@ def sammeln():
     elif varweiter == 2: #Strecken hinzufügen
         prozess.zeige1frame() #Zwei-Fenster-Anzeige deaktiviert
 
-        meisterschaft.setRennkalenderName(rennkalenderListe)
+        meisterschaft.setrennkalenderName(rennkalenderListe)
 
     elif varweiter == 3: #Fahrer hinzufügen
         prozess.zeige1frame() #Zwei-Fenster-Anzeige deaktiviert
@@ -84,6 +84,7 @@ def sammeln():
 
     elif varweiter == 4: #Speichern und erstellen beenden
         meisterschaft.speichern()
+        prozess.hauptmenü()
     else:
         pass
 
@@ -138,9 +139,9 @@ def aktualisiereFenster():
 
     #zuerst den linken Frame löschen, wiederherstellen, aber mit veränderter Liste -- effizienter?
     for widget in prozess.frameAnzeige1.winfo_children():
-        widget.destroy()
+        widget.pack_forget()
     for widget in prozess.frameAnzeige2.winfo_children():
-        widget.destroy()
+        widget.pack_forget()
 
     if varweiter == 2:
         liste = Daten.listeNamen("Strecken")
