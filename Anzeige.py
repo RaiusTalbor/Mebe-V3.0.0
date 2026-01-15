@@ -47,6 +47,7 @@ class Fenster:
 
         self.listebuttons=[]
         self.übergebeneFrames=[]
+        self.gespeicherteButtons=[]
 
         self.checkpoint = [self.frameAnzeige, self.gespeicherteButtons] #speichert einen Frame, damit er wiederhergestellt werden kann
 
