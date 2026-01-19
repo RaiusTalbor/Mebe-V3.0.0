@@ -16,9 +16,8 @@ class Fenster:
     def __init__(self):
         self.start = 0
         self.hauptmenuebuttons = []
-        #Hauptmenübuttons sind besondere Buttons, die sich in button.kategorie unterscheiden. Sie haben die Kategorie "Hauptmenü".
-        #Alle Buttons, die in MebeV3.py erstellt werden, bekommen diese Kategorie, da beim Laden dieses Moduls prozess.start=0 ist. Dadurch wird beim Hinzufügen der Buttons, solange start=0, diese Eigenschaft zugewiesen und permanent in die Liste hauptmenübuttons geschrieben. Nach erstmaligen (und damit letztmaligen Durchlaufen) von MebeV3.py wird start auf 1 gesetzt (für immer), damit keine weiteren Hauptmenübuttons hinzugefügt werden können. Alle anderen Buttons werden demnach normal behandelt.
-        #Alle Buttons mit dieser speziellen Kategorie werden nie gelöscht, sondern nur versteckt. So kann man (über die Liste geht der Zugriff nicht verloren) sie immer wieder hinzufügen, wenn sie benötigt werden (destroy vernichtet sie für immer).
+
+        #Alle Buttons, die in MebeV3.py erstellt werden, solange start=0 ist, werden permanent in die Liste hauptmenübuttons geschrieben. Nach erstmaligen (und damit letztmaligen Durchlaufen) von MebeV3.py wird start auf 1 gesetzt (für immer), damit keine weiteren Hauptmenübuttons hinzugefügt werden können. Alle anderen Buttons werden demnach normal behandelt.
 
         self.fenster = Tk()
         self.fenster.title("Mebe V3.0.0")
@@ -70,23 +69,25 @@ class Fenster:
     #Buttons ----------------------------------
     def löscheButtons(self):
         for i in self.listebuttons:
-            if i.kategorie != "Hauptmenü":
-                i.destroy()
-            else:
-                i.pack_forget() #alle mit dieser Kategorie werden versteckt, nicht zerstört
+            i.pack_forget()
+            #mögliche Optimierung Issue #14
+            #if i.kategorie != "Hauptmenü":
+            #    i.destroy()
+            #else:
+            #    i.pack_forget() #alle mit dieser Kategorie werden versteckt, nicht zerstört
 
         self.listebuttons = []
 
     def hinzufügenButton(self, textübergabe, commandübergabe):
         button = Button(master=self.frameButtons, text=textübergabe, command=commandübergabe)
         button.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
-        button.kategorie = "Button"
+        #button.kategorie = "Button" #mögliche Optimierung Issue #14
         self.listebuttons.append(button)
 
         #Sonderbehandlung Buttons aus MebeV3.py
         if self.start == 0:
             self.hauptmenuebuttons.append(button)
-            button.kategorie = "Hauptmenü"
+            #button.kategorie = "Hauptmenü" #mögliche Optimierung Issue #14
 
     def setTitelFrame(self, übergabe):
         self.labelTitel.config(text=übergabe)
@@ -130,9 +131,9 @@ class Fenster:
     def speicherCheckpoint(self):
         #speichert Checkpoint und übergibt Buttons und Frame frei
 
-        self.checkpoint = [self.frameAnzeige, self.listeButtons]
+        self.checkpoint = [self.frameAnzeige, self.listebuttons]
 
-        self.frameAnzeige.pack_forget()
+        self.löscheframeInhalt()
 
         for i in self.listebuttons:
             i.pack_forget()
@@ -149,6 +150,8 @@ class Fenster:
         for i in buttons:
             i.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
             self.listebuttons.append(i)
+
+        self.frameAnzeige.update_idletasks()
 
     #scrollbar...
 

@@ -9,7 +9,7 @@ import Strecke
 import Daten
 
 def speichern():
-    global strecke, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
+    global strecke, entryName, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
 
     #Radios
     global kurvig
@@ -17,6 +17,10 @@ def speichern():
     global schnell
 
     #Informationen aus Widgets holen
+
+    if entryName.winfo_exists():
+        strecke.name = entryName.get()   
+
     strecke.rekordhalter = entryRekordhalterAuswählen.get()
 
     strecke.streckentyp = int(streckentyp.get())
@@ -29,7 +33,7 @@ def speichern():
 
 def erstellen(name):
     #erstellen und bearbeiten einer Strecke
-    global strecke, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
+    global strecke, entryName, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
 
     #Radios
     global kurvig
@@ -44,9 +48,14 @@ def erstellen(name):
     
     #Auswahl, ob bearbeiten oder nicht
     if name == "":
-        strecke = Strecke()
+        strecke = Strecke.Strecke()
+
+        prozess.hinzufügenLabel("Name der Strecke:")
+
+        entryName = Entry(master = prozess.frameAnzeige)
+        entryName.pack()
     else:
-        strecke = Strecke()
+        strecke = Strecke.Strecke()
         strecke.ladenName(name)
 
     prozess.hinzufügenLabel("Wer ist der Rekordhater?")

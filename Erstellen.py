@@ -233,7 +233,7 @@ def erstelleElement():
     global varweiter
 
     if varweiter == 2:
-        ErstelleStrecke.erstellen()
+        ErstelleStrecke.erstellen("")
     if varweiter == 3:
         ErstelleFahrer.erstellen()
 

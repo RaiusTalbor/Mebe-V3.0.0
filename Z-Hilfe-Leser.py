@@ -4,7 +4,7 @@ import pickle
 # pfad = filedialog.askopenfile()
 
 #f = open("temporäre Dateien/000 - Zwischendaten.dat", mode='rb')
-f = open("Datenbank/BTM 2022.dat", mode='rb')
+f = open("Datenbank/Strecken/Blitzring.dat", mode='rb')
 
 platzhalter=pickle.load(f)
 

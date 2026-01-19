@@ -50,6 +50,7 @@ class Strecke:
 
     #speichern
     def speichern(self):
+        self.setpfad(self.name)
         Daten.schreiben(self.pfad, [self.rekordhalter, self.streckentyp, self.schwierigkeit])
 
     #laden aus Datei
