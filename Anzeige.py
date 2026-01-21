@@ -131,7 +131,7 @@ class Fenster:
     def speicherCheckpoint(self):
         #speichert Checkpoint und übergibt Buttons und Frame frei
 
-        self.checkpoint = [self.frameAnzeige, self.listebuttons]
+        self.checkpoint = [self.frameAnzeige, self.listebuttons[:]]
 
         self.löscheframeInhalt()
 
@@ -144,6 +144,9 @@ class Fenster:
         self.löscheInfo()
 
         self.frameAnzeige = self.checkpoint[0]
+
+        for widget in self.frameAnzeige.winfo_children():
+            widget.pack()
 
         buttons = self.checkpoint[1]
         

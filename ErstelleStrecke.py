@@ -4,6 +4,7 @@
 
 from tkinter import *
 
+import Erstellen
 from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 import Strecke
 import Daten
@@ -30,6 +31,7 @@ def speichern():
     strecke.speichern()
 
     prozess.wiederherstellenCheckpoint() #zurück an Hauptprozess
+    #Erstellen.aktualisiereFenster() #Falle für Bearbeiten!!!!!
 
 def erstellen(name):
     #erstellen und bearbeiten einer Strecke
