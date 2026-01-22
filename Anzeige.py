@@ -31,8 +31,11 @@ class Fenster:
         self.frameButtons = Frame(master=self.fenster)
         self.frameButtons.pack()
 
-        self.frameAnzeige = Frame(master=self.fenster)
-        self.frameAnzeige.pack()
+        self.frameAnzeigeInhalt = Frame(master=self.fenster) #Hält den ContentFrame fest, da dieser nur relativ existiert
+        self.frameAnzeigeInhalt.pack(fill="both", expand=True)
+
+        self.frameAnzeige = Frame(master=self.frameAnzeigeInhalt)
+        self.frameAnzeige.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         #für die geteilte Anzeige - werden noch nicht gepackt --> nicht sichtbar
         self.frameAnzeige1 = Frame(master=self.frameAnzeige)
