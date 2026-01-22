@@ -19,8 +19,11 @@ def speichern():
 
     #Informationen aus Widgets holen
 
+    erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
+
     if entryName.winfo_exists():
-        strecke.name = entryName.get()   
+        strecke.name = entryName.get()
+        erstellen = 1   
 
     strecke.rekordhalter = entryRekordhalterAuswählen.get()
 
@@ -31,7 +34,9 @@ def speichern():
     strecke.speichern()
 
     prozess.wiederherstellenCheckpoint() #zurück an Hauptprozess
-    #Erstellen.aktualisiereFenster() #Falle für Bearbeiten!!!!!
+
+    if erstellen == 1: #geht nicht wie oben, da Checkpoint schon wieder hergestellt wird, sonst setzt er die Radios auf den dann löschenden Frame
+        Erstellen.aktualisiereFenster() #nur, wenn erstellt wird --> sonst Falle für Bearbeiten
 
 def erstellen(name):
     #erstellen und bearbeiten einer Strecke

@@ -79,7 +79,7 @@ def sammeln():
 
     elif varweiter == 3: #Fahrer hinzufügen
         prozess.zeige1frame() #Zwei-Fenster-Anzeige deaktiviert
-        
+
         meisterschaft.setfahrerlisteName(fahrerliste)
 
     else:
@@ -234,5 +234,7 @@ def erstelleElement():
         ErstelleStrecke.erstellen("")
     if varweiter == 3:
         ErstelleFahrer.erstellen()
+    else:
+        pass
 
-    aktualisiereFenster() #sonst würde nicht aktualisiert werden
+    aktualisiereFenster() #sonst würde nicht aktualisiert werden --> leider nicht
