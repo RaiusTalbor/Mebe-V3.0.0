@@ -26,7 +26,7 @@ def weiter():
 
     global varweiter
 
-    sammeln() #speichert die Informationen zwischen --> aber wie??
+    sammeln() #speichert die Informationen zwischen
 
     #immer Fenster neu initialisieren --> die Unterdinger müssen sich nicht darum kümmern
     prozess.löscheframeInhalt()
@@ -48,6 +48,7 @@ def weiter():
         fahrereinfügen()
     elif varweiter == 4: #Speichern und erstellen beenden
         prozess.hauptmenü() #da sonst diese Funktion weiter und er hängt fest  
+        meisterschaft.speichern() #leider nicht über sammeln(), da er immer nur den vorherigen Wert sammelt --> wenn ich danach mache, hängt er aber daran fest
 
 #einem speziellen Erstellen-Code wird immer ein Wert übergeben: ein entsprechender Pfad oder "leer". Bei leer wird etwas neues erstellt, mit Pfad wird dieser geladen und die Werte von dem Ding gespeichert
 
@@ -78,12 +79,8 @@ def sammeln():
 
     elif varweiter == 3: #Fahrer hinzufügen
         prozess.zeige1frame() #Zwei-Fenster-Anzeige deaktiviert
-
+        
         meisterschaft.setfahrerlisteName(fahrerliste)
-
-    elif varweiter == 4: #Speichern und erstellen beenden
-        meisterschaft.speichern()
-        print("Speicherst Du?")
 
     else:
         pass
