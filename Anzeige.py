@@ -34,12 +34,17 @@ class Fenster:
         self.frameAnzeigeInhalt = Frame(master=self.fenster) #Hält den ContentFrame fest, da dieser nur relativ existiert
         self.frameAnzeigeInhalt.pack(fill="both", expand=True)
 
-        self.frameAnzeige = Frame(master=self.frameAnzeigeInhalt)
+        self.frameAnzeige = Frame(master=self.frameAnzeigeInhalt) #Standard-Anzeige
         self.frameAnzeige.place(relx=0, rely=0, relwidth=1, relheight=1)
 
+        self.aktuelleAnzeige = self.frameAnzeige #speichert die aktuelle Anzeige, die gerade angezeigt wird (ganz oben liegt) --> einfacher händeln als Liste
+
+        self.alleAnzeigen = [] #dazu da, um die Reihenfolge der Anzeigen besser zu managen und wenn eine Anzeige gelöscht wird, dass die nächsttiefere wieder angesprochen werden kann
+        self.alleAnzeigen.append(self.aktuelleAnzeige)
+
         #für die geteilte Anzeige - werden noch nicht gepackt --> nicht sichtbar
-        self.frameAnzeige1 = Frame(master=self.frameAnzeige)
-        self.frameAnzeige2 = Frame(master=self.frameAnzeige)
+        self.frameAnzeige1 = Frame(master=self.aktuelleAnzeige)
+        self.frameAnzeige2 = Frame(master=self.aktuelleAnzeige)
 
         self.frameInfo = Frame(master=self.fenster)
         self.frameInfo.pack()
@@ -48,10 +53,9 @@ class Fenster:
         self.labelInfo.pack()
 
         self.listebuttons=[]
-        self.übergebeneFrames=[]
         self.gespeicherteButtons=[]
 
-        self.checkpoint = [self.frameAnzeige, self.gespeicherteButtons] #speichert einen Frame, damit er wiederhergestellt werden kann
+        #self.checkpoint = [self.frameAnzeige, self.gespeicherteButtons] #speichert einen Frame, damit er wiederhergestellt werden kann
 
     def beenden(self):
         self.setInfo('Mebe V3.0.0 wird beendet! Auf Wiedersehen!')
@@ -115,10 +119,10 @@ class Fenster:
 
     #Anzeige ----------------------------------------
     def löscheframeInhalt(self):
-        for widget in self.frameAnzeige.winfo_children():
+        for widget in self.aktuelleAnzeige.winfo_children():
             widget.pack_forget()
 
-        self.frameAnzeige.update_idletasks()
+        self.aktuelleAnzeige.update_idletasks()
 
     def zeige2frames(self):
         #um die geteilte Anzeige zu nutzen, muss sie explizit aktiviert und deaktiviert werden
@@ -134,35 +138,41 @@ class Fenster:
     def speicherCheckpoint(self):
         #speichert Checkpoint und übergibt Buttons und Frame frei
 
-        self.checkpoint = [self.frameAnzeige, self.listebuttons[:]]
+        #erstellt Frame, den er auf frameAnzeige legt --> der ist nun der aktuelle Frame
 
-        self.löscheframeInhalt()
+        neuerFrame = Frame(master=self.frameAnzeigeInhalt) #Standard-Anzeige, legt den Frame über die anderen Frames
+        neuerFrame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
-        for i in self.listebuttons:
-            i.pack_forget()
+        self.aktuelleAnzeige = neuerFrame #aktuelleAnzeige wird gesetzt
+        self.alleAnzeigen.append(neuerFrame) #Liste wird richtig gepflegt
+
+        #Buttonmanagement
+        self.gespeicherteButtons.append(self.listebuttons[:]) #speichert alle aktuellen Buttons
+
+        self.löscheButtons()
 
     def wiederherstellenCheckpoint(self):
-        self.löscheframeInhalt()
-        self.löscheButtons()
-        self.löscheInfo()
+        self.aktuelleAnzeige.destroy() #aktuelle Anzeige wird gelöscht und soll nicht mehr behalten werden
+        self.alleAnzeigen.remove(self.aktuelleAnzeige) #löscht die Anzeige aus der Liste
+        self.aktuelleAnzeige = self.alleAnzeigen[-1] #setzt die aktuelle Anzeige nun auf die letzte Anzeige, die vor der letzten gespeichert wurde
 
-        self.frameAnzeige = self.checkpoint[0]
+        #da alle die ganze Zeit existieren, sind die Anzeigen nie weg, sondern nur unsichtbar zum Zeitpunkt
 
-        for widget in self.frameAnzeige.winfo_children():
-            widget.pack()
+        #Buttonmanagement
+        self.löscheButtons() #löscht alle erstellten Buttons
 
-        buttons = self.checkpoint[1]
-        
+        buttons = self.gespeicherteButtons[-1]
+
         for i in buttons:
             i.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
             self.listebuttons.append(i)
 
-        self.frameAnzeige.update_idletasks()
+        self.gespeicherteButtons.pop(-1) #löscht den letzten Eintrag (die eben gesetzten Buttons)
 
     #scrollbar...
 
     def hinzufügenLabel(self, text):
-        label = Label(master = self.frameAnzeige, text = text)
+        label = Label(master = self.aktuelleAnzeige, text = text)
         label.pack()
 
 prozess = Fenster()

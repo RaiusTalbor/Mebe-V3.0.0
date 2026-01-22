@@ -40,7 +40,7 @@ def berechnen():
     #zeige alle Meisterschaften als Button an
     for i in range(0, len(VerzeichnisMeisterschaften)):
 
-        radiobuttonMeisterschaft = Radiobutton(master=prozess.frameAnzeige, text=f"{VerzeichnisMeisterschaften[i]}", value=VerzeichnisMeisterschaften[i], variable = meisterschaft)
+        radiobuttonMeisterschaft = Radiobutton(master=prozess.aktuelleAnzeige, text=f"{VerzeichnisMeisterschaften[i]}", value=VerzeichnisMeisterschaften[i], variable = meisterschaft)
         radiobuttonMeisterschaft.pack()
 
     meisterschaft.set(VerzeichnisMeisterschaften[0])

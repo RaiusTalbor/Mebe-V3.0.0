@@ -54,7 +54,7 @@ def erstellen(name):
 
         prozess.hinzufügenLabel("Name der Strecke:")
 
-        entryName = Entry(master = prozess.frameAnzeige)
+        entryName = Entry(master = prozess.aktuelleAnzeige)
         entryName.pack()
     else:
         strecke = Strecke.Strecke()
@@ -62,22 +62,22 @@ def erstellen(name):
 
     prozess.hinzufügenLabel("Wer ist der Rekordhater?")
 
-    entryRekordhalterAuswählen = Entry(master = prozess.frameAnzeige)
+    entryRekordhalterAuswählen = Entry(master = prozess.aktuelleAnzeige)
     entryRekordhalterAuswählen.pack()
 
     entryRekordhalterAuswählen.delete(0, END)
     entryRekordhalterAuswählen.insert(0, name)
     entryRekordhalterAuswählen.update_idletasks()
     
-    buttonAuswählen = Button(master = prozess.frameAnzeige, text = "Fahrer aus Datenbank auswählen...", command = FahrerAuswählen)
+    buttonAuswählen = Button(master = prozess.aktuelleAnzeige, text = "Fahrer aus Datenbank auswählen...", command = FahrerAuswählen)
     buttonAuswählen.pack()
 
     prozess.hinzufügenLabel("Auswahl des Streckentps:")
 
     streckentyp = StringVar()
-    kurvig = Radiobutton(master = prozess.frameAnzeige, text = "Kurvige Strecke", value = 1, variable = streckentyp)
-    ausgeglichen = Radiobutton(master = prozess.frameAnzeige, text = "Ausgeglichene Strecke", value = 2, variable = streckentyp)
-    schnell = Radiobutton(master = prozess.frameAnzeige, text = "Schnelle Strecke", value = 3, variable = streckentyp)
+    kurvig = Radiobutton(master = prozess.aktuelleAnzeige, text = "Kurvige Strecke", value = 1, variable = streckentyp)
+    ausgeglichen = Radiobutton(master = prozess.aktuelleAnzeige, text = "Ausgeglichene Strecke", value = 2, variable = streckentyp)
+    schnell = Radiobutton(master = prozess.aktuelleAnzeige, text = "Schnelle Strecke", value = 3, variable = streckentyp)
     kurvig.select()
 
     kurvig.pack()
@@ -97,7 +97,7 @@ def erstellen(name):
 
     prozess.hinzufügenLabel("Auswahl der Schwierigkeit:")
 
-    scaleSchwierigkeit = Scale(master = prozess.frameAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
+    scaleSchwierigkeit = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
     scaleSchwierigkeit.pack()
 
     scaleSchwierigkeit.set(strecke.schwierigkeit)
@@ -130,7 +130,7 @@ def FahrerAuswählen():
         #formated String in Radiobutton wird gesetzt
         textFahrer = listeFahrer[i]
 
-        radioFahrer = Radiobutton(master = prozess.frameAnzeige, text = listeFahrer[i], value = str(listeFahrer[i]), variable = Fahrer)
+        radioFahrer = Radiobutton(master = prozess.aktuelleAnzeige, text = listeFahrer[i], value = str(listeFahrer[i]), variable = Fahrer)
         radioFahrer.pack()
 
     Fahrer.set(strecke.rekordhalter)

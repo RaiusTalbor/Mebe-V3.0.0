@@ -83,6 +83,7 @@ def sammeln():
 
     elif varweiter == 4: #Speichern und erstellen beenden
         meisterschaft.speichern()
+        print("Speicherst Du?")
 
     else:
         pass
@@ -92,13 +93,13 @@ def meisterschaftdefinieren():
 
     prozess.hinzufügenLabel("Name der Meisterschaft:")
 
-    entryNameMeisterschaft = Entry(master = prozess.frameAnzeige)
+    entryNameMeisterschaft = Entry(master = prozess.aktuelleAnzeige)
     entryNameMeisterschaft.pack()
 
     prozess.hinzufügenLabel("Jahr der Meisterschaft:")
 
-    entryJahrMeisterschaft = Entry(master = prozess.frameAnzeige)
-    entryJahrMeisterschaft = Entry(master = prozess.frameAnzeige)
+    entryJahrMeisterschaft = Entry(master = prozess.aktuelleAnzeige)
+    entryJahrMeisterschaft = Entry(master = prozess.aktuelleAnzeige)
     entryJahrMeisterschaft.pack()
 
 def auswählen():
