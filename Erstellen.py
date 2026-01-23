@@ -10,7 +10,7 @@ import Meisterschaft
 import Strecke
 import ErstelleStrecke
 import Fahrer
-import Fahrzeug #notwendig hier?
+import ErstelleFahrer
 
 global varweiter
 
@@ -233,7 +233,7 @@ def erstelleElement():
     if varweiter == 2:
         ErstelleStrecke.erstellen("")
     if varweiter == 3:
-        ErstelleFahrer.erstellen()
+        ErstelleFahrer.erstellen("")
     else:
         pass
 

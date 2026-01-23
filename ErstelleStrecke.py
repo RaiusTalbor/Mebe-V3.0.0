@@ -12,11 +12,6 @@ import Daten
 def speichern():
     global strecke, entryName, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
 
-    #Radios
-    global kurvig
-    global ausgeglichen
-    global schnell
-
     #Informationen aus Widgets holen
 
     erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
@@ -65,6 +60,7 @@ def erstellen(name):
         strecke = Strecke.Strecke()
         strecke.ladenName(name)
 
+    #Parameter GUI
     prozess.hinzufügenLabel("Wer ist der Rekordhater?")
 
     entryRekordhalterAuswählen = Entry(master = prozess.aktuelleAnzeige)
@@ -131,10 +127,6 @@ def FahrerAuswählen():
     Fahrer = StringVar()
     #für jedes Element der Liste (also alle Fahrer) wird ein Radiobutton erzeugt
     for i in range(0, len(listeFahrer)):
-
-        #formated String in Radiobutton wird gesetzt
-        textFahrer = listeFahrer[i]
-
         radioFahrer = Radiobutton(master = prozess.aktuelleAnzeige, text = listeFahrer[i], value = str(listeFahrer[i]), variable = Fahrer)
         radioFahrer.pack()
 
