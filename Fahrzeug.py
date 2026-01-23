@@ -42,6 +42,7 @@ class Fahrzeug:
 
     #speichern
     def speichern(self):
+        self.setpfad(self.name)
         Daten.schreiben(self.pfad, [self.leistung, self.wendigkeit])
 
     #laden aus Datei

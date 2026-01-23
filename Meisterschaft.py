@@ -80,7 +80,7 @@ class Meisterschaft:
     #wenn Liste mit Namen übergeben wird, wird ins richtige Speicherformat (in Pfade überführt) gebracht
     def setrennkalenderName(self, übergabe):
         for i in range(0, len(übergabe)):
-            übergabe[i] = 'Datenbank/Strecke/' + übergabe[i] + '.dat'
+            übergabe[i] = 'Datenbank/Strecken/' + übergabe[i] + '.dat'
 
         self.rennkalender = übergabe      
 

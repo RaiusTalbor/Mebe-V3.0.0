@@ -54,14 +54,15 @@ class Fahrer:
 
     #setter
     def setpfad(self, name):
-        self.pfad = 'Datenbank/Fahrzeuge/' + name + '.dat'
+        self.pfad = 'Datenbank/Fahrer/' + name + '.dat'
 
     def setpfadFahrzeug(self, übergabe):
         self.fahrzeugpfadpfad = 'Datenbank/Fahrzeuge/' + übergabe + '.dat'
 
     #speichern
     def speichern(self):
-        Daten.schreiben(self.pfad, [self.gebjahr, self.erstesrennen, self.aggressivität, self.geschicklichkeit, self.grundkönnen, self.vorliebe, self.durchschnittlicheplatzierung, self.fahrzeug, self.seitWannFahrzeug])
+        self.setpfad(self.name)
+        Daten.schreiben(self.pfad, [int(self.gebjahr), int(self.erstesrennen), int(self.aggressivität), int(self.geschicklichkeit), int(self.grundkönnen), self.vorliebe, self.durchschnittlicheplatzierung, self.fahrzeug, int(self.seitWannFahrzeug), self.name])
 
     #laden aus Datei
     def laden(self):

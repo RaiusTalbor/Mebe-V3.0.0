@@ -7,6 +7,7 @@ from tkinter import *
 import Erstellen
 from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 import Fahrer
+import ErstelleFahrzeug
 import Daten
 
 def speichern():
@@ -122,24 +123,24 @@ def erstellen(name):
 
 # fügt Fahrer in Entry aus fahrerAuswahl ein --> Name ist definitiv richtig; gibt checkpoint wieder zurück
 def fügeFahrzeugein():
-    global Fahrzeug, labelFahrzeugAuswahl, fahrzeugkontrolle
+    global Fahrzeug, labelFahrzeugAuswahl
 
-    labelFahrzeugAuswahl.config(Fahrzeug.get())
-
-    fahrzeugkontrolle = 1
+    labelFahrzeugAuswahl.config(text = Fahrzeug.get())
 
     prozess.wiederherstellenCheckpoint()
 
 # alle Fahrzeuge angezeigen. Mit Radiobuttons Auswahl des Fahrzeugs aus Datenbank möglich
 def FahrzeugAuswählen():
-    global Fahrzeug
+    global Fahrzeug, fahrzeugkontrolle
 
     prozess.speicherCheckpoint()
 
     listeFahrzeug = Daten.listeNamen("Fahrzeuge")
 
     prozess.hinzufügenButton("Fahrzeug auswählen", fügeFahrzeugein)
-    prozess.hinzufügenButton("Neues Fahrzeug erstellen", neuesFahrzeug) #nach Erstellen bitte FahrzeugAuswählen aufrufen oder direkt setzen und diesen Checkpoint überspringen
+    prozess.hinzufügenButton("Neues Fahrzeug erstellen", neuesFahrzeug)
+
+    fahrzeugkontrolle = 1 #ab hier kann der Fahrer gespeichert werden --> weil ab hier nur noch mit Abbruch wegkann (ich möchte globals vermeiden)
 
     Fahrzeug = StringVar()
     #für jedes Element der Liste (also alle Fahrzeuge) wird ein Radiobutton erzeugt
@@ -148,3 +149,8 @@ def FahrzeugAuswählen():
         radioFahrzeug.pack()
 
     Fahrzeug.set(listeFahrzeug[0])
+
+def neuesFahrzeug(): #da sonst direkt ausgeführt, weil Parameterübergabe
+    global fahrer, labelFahrzeugAuswahl
+
+    labelFahrzeugAuswahl.config(text = ErstelleFahrzeug.erstellen("")) #nimmt den Namen entgegen und setzt ihn ins Label
