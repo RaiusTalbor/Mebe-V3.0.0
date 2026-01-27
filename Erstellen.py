@@ -36,7 +36,10 @@ def weiter():
 
     prozess.hinzufügenButton("Abbrechen", prozess.hauptmenü) #geändert, um weniger verwirrend
 
-    prozess.hinzufügenButton("Weiter", weiter)
+    if varweiter != 2:
+        prozess.hinzufügenButton("Weiter", weiter)
+    else:
+        prozess.hinzufügenButton("Meisterschaft erstellen", weiter)
 
     varweiter += 1 #vorher erhöht, um überall gleiche Zahlen stehen zu haben (läuft ja durch)
 
@@ -120,10 +123,10 @@ def entfernen():
 
     #holt sich die Daten und speichert sie zwischen
     if varweiter == 2:
-        rennkalenderListe.remove(radioAuswahlRechts.get())
+        rennkalenderListe.pop(radioAuswahlRechts.get())
     
     if varweiter == 3:
-        fahrerliste.remove(radioAuswahlRechts.get())
+        fahrerliste.pop(radioAuswahlRechts.get())
 
     aktualisiereFenster()
 
@@ -160,11 +163,11 @@ def aktualisiereFenster():
 
     #alle Elemente rechts hinzufügen, aber nur wenn in Liste was drin
     if listeRechts:
-        radioAuswahlRechts = StringVar()
+        radioAuswahlRechts = IntVar()
         for i in range(len(listeRechts)):
-            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=listeRechts[i], value=listeRechts[i], variable=radioAuswahlRechts)
+            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=listeRechts[i], value=i, variable=radioAuswahlRechts)
             radioStrecken.pack(anchor='w')
-        radioAuswahlRechts.set(listeRechts[0])
+        radioAuswahlRechts.set(0)
 
     prozess.frameAnzeige1.update_idletasks()
     prozess.frameAnzeige2.update_idletasks()
@@ -191,11 +194,11 @@ def rennkalendereinfügen():
     radioAuswahl.set(listeStrecken[0])
 
     if rennkalenderListe:
-        radioAuswahlRechts = StringVar()
+        radioAuswahlRechts = IntVar()
         for i in range(len(rennkalenderListe)):
-            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=rennkalenderListe[i], value=rennkalenderListe[i], variable=radioAuswahlRechts)
+            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=rennkalenderListe[i], value=ri, variable=radioAuswahlRechts)
             radioStrecken.pack(anchor='w')
-        radioAuswahlRechts.set(rennkalenderListe[0])
+        radioAuswahlRechts.set(0)
 
 def fahrereinfügen():
     #zeigt die Fahrerauswahl an
@@ -219,11 +222,11 @@ def fahrereinfügen():
     radioAuswahl.set(listeFahrer[0])
 
     if fahrerliste:
-        radioAuswahlRechts = StringVar()
+        radioAuswahlRechts = IntVar()
         for i in range(len(fahrerliste)):
-            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=fahrerliste[i], value=fahrerliste[i], variable=radioAuswahlRechts)
+            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=fahrerliste[i], value=i, variable=radioAuswahlRechts)
             radioStrecken.pack(anchor='w')
-        radioAuswahlRechts.set(fahrerliste[0])
+        radioAuswahlRechts.set(0)
 
     aktualisiereFenster() #warum keine Ahnung, aber sonst werden die falschen Radiobuttons angezeigt
 
