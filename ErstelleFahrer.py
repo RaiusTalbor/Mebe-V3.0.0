@@ -21,7 +21,7 @@ def speichern():
         fahrer.name = entryName.get()
         erstellen = 1   
 
-    if fahrzeugkontrolle == 0 and fahrer.fahrzeug == '': #wenn kein Fahrzeug ausgewählt wurde und keiner im Objekt hinterlegt wurde
+    if fahrzeugkontrolle == 0 and fahrer.fahrzeug == '[Kein Fahrzeug ausgewählt]': #wenn kein Fahrzeug ausgewählt wurde und keiner im Objekt hinterlegt wurde
         prozess.setInfo("Kein Fahrzeug ausgewählt! Wähle ein Fahrzeug zum Fortfahren aus.")
         return
 
@@ -78,22 +78,27 @@ def erstellen(name):
     prozess.hinzufügenLabel("Geburtsjahr des Fahrers:")
     entryGebJahr = Entry(master = prozess.aktuelleAnzeige)
     entryGebJahr.pack()
+    entryGebJahr.insert(0, fahrer.gebjahr)
 
     prozess.hinzufügenLabel("Wann fuhr der Fahrer/die Fahrerin sein/ihr erstes Rennen?")
     entry1Rennen = Entry(master = prozess.aktuelleAnzeige)
     entry1Rennen.pack()
+    entry1Rennen.insert(0, fahrer.erstesrennen)
 
     prozess.hinzufügenLabel("Wie aggressiv fährt der Fahrer?")
     scaleAggressivität = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
     scaleAggressivität.pack()
+    scaleAggressivität.set(fahrer.aggressivität)
 
     prozess.hinzufügenLabel("Wie geschickt fährt der Fahrer?")
     scaleGeschicklichkeit = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
     scaleGeschicklichkeit.pack()
+    scaleGeschicklichkeit.set(fahrer.geschicklichkeit)
 
     prozess.hinzufügenLabel("Wie hoch ist sein Grundkönnen?")
     scaleGrundkönnen = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 100, orient=HORIZONTAL)
     scaleGrundkönnen.pack()
+    scaleGrundkönnen.set(fahrer.grundkönnen)
 
     prozess.hinzufügenLabel("Welche Strecken bevorzugt der Fahrer?")
 
@@ -102,16 +107,21 @@ def erstellen(name):
     schnell = Radiobutton(master = prozess.aktuelleAnzeige, text = "Schnelle Strecke", value = 2, variable = vorliebe)
     kurvig.pack()
     schnell.pack()
-    kurvig.select()
+    
+    if fahrer.vorliebe == 1:
+        kurvig.select()
+    else:
+        schnell.select()
 
     prozess.hinzufügenLabel("Welche durchschnittliche Platzierung?") #wird die Info überhaupt benutzt?
     entryDurchschnittPlatzierung = Entry(master = prozess.aktuelleAnzeige)
     entryDurchschnittPlatzierung.pack()
+    entryDurchschnittPlatzierung.insert(0, fahrer.durchschnittlicheplatzierung)
 
     prozess.hinzufügenLabel("Welches Fahrzeug wird gefahren?")
 
-    labelFahrzeugAuswahl = Label(master = prozess.aktuelleAnzeige, text="[Kein Fahrzeug ausgewählt]")
-    labelFahrzeugAuswahl.pack()
+    labelFahrzeugAuswahl = Label(master = prozess.aktuelleAnzeige, text=fahrer.fahrzeug)
+    labelFahrzeugAuswahl.pack() #Fahrer ohne zugewiesenen Fahrzeug haben "[Kein Fahrzeug ausgewählt]" drin
 
     buttonFahrzeugAuswählen = Button(master = prozess.aktuelleAnzeige, text = "Fahrzeug auswählen...", command = FahrzeugAuswählen)
     buttonFahrzeugAuswählen.pack()
@@ -120,6 +130,7 @@ def erstellen(name):
 
     entryFahrzeugwann = Entry(master = prozess.aktuelleAnzeige)
     entryFahrzeugwann.pack()
+    entryFahrzeugwann.insert(0, fahrer.seitWannFahrzeug)
 
 # fügt Fahrer in Entry aus fahrerAuswahl ein --> Name ist definitiv richtig; gibt checkpoint wieder zurück
 def fügeFahrzeugein():
@@ -131,7 +142,7 @@ def fügeFahrzeugein():
 
 # alle Fahrzeuge angezeigen. Mit Radiobuttons Auswahl des Fahrzeugs aus Datenbank möglich
 def FahrzeugAuswählen():
-    global Fahrzeug, fahrzeugkontrolle
+    global Fahrzeug, fahrzeugkontrolle, fahrer
 
     prozess.speicherCheckpoint()
 
@@ -148,9 +159,9 @@ def FahrzeugAuswählen():
         radioFahrzeug = Radiobutton(master = prozess.aktuelleAnzeige, text = listeFahrzeug[i], value = str(listeFahrzeug[i]), variable = Fahrzeug)
         radioFahrzeug.pack()
 
-    Fahrzeug.set(listeFahrzeug[0])
+    Fahrzeug.set(fahrer.fahrzeug)
 
 def neuesFahrzeug(): #da sonst direkt ausgeführt, weil Parameterübergabe
-    global fahrer, labelFahrzeugAuswahl
+    global labelFahrzeugAuswahl
 
     labelFahrzeugAuswahl.config(text = ErstelleFahrzeug.erstellen("")) #nimmt den Namen entgegen und setzt ihn ins Label

@@ -5,7 +5,7 @@
 
 #Mebe-Module und Funktionen
 import Erstellen
-#import Bearbeiten
+import Bearbeiten
 import Berechnen
 
 #START DES PROGRAMMS
@@ -28,7 +28,7 @@ def test():
 
 prozess.hinzufügenButton("Erstellen", Erstellen.erstellen) #erstellen einer Meisterschaft
 
-prozess.hinzufügenButton("Bearbeiten", test)
+prozess.hinzufügenButton("Bearbeiten", Bearbeiten.bearbeiten)
 
 prozess.hinzufügenButton("Berechnen", Berechnen.berechnen) #berechnen einer Meisterschaft
 

@@ -15,9 +15,9 @@ class Fahrer:
         self.aggressivität = 0
         self.geschicklichkeit = 0
         self.grundkönnen = 0
-        self.vorliebe = 0
+        self.vorliebe = 1
         self.durchschnittlicheplatzierung = 20
-        self.fahrzeug = ''
+        self.fahrzeug = '[Kein Fahrzeug ausgewählt]'
         self.fahrzeugpfad = ''
         self.seitWannFahrzeug = 1988
 
