@@ -22,7 +22,7 @@ def bearbeiten():
 
     prozess.setTitelFrame("Bearbeiten von Objekten")
 
-    prozess.hinzufügenLabel("Bearbeiten - bitte Auswählen")
+    prozess.hinzufügenLabel("Bearbeiten - bitte auswählen")
 
     prozess.hinzufügenButton("Meisterschaft bearbeiten", bearbeiteMeisterschaft)
     prozess.hinzufügenButton("Strecke bearbeiten", bearbeiteStrecke)
@@ -49,6 +49,8 @@ def auswählen():
 
 def auswahl(objekt):
     global radioAuswahl
+
+    prozess.setTitelFrame("")
 
     prozess.löscheButtons()
     prozess.zurückButton()
