@@ -35,7 +35,7 @@ def auswählen():
     ausgewähltesObjekt = radioAuswahl.get()
 
     if ausgewählteAktion == 1: #Meisterschaft
-        pass
+        Erstellen.MeisterschaftBearbeiten(str(ausgewähltesObjekt))
     elif ausgewählteAktion == 2: #Strecke
         ErstelleStrecke.erstellen(str(ausgewähltesObjekt))
     elif ausgewählteAktion == 3: #Fahrer
@@ -58,7 +58,7 @@ def auswahl(objekt):
     prozess.hinzufügenButton("Auswählen", auswählen)
 
     if objekt == "Meisterschaft":
-        liste = Daten.listeMeisterschaftsnamen
+        liste = Daten.listeMeisterschaftsnamen()
     else:
         liste = Daten.listeNamen(objekt)
 

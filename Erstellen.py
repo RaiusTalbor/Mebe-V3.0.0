@@ -15,11 +15,29 @@ import ErstelleFahrer
 global varweiter
 
 def erstellen():
-    global varweiter
+    global varweiter, meisterschaft
 
     varweiter=0
 
+    meisterschaft = Meisterschaft.Meisterschaft()
+
+    prozess.setTitelFrame("Erstellen einer Meisterschaft")
     weiter() #damit es nicht hier mit drin steht
+
+def MeisterschaftBearbeiten(name):
+    #fehlt: abfangen des fehlenden entryName und der Checkpoint (wobei der nicht wichtig wäre)
+    global varweiter, meisterschaft, rennkalenderListe, fahrerliste
+
+    varweiter = 1
+
+    meisterschaft = Meisterschaft.Meisterschaft()
+    meisterschaft.ladenName(name)
+
+    rennkalenderListe = meisterschaft.getrennkalender()
+    fahrerliste = meisterschaft.getfahrerliste()
+
+    prozess.setTitelFrame("Bearbeiten einer Meisterschaft")
+    weiter()
 
 def weiter():
     #übernimmt die Daten und gibt das nächste Fenster durch
@@ -31,8 +49,6 @@ def weiter():
     #immer Fenster neu initialisieren --> die Unterdinger müssen sich nicht darum kümmern
     prozess.löscheframeInhalt()
     prozess.löscheButtons()
-
-    prozess.setTitelFrame("Erstellen einer Meisterschaft")
 
     prozess.hinzufügenButton("Abbrechen", prozess.hauptmenü) #geändert, um weniger verwirrend
 
@@ -63,7 +79,6 @@ def sammeln():
     global meisterschaft #globalen Objekte zum Speichern
 
     if varweiter == 1: #Meisterschaft
-        meisterschaft = Meisterschaft.Meisterschaft()
 
         name = entryNameMeisterschaft.get()
         name = name + entryJahrMeisterschaft.get()
@@ -196,7 +211,7 @@ def rennkalendereinfügen():
     if rennkalenderListe:
         radioAuswahlRechts = IntVar()
         for i in range(len(rennkalenderListe)):
-            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=rennkalenderListe[i], value=ri, variable=radioAuswahlRechts)
+            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=rennkalenderListe[i], value=i, variable=radioAuswahlRechts)
             radioStrecken.pack(anchor='w')
         radioAuswahlRechts.set(0)
 
