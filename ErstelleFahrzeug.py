@@ -16,7 +16,7 @@ def speichern():
 
     erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
 
-    if entryName.winfo_exists():
+    if entryName != None:
         fahrzeug.name = entryName.get()
         erstellen = 1   
 
@@ -57,6 +57,7 @@ def erstellen(name):
     else:
         fahrzeug = Fahrzeug.Fahrzeug()
         fahrzeug.ladenName(name)
+        entryName = None #für Überprüfung, onb Bearbeitet wurde oder nicht
 
     #Parameter GUI
     prozess.hinzufügenLabel("Wie viel Leistung hat das Fahrzeug im Vergleich zu den anderen in der Meisterschaft?")
@@ -68,7 +69,13 @@ def erstellen(name):
     wenig.pack()
     mittel.pack()
     viel.pack()
-    wenig.select()
+    
+    if fahrzeug.leistung == 1:
+        wenig.select()
+    elif fahrzeug.leistung == 2:
+        mittel.select()
+    else:
+        viel.select()
 
     prozess.hinzufügenLabel("Wie wendig ist das Fahrzeug im Vergleich zu den anderen der Meisterschaft?")
 
@@ -79,4 +86,10 @@ def erstellen(name):
     schnell.pack()
     ausgeglichen.pack()
     wendig.pack()
-    schnell.select()
+    
+    if fahrzeug.wendigkeit == 1:
+        schnell.select()
+    elif fahrzeug.wendigkeit == 2:
+        ausgeglichen.select()
+    else:
+        wendig.select()

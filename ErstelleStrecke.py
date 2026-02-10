@@ -16,7 +16,7 @@ def speichern():
 
     erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
 
-    if entryName.winfo_exists():
+    if entryName != None:
         strecke.name = entryName.get()
         erstellen = 1   
 
@@ -60,6 +60,8 @@ def erstellen(name):
         strecke = Strecke.Strecke()
         strecke.ladenName(name)
 
+        entryName = None #für Überprüfung, onb Bearbeitet wurde oder nicht
+
     #Parameter GUI
     prozess.hinzufügenLabel("Wer ist der Rekordhater?")
 
@@ -67,7 +69,7 @@ def erstellen(name):
     entryRekordhalterAuswählen.pack()
 
     entryRekordhalterAuswählen.delete(0, END)
-    entryRekordhalterAuswählen.insert(0, name)
+    entryRekordhalterAuswählen.insert(0, strecke.rekordhalter)
     entryRekordhalterAuswählen.update_idletasks()
     
     buttonAuswählen = Button(master = prozess.aktuelleAnzeige, text = "Fahrer aus Datenbank auswählen...", command = FahrerAuswählen)
@@ -79,8 +81,6 @@ def erstellen(name):
     kurvig = Radiobutton(master = prozess.aktuelleAnzeige, text = "Kurvige Strecke", value = 1, variable = streckentyp)
     ausgeglichen = Radiobutton(master = prozess.aktuelleAnzeige, text = "Ausgeglichene Strecke", value = 2, variable = streckentyp)
     schnell = Radiobutton(master = prozess.aktuelleAnzeige, text = "Schnelle Strecke", value = 3, variable = streckentyp)
-    kurvig.select()
-
     kurvig.pack()
     ausgeglichen.pack()
     schnell.pack()
@@ -92,17 +92,12 @@ def erstellen(name):
     else:
         schnell.select()
 
-    kurvig.update_idletasks()
-    ausgeglichen.update_idletasks()
-    schnell.update_idletasks()
-
     prozess.hinzufügenLabel("Auswahl der Schwierigkeit:")
 
     scaleSchwierigkeit = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
     scaleSchwierigkeit.pack()
 
     scaleSchwierigkeit.set(strecke.schwierigkeit)
-    scaleSchwierigkeit.update_idletasks()
 
 # fügt Fahrer in Entry aus fahrerAuswahl ein --> Name ist definitiv richtig; gibt checkpoint wieder zurück
 def fügeFahrerein():

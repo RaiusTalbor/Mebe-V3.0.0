@@ -17,7 +17,7 @@ def speichern():
 
     erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
 
-    if entryName.winfo_exists():
+    if entryName != None:
         fahrer.name = entryName.get()
         erstellen = 1   
 
@@ -71,6 +71,7 @@ def erstellen(name):
         entryName = Entry(master = prozess.aktuelleAnzeige)
         entryName.pack()
     else:
+        entryName = None
         fahrer = Fahrer.Fahrer()
         fahrer.ladenName(name)
 
