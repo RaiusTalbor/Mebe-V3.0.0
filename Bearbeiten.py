@@ -64,7 +64,7 @@ def auswahl(objekt):
 
     radioAuswahl = StringVar()
     for i in range(len(liste)):
-        radio = Radiobutton(master=prozess.frameAnzeige, text=liste[i], value=liste[i], variable=radioAuswahl)
+        radio = Radiobutton(master=prozess.aktuelleAnzeige, text=liste[i], value=liste[i], variable=radioAuswahl)
         radio.pack()
     radioAuswahl.set(liste[0])
 

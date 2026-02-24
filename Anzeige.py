@@ -42,9 +42,9 @@ class Fenster:
         self.alleAnzeigen = [] #dazu da, um die Reihenfolge der Anzeigen besser zu managen und wenn eine Anzeige gelöscht wird, dass die nächsttiefere wieder angesprochen werden kann
         self.alleAnzeigen.append(self.aktuelleAnzeige)
 
-        #für die geteilte Anzeige - werden noch nicht gepackt --> nicht sichtbar
-        self.frameAnzeige1 = Frame(master=self.aktuelleAnzeige)
-        self.frameAnzeige2 = Frame(master=self.aktuelleAnzeige)
+        #für die geteilte Anzeige - werden noch nicht gepackt --> nicht sichtbar --> Ausgelagert zu zeige2frames(); ist an Checkpoint-Logik gescheitert, da sie ja die Frames immer übereinander lagern; aktiviert man aber die 2-Fenster-Logik wieder, dann werden sie ins allererste Fenster und nicht oberste Fenster eingetragen
+        #self.frameAnzeige1 = Frame(master=self.aktuelleAnzeige)
+        #self.frameAnzeige2 = Frame(master=self.aktuelleAnzeige)
 
         self.frameInfo = Frame(master=self.fenster)
         self.frameInfo.pack()
@@ -112,6 +112,8 @@ class Fenster:
         self.löscheframeInhalt()
         self.setTitelFrame("Mebe V3.0.0")
 
+        #self.zeige1frame() #sollte der gerade in Zwei-Fenster-Modus hängen --> geht nicht, da evtl. nicht initialisiert
+
         self.alleAnzeigen = [] #zurücksetzen des Anzeigenspeichers, um Checkpoints sauber zu laden
 
         #wieder hinzufügen der Buttons
@@ -128,6 +130,9 @@ class Fenster:
 
     def zeige2frames(self):
         #um die geteilte Anzeige zu nutzen, muss sie explizit aktiviert und deaktiviert werden
+        self.frameAnzeige1 = Frame(master=self.aktuelleAnzeige) #werden dynamisch erstellt, damit immer oben 
+        self.frameAnzeige2 = Frame(master=self.aktuelleAnzeige)
+
         self.frameAnzeige1.pack(fill=BOTH, expand=True, side=LEFT)
         self.frameAnzeige2.pack(fill=BOTH, expand=True, side=LEFT)
 
