@@ -52,8 +52,8 @@ class Fenster:
         self.labelInfo = Label(self.frameInfo, text="", font=('', 15), wraplength = 800)
         self.labelInfo.pack()
 
-        self.listebuttons=[]
-        self.gespeicherteButtons=[]
+        self.listebuttons=[] #aktuellen Buttons
+        self.gespeicherteButtons=[] #für Checkpoint, da alle Buttons drin, die für vorigen Checkpoint benötigt werden
 
         #self.checkpoint = [self.frameAnzeige, self.gespeicherteButtons] #speichert einen Frame, damit er wiederhergestellt werden kann
 
@@ -112,6 +112,8 @@ class Fenster:
         self.löscheframeInhalt()
         self.setTitelFrame("Mebe V3.0.0")
 
+        self.alleAnzeigen = [] #zurücksetzen des Anzeigenspeichers, um Checkpoints sauber zu laden
+
         #wieder hinzufügen der Buttons
         for i in self.hauptmenuebuttons:
             i.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
@@ -120,7 +122,7 @@ class Fenster:
     #Anzeige ----------------------------------------
     def löscheframeInhalt(self):
         for widget in self.aktuelleAnzeige.winfo_children():
-            widget.pack_forget()
+            widget.pack_forget() #kein destroy, da sonst große Probleme
 
         self.aktuelleAnzeige.update_idletasks()
 
