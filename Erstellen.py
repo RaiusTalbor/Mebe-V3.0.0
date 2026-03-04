@@ -72,9 +72,9 @@ def weiter():
     elif varweiter == 4: #Speichern und erstellen beenden
         prozess.hauptmenü() #da sonst diese Funktion weiter und er hängt fest  
         meisterschaft.speichern() #leider nicht über sammeln(), da er immer nur den vorherigen Wert sammelt --> wenn ich danach mache, hängt er aber daran fest
-        prozess.setInfo("Speichert...")
-        time.sleep(2)
-        prozess.löscheInfo()
+        #prozess.setInfo("Speichert...") #TODO
+        #time.sleep(2)
+        #prozess.löscheInfo()
 
 #einem speziellen Erstellen-Code wird immer ein Wert übergeben: ein entsprechender Pfad oder "leer". Bei leer wird etwas neues erstellt, mit Pfad wird dieser geladen und die Werte von dem Ding gespeichert
 
@@ -99,8 +99,8 @@ def sammeln():
             fahrerliste = []
         else:
             #in Bearbeitung Umbenennung nicht möglich, deswegen auch 1. Fenster weg und direkt mit varweiter; auch entryName übersprungen
-            rennkalenderListe = meisterschaft.getrennkalender()
-            fahrerliste = meisterschaft.getfahrerliste()
+            rennkalenderListe = meisterschaft.getRennkalenderNamen()
+            fahrerliste = meisterschaft.getFahrerNamen()
 
     elif varweiter == 2: #Strecken hinzufügen
         prozess.zeige1frame() #Zwei-Fenster-Anzeige deaktiviert
