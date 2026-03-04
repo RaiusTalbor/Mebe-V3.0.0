@@ -54,15 +54,37 @@ class Meisterschaft:
 
     def getpfadRennkalender(self):
         return self.pfadRennkalender
+    
+    def getRennkalenderNamen(self):
+        rennkalenderNamen = []
+
+        #nimmt die Rennkalenderliste und gibt nur die Namen als Liste zurück
+        for i in self.rennkalender:
+            i = i.replace('.dat', '')
+            i = i.replace('Datenbank/Strecken/', '')
+            rennkalenderNamen.append(i)
+
+        return rennkalenderNamen
+    
+    def getrennkalender(self):
+        return self.rennkalender
 
     def getpfadFahrer(self):
         return self.pfadFahrer
 
-    def getrennkalender(self):
-        return self.rennkalender
-
     def getfahrerliste(self):
         return self.fahrerliste
+    
+    def getFahrerNamen(self):
+        fahrernamen = []
+
+        #nimmt die Fahrerliste und gibt nur die Namen als Liste zurück
+        for i in self.fahrerliste:
+            i = i.replace('.dat', '')
+            i = i.replace('Datenbank/Fahrer/', '')
+            fahrernamen.append(i)
+
+        return fahrernamen
 
     #setter
     def setname(self, übergabe):

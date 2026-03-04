@@ -3,6 +3,8 @@
 # kümmert sich darum, dass die richtigen Seiten zum Erstellen einer Meisterschaft geöffnet werden --> händelt es quasi
 
 from tkinter import *
+from datetime import datetime
+import time
 
 from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar 
 import Daten
@@ -15,9 +17,10 @@ import ErstelleFahrer
 global varweiter
 
 def erstellen():
-    global varweiter, meisterschaft
+    global varweiter, meisterschaft, bearbeitungsmodus
 
     varweiter=0
+    bearbeitungsmodus = 0
 
     meisterschaft = Meisterschaft.Meisterschaft()
 
@@ -26,15 +29,16 @@ def erstellen():
 
 def MeisterschaftBearbeiten(name):
     #fehlt: abfangen des fehlenden entryName und der Checkpoint (wobei der nicht wichtig wäre)
-    global varweiter, meisterschaft, rennkalenderListe, fahrerliste
+    global varweiter, meisterschaft, rennkalenderListe, fahrerliste, bearbeitungsmodus
 
     varweiter = 1
+    bearbeitungsmodus = 1
 
     meisterschaft = Meisterschaft.Meisterschaft()
     meisterschaft.ladenName(name)
 
-    rennkalenderListe = meisterschaft.getrennkalender()
-    fahrerliste = meisterschaft.getfahrerliste()
+    rennkalenderListe = meisterschaft.getRennkalenderNamen()
+    fahrerliste = meisterschaft.getFahrerNamen()
 
     prozess.setTitelFrame("Bearbeiten einer Meisterschaft")
     weiter()
@@ -68,27 +72,35 @@ def weiter():
     elif varweiter == 4: #Speichern und erstellen beenden
         prozess.hauptmenü() #da sonst diese Funktion weiter und er hängt fest  
         meisterschaft.speichern() #leider nicht über sammeln(), da er immer nur den vorherigen Wert sammelt --> wenn ich danach mache, hängt er aber daran fest
+        prozess.setInfo("Speichert...")
+        time.sleep(2)
+        prozess.löscheInfo()
 
 #einem speziellen Erstellen-Code wird immer ein Wert übergeben: ein entsprechender Pfad oder "leer". Bei leer wird etwas neues erstellt, mit Pfad wird dieser geladen und die Werte von dem Ding gespeichert
 
 def sammeln():
     #sammelt bei vaweiter die Eingaben ein und speichert die zwischen
 
-    global entryJahrMeisterschaft, entryNameMeisterschaft, rennkalenderListe, fahrerliste
+    global entryJahrMeisterschaft, entryNameMeisterschaft, rennkalenderListe, fahrerliste, bearbeitungsmodus
 
     global meisterschaft #globalen Objekte zum Speichern
 
     if varweiter == 1: #Meisterschaft
 
-        name = entryNameMeisterschaft.get()
-        name = name + entryJahrMeisterschaft.get()
+        if bearbeitungsmodus == 0:
+            name = entryNameMeisterschaft.get()
+            name = name + " " + entryJahrMeisterschaft.get()
 
-        meisterschaft.setname(name)
-        meisterschaft.setPfade()
+            meisterschaft.setname(name)
+            meisterschaft.setPfade()
 
-        #Initialisieren der globalen Listen für Rennkalender und Speicherliste, weil ich sonst immer weitere globals definieren muss und davon will ich weg
-        rennkalenderListe = []
-        fahrerliste = []
+            #Initialisieren der globalen Listen für Rennkalender und Speicherliste, weil ich sonst immer weitere globals definieren muss und davon will ich weg
+            rennkalenderListe = []
+            fahrerliste = []
+        else:
+            #in Bearbeitung Umbenennung nicht möglich, deswegen auch 1. Fenster weg und direkt mit varweiter; auch entryName übersprungen
+            rennkalenderListe = meisterschaft.getrennkalender()
+            fahrerliste = meisterschaft.getfahrerliste()
 
     elif varweiter == 2: #Strecken hinzufügen
         prozess.zeige1frame() #Zwei-Fenster-Anzeige deaktiviert
@@ -113,8 +125,10 @@ def meisterschaftdefinieren():
 
     prozess.hinzufügenLabel("Jahr der Meisterschaft:")
 
+    aktuellesDatum = datetime.now()
+
     entryJahrMeisterschaft = Entry(master = prozess.aktuelleAnzeige)
-    entryJahrMeisterschaft = Entry(master = prozess.aktuelleAnzeige)
+    entryJahrMeisterschaft.insert(0, str(aktuellesDatum.year)) #das aktuelle Jahr ist der Standard-Wert
     entryJahrMeisterschaft.pack()
 
 def auswählen():
