@@ -109,12 +109,18 @@ class Fenster:
     def hauptmenü(self):
         self.löscheButtons()
         self.löscheInfo()
-        self.löscheframeInhalt()
         self.setTitelFrame("Mebe V3.0.0")
+        
+        self.löscheframeInhalt() #wichtig, weil sonst aktuellen Inhalte nicht entfernt werden
 
         #self.zeige1frame() #sollte der gerade in Zwei-Fenster-Modus hängen --> geht nicht, da evtl. nicht initialisiert
 
+        for frame in self.alleAnzeigen[1:]:
+            frame.destroy()
+
+        self.aktuelleAnzeige = self.alleAnzeigen[0]      # Hauptmenüframe wieder aktuell setzen
         self.alleAnzeigen = [] #zurücksetzen des Anzeigenspeichers, um Checkpoints sauber zu laden
+        self.alleAnzeigen.append(self.aktuelleAnzeige)   # wieder an alleAnzeigen anfügen, sonst leer!
 
         #wieder hinzufügen der Buttons
         for i in self.hauptmenuebuttons:
