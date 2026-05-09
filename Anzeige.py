@@ -34,8 +34,19 @@ class Fenster:
         self.frameAnzeigeInhalt = Frame(master=self.fenster) #Hält den ContentFrame fest, da dieser nur relativ existiert
         self.frameAnzeigeInhalt.pack(fill="both", expand=True)
 
-        self.frameAnzeige = Frame(master=self.frameAnzeigeInhalt) #Standard-Anzeige
-        self.frameAnzeige.place(relx=0, rely=0, relwidth=1, relheight=1)
+        #Canvas, um die Scrollbar darin festzuhalten --> Zwischenschicht zwischen frameAnzeigeInhalt und frameAnzeige, in der die Scrollbar den inneren Frame scrollen kann
+        self.canvasScrollbar = Canvas(master=self.frameAnzeigeInhalt)
+        self.scrollbar = Scrollbar(master=self.frameAnzeigeInhalt, orient=VERTICAL, command=self.canvasScrollbar.yview)
+        self.scrollbar.pack(side=RIGHT, fill=Y)
+        self.canvasScrollbar.pack(side=LEFT, fill=BOTH, expand=True)
+
+        self.frameAnzeige = Frame(master=self.canvasScrollbar) #Standard-Anzeige
+        #self.frameAnzeige.place(relx=0, rely=0, relwidth=1, relheight=1)
+        self.canvasScrollbar.bind("<Configure>", lambda e: self.canvasScrollbar.itemconfig(self.canvasFrame, width=e.width)) #übernimmt die Funktion von vorher
+        self.canvasFrame = self.canvasScrollbar.create_window((0, 0), window=self.frameAnzeige, anchor=NW)
+        self.frameAnzeige.bind("<Configure>", lambda e: self.canvasScrollbar.configure(scrollregion=self.canvasScrollbar.bbox("all")))
+        self.canvasScrollbar.configure(yscrollcommand=self.scrollbar.set)
+        self.fenster.bind("<MouseWheel>", lambda e: self.canvasScrollbar.yview_scroll(int(-1*(e.delta/120)), "units")) #damit Mausrad scrollt
 
         self.aktuelleAnzeige = self.frameAnzeige #speichert die aktuelle Anzeige, die gerade angezeigt wird (ganz oben liegt) --> einfacher händeln als Liste
 
