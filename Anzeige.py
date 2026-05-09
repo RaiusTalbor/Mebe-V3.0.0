@@ -167,6 +167,9 @@ class Fenster:
         neuerFrame = Frame(master=self.frameAnzeigeInhalt) #Standard-Anzeige, legt den Frame über die anderen Frames
         neuerFrame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
+        #Scrollregion von Canvas anpassen
+        #neuerFrame.bind("<Configure>", lambda e: self.canvasScrollbar.configure(scrollregion=self.canvasScrollbar.bbox("all")))
+
         self.aktuelleAnzeige = neuerFrame #aktuelleAnzeige wird gesetzt
         self.alleAnzeigen.append(neuerFrame) #Liste wird richtig gepflegt
 
@@ -179,6 +182,9 @@ class Fenster:
         self.aktuelleAnzeige.destroy() #aktuelle Anzeige wird gelöscht und soll nicht mehr behalten werden
         self.alleAnzeigen.remove(self.aktuelleAnzeige) #löscht die Anzeige aus der Liste
         self.aktuelleAnzeige = self.alleAnzeigen[-1] #setzt die aktuelle Anzeige nun auf die letzte Anzeige, die vor der letzten gespeichert wurde
+
+        #passt die Scrollregion wieder an
+        #self.canvasScrollbar.configure(scrollregion=self.canvasScrollbar.bbox("all"))
 
         #da alle die ganze Zeit existieren, sind die Anzeigen nie weg, sondern nur unsichtbar zum Zeitpunkt
 
