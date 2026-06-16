@@ -15,6 +15,8 @@ import Daten
 
 from Anzeige import prozess
 
+from Aussehen import *
+
 def bearbeiten():
     prozess.löscheframeInhalt()
     prozess.löscheButtons()
@@ -22,7 +24,7 @@ def bearbeiten():
 
     prozess.setTitelFrame("Bearbeiten von Objekten")
 
-    prozess.hinzufügenLabel("Bearbeiten - bitte auswählen")
+    #prozess.hinzufügenLabel("Bearbeiten - bitte auswählen")
 
     prozess.hinzufügenButton("Meisterschaft bearbeiten", bearbeiteMeisterschaft)
     prozess.hinzufügenButton("Strecke bearbeiten", bearbeiteStrecke)
@@ -50,7 +52,7 @@ def auswählen():
 def auswahl(objekt):
     global radioAuswahl
 
-    prozess.setTitelFrame("")
+    prozess.setTitelFrame("Bearbeiten - bitte auswählen")
 
     prozess.löscheButtons()
     prozess.zurückButton()
@@ -64,7 +66,7 @@ def auswahl(objekt):
 
     radioAuswahl = StringVar()
     for i in range(len(liste)):
-        radio = Radiobutton(master=prozess.aktuelleAnzeige, text=liste[i], value=liste[i], variable=radioAuswahl)
+        radio = Radiobutton(**aussehenRadio, master=prozess.aktuelleAnzeige, text=liste[i], value=liste[i], variable=radioAuswahl)
         radio.pack()
     radioAuswahl.set(liste[0])
 

@@ -10,6 +10,8 @@ import Fahrer
 import ErstelleFahrzeug
 import Daten
 
+from Aussehen import *
+
 def speichern():
     global fahrer, entryName, entryGebJahr, entry1Rennen, scaleAggressivität, scaleGeschicklichkeit, scaleGrundkönnen, vorliebe, entryDurchschnittPlatzierung, labelFahrzeugAuswahl, entryFahrzeugwann, fahrzeugkontrolle
 
@@ -68,7 +70,7 @@ def erstellen(name):
 
         prozess.hinzufügenLabel("Name des Fahrers:")
 
-        entryName = Entry(master = prozess.aktuelleAnzeige)
+        entryName = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
         entryName.pack()
     else:
         entryName = None
@@ -77,35 +79,35 @@ def erstellen(name):
 
     #Parameter GUI
     prozess.hinzufügenLabel("Geburtsjahr des Fahrers:")
-    entryGebJahr = Entry(master = prozess.aktuelleAnzeige)
+    entryGebJahr = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
     entryGebJahr.pack()
     entryGebJahr.insert(0, fahrer.gebjahr)
 
     prozess.hinzufügenLabel("Wann fuhr der Fahrer/die Fahrerin sein/ihr erstes Rennen?")
-    entry1Rennen = Entry(master = prozess.aktuelleAnzeige)
+    entry1Rennen = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
     entry1Rennen.pack()
     entry1Rennen.insert(0, fahrer.erstesrennen)
 
     prozess.hinzufügenLabel("Wie aggressiv fährt der Fahrer?")
-    scaleAggressivität = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
+    scaleAggressivität = Scale(**aussehenScale, master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
     scaleAggressivität.pack()
     scaleAggressivität.set(fahrer.aggressivität)
 
     prozess.hinzufügenLabel("Wie geschickt fährt der Fahrer?")
-    scaleGeschicklichkeit = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
+    scaleGeschicklichkeit = Scale(**aussehenScale, master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
     scaleGeschicklichkeit.pack()
     scaleGeschicklichkeit.set(fahrer.geschicklichkeit)
 
     prozess.hinzufügenLabel("Wie hoch ist sein Grundkönnen?")
-    scaleGrundkönnen = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 100, orient=HORIZONTAL)
+    scaleGrundkönnen = Scale(**aussehenScale, master = prozess.aktuelleAnzeige, from_= 1, to = 100, orient=HORIZONTAL)
     scaleGrundkönnen.pack()
     scaleGrundkönnen.set(fahrer.grundkönnen)
 
     prozess.hinzufügenLabel("Welche Strecken bevorzugt der Fahrer?")
 
     vorliebe = StringVar()
-    kurvig = Radiobutton(master = prozess.aktuelleAnzeige, text = "Kurvige Strecke", value = 1, variable = vorliebe)
-    schnell = Radiobutton(master = prozess.aktuelleAnzeige, text = "Schnelle Strecke", value = 2, variable = vorliebe)
+    kurvig = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Kurvige Strecke", value = 1, variable = vorliebe)
+    schnell = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Schnelle Strecke", value = 2, variable = vorliebe)
     kurvig.pack()
     schnell.pack()
     
@@ -115,21 +117,21 @@ def erstellen(name):
         schnell.select()
 
     prozess.hinzufügenLabel("Welche durchschnittliche Platzierung?") #wird die Info überhaupt benutzt?
-    entryDurchschnittPlatzierung = Entry(master = prozess.aktuelleAnzeige)
+    entryDurchschnittPlatzierung = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
     entryDurchschnittPlatzierung.pack()
     entryDurchschnittPlatzierung.insert(0, fahrer.durchschnittlicheplatzierung)
 
     prozess.hinzufügenLabel("Welches Fahrzeug wird gefahren?")
 
-    labelFahrzeugAuswahl = Label(master = prozess.aktuelleAnzeige, text=fahrer.fahrzeug)
+    labelFahrzeugAuswahl = Label(**aussehenLabel, master = prozess.aktuelleAnzeige, text=fahrer.fahrzeug)
     labelFahrzeugAuswahl.pack() #Fahrer ohne zugewiesenen Fahrzeug haben "[Kein Fahrzeug ausgewählt]" drin
 
-    buttonFahrzeugAuswählen = Button(master = prozess.aktuelleAnzeige, text = "Fahrzeug auswählen...", command = FahrzeugAuswählen)
+    buttonFahrzeugAuswählen = Button(**aussehenButton, master = prozess.aktuelleAnzeige, text = "Fahrzeug auswählen...", command = FahrzeugAuswählen)
     buttonFahrzeugAuswählen.pack()
 
     prozess.hinzufügenLabel("Seit wann wird das Fahrzeug gefahren?")
 
-    entryFahrzeugwann = Entry(master = prozess.aktuelleAnzeige)
+    entryFahrzeugwann = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
     entryFahrzeugwann.pack()
     entryFahrzeugwann.insert(0, fahrer.seitWannFahrzeug)
 
@@ -157,7 +159,7 @@ def FahrzeugAuswählen():
     Fahrzeug = StringVar()
     #für jedes Element der Liste (also alle Fahrzeuge) wird ein Radiobutton erzeugt
     for i in range(0, len(listeFahrzeug)):
-        radioFahrzeug = Radiobutton(master = prozess.aktuelleAnzeige, text = listeFahrzeug[i], value = str(listeFahrzeug[i]), variable = Fahrzeug)
+        radioFahrzeug = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = listeFahrzeug[i], value = str(listeFahrzeug[i]), variable = Fahrzeug)
         radioFahrzeug.pack()
 
     Fahrzeug.set(fahrer.fahrzeug)

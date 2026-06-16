@@ -11,6 +11,8 @@ import Daten    #Lesen, Schreiben von Dateien
 import time
 import os
 
+from Aussehen import *
+
 class Fenster:
     #Blueprint für jedes Fenster, welches existiert
 
@@ -22,26 +24,25 @@ class Fenster:
 
         self.fenster = Tk()
         self.fenster.title("Mebe V3.0.0")
-        self.fenster.geometry("800x600")
+        self.fenster.geometry("900x600")
+        self.fenster.configure(**aussehenFenster)
 
-        self.labelTitel = Label(master=self.fenster,
-                        text="Mebe V3.0.0",
-                        font=('', 18))
+        self.labelTitel = Label(**aussehenLabelÜberschrift, master=self.fenster, text="Mebe V3.0.0")
         self.labelTitel.pack()
 
-        self.frameButtons = Frame(master=self.fenster)
+        self.frameButtons = Frame(**aussehenFrame, master=self.fenster)
         self.frameButtons.pack()
 
-        self.frameAnzeigeInhalt = Frame(master=self.fenster) #Hält den ContentFrame fest, da dieser nur relativ existiert
+        self.frameAnzeigeInhalt = Frame(**aussehenFrame, master=self.fenster) #Hält den ContentFrame fest, da dieser nur relativ existiert
         self.frameAnzeigeInhalt.pack(fill="both", expand=True)
 
         #Canvas, um die Scrollbar darin festzuhalten --> Zwischenschicht zwischen frameAnzeigeInhalt und frameAnzeige, in der die Scrollbar den inneren Frame scrollen kann
-        self.canvasScrollbar = Canvas(master=self.frameAnzeigeInhalt)
-        self.scrollbar = Scrollbar(master=self.frameAnzeigeInhalt, orient=VERTICAL, command=self.canvasScrollbar.yview)
+        self.canvasScrollbar = Canvas(**aussehenCanvas, master=self.frameAnzeigeInhalt)
+        self.scrollbar = Scrollbar(**aussehenScrollbar, master=self.frameAnzeigeInhalt, orient=VERTICAL, command=self.canvasScrollbar.yview)
         self.scrollbar.pack(side=RIGHT, fill=Y)
         self.canvasScrollbar.pack(side=LEFT, fill=BOTH, expand=True)
 
-        self.frameAnzeige = Frame(master=self.canvasScrollbar) #Standard-Anzeige
+        self.frameAnzeige = Frame(**aussehenFrame, master=self.canvasScrollbar) #Standard-Anzeige
         #self.frameAnzeige.place(relx=0, rely=0, relwidth=1, relheight=1)
         self.canvasScrollbar.bind("<Configure>", lambda e: self.canvasScrollbar.itemconfig(self.canvasFrame, width=e.width)) #übernimmt die Funktion von vorher
         self.canvasFrame = self.canvasScrollbar.create_window((0, 0), window=self.frameAnzeige, anchor=NW)
@@ -58,10 +59,10 @@ class Fenster:
         #self.frameAnzeige1 = Frame(master=self.aktuelleAnzeige)
         #self.frameAnzeige2 = Frame(master=self.aktuelleAnzeige)
 
-        self.frameInfo = Frame(master=self.fenster)
+        self.frameInfo = Frame(**aussehenFrame, master=self.fenster)
         self.frameInfo.pack()
 
-        self.labelInfo = Label(self.frameInfo, text="", font=('', 15), wraplength = 800)
+        self.labelInfo = Label(**aussehenLabelGroß, master=self.frameInfo, text="", wraplength = 800)
         self.labelInfo.pack()
 
         self.listebuttons=[] #aktuellen Buttons
@@ -107,7 +108,7 @@ class Fenster:
         self.listebuttons = []
 
     def hinzufügenButton(self, textübergabe, commandübergabe):
-        button = Button(master=self.frameButtons, text=textübergabe, command=commandübergabe)
+        button = Button(**aussehenButton, master=self.frameButtons, text=textübergabe, command=commandübergabe)
         button.pack(side=LEFT, anchor=N, padx= 20, pady = 20)
         #button.kategorie = "Button" #mögliche Optimierung Issue #14
         self.listebuttons.append(button)
@@ -157,8 +158,8 @@ class Fenster:
 
     def zeige2frames(self):
         #um die geteilte Anzeige zu nutzen, muss sie explizit aktiviert und deaktiviert werden
-        self.frameAnzeige1 = Frame(master=self.aktuelleAnzeige) #werden dynamisch erstellt, damit immer oben 
-        self.frameAnzeige2 = Frame(master=self.aktuelleAnzeige)
+        self.frameAnzeige1 = Frame(**aussehenFrame, master=self.aktuelleAnzeige) #werden dynamisch erstellt, damit immer oben 
+        self.frameAnzeige2 = Frame(**aussehenFrame, master=self.aktuelleAnzeige)
 
         self.frameAnzeige1.pack(fill=BOTH, expand=True, side=LEFT)
         self.frameAnzeige2.pack(fill=BOTH, expand=True, side=LEFT)
@@ -173,12 +174,13 @@ class Fenster:
         #speichert Checkpoint und übergibt Buttons und Frame frei
 
         #erstellt Frame, den er auf frameAnzeige legt --> der ist nun der aktuelle Frame
-
-        neuerFrame = Frame(master=self.frameAnzeige) #Standard-Anzeige, legt den Frame über die anderen Frames | frameAnzeige --> für Scrollbar-Logik ; davor: frameAnzeigeInhalt
+        neuerFrame = Frame(**aussehenFrame, master=self.frameAnzeige) #Standard-Anzeige, legt den Frame über die anderen Frames | frameAnzeige --> für Scrollbar-Logik ; davor: frameAnzeigeInhalt
         neuerFrame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         self.aktuelleAnzeige = neuerFrame #aktuelleAnzeige wird gesetzt
         self.alleAnzeigen.append(neuerFrame) #Liste wird richtig gepflegt
+
+        self.canvasScrollbar.yview_moveto(0)  # Scrollbar springt ganz nach oben
 
         #Buttonmanagement
         self.gespeicherteButtons.append(self.listebuttons[:]) #speichert alle aktuellen Buttons
@@ -190,10 +192,9 @@ class Fenster:
         self.alleAnzeigen.remove(self.aktuelleAnzeige) #löscht die Anzeige aus der Liste
         self.aktuelleAnzeige = self.alleAnzeigen[-1] #setzt die aktuelle Anzeige nun auf die letzte Anzeige, die vor der letzten gespeichert wurde
 
-        #passt die Scrollregion wieder an
-        #self.canvasScrollbar.configure(scrollregion=self.canvasScrollbar.bbox("all"))
-
         #da alle die ganze Zeit existieren, sind die Anzeigen nie weg, sondern nur unsichtbar zum Zeitpunkt
+
+        self.canvasScrollbar.yview_moveto(0)  # Scrollbar springt ganz nach oben
 
         #Buttonmanagement
         self.löscheButtons() #löscht alle erstellten Buttons
@@ -209,7 +210,7 @@ class Fenster:
     #scrollbar...
 
     def hinzufügenLabel(self, text):
-        label = Label(master = self.aktuelleAnzeige, text = text)
+        label = Label(**aussehenLabel, master = self.aktuelleAnzeige, text = text)
         label.pack()
 
     def wurdeGespeichert(self, pfad):

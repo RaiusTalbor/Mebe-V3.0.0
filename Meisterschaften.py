@@ -11,10 +11,12 @@ import os
 
 from MebeV3 import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 
+from Aussehen import *
+
 def Meisterschaften():
     #Frames
-    frameInfo = Frame(prozess.frameAnzeige)
-    frameInteraktion = Frame(prozess.frameAnzeige)
+    frameInfo = Frame(**aussehenFrame, master=prozess.frameAnzeige)
+    frameInteraktion = Frame(**aussehenFrame, master=prozess.frameAnzeige)
     frameInfo.pack()
     frameInteraktion.pack()
 
@@ -39,7 +41,7 @@ def Meisterschaften():
         anzeige = VerzeichnisMeisterschaften[i]
         anzeige = anzeige.replace('.dat', '')
 
-        radiobuttonMeisterschaft = Radiobutton(master=frameInteraktion, text=f"{anzeige}", 
+        radiobuttonMeisterschaft = Radiobutton(**aussehenRadio, master=frameInteraktion, text=f"{anzeige}", 
                                                value=VerzeichnisMeisterschaften[i], variable = meisterschaft)
         radiobuttonMeisterschaft.pack()
 

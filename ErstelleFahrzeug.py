@@ -9,6 +9,8 @@ from Anzeige import prozess #das Objekt wird global importiert und für alle jed
 import Fahrzeug
 import ErstelleFahrer
 
+from Aussehen import *
+
 def speichern():
     global fahrzeug, entryName, leistung, wendigkeit
 
@@ -52,7 +54,7 @@ def erstellen(name):
 
         prozess.hinzufügenLabel("Name des Fahrzeugs:")
 
-        entryName = Entry(master = prozess.aktuelleAnzeige)
+        entryName = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
         entryName.pack()
     else:
         fahrzeug = Fahrzeug.Fahrzeug()
@@ -63,9 +65,9 @@ def erstellen(name):
     prozess.hinzufügenLabel("Wie viel Leistung hat das Fahrzeug im Vergleich zu den anderen in der Meisterschaft?")
 
     leistung = StringVar()
-    wenig = Radiobutton(master = prozess.aktuelleAnzeige, text = "Wenig", value = 1, variable = leistung)
-    mittel = Radiobutton(master = prozess.aktuelleAnzeige, text = "Ausgeglichen", value = 2, variable = leistung)
-    viel = Radiobutton(master = prozess.aktuelleAnzeige, text = "Viel", value = 3, variable = leistung)
+    wenig = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Wenig", value = 1, variable = leistung)
+    mittel = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Ausgeglichen", value = 2, variable = leistung)
+    viel = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Viel", value = 3, variable = leistung)
     wenig.pack()
     mittel.pack()
     viel.pack()
@@ -80,9 +82,9 @@ def erstellen(name):
     prozess.hinzufügenLabel("Wie wendig ist das Fahrzeug im Vergleich zu den anderen der Meisterschaft?")
 
     wendigkeit = StringVar()
-    schnell = Radiobutton(master = prozess.aktuelleAnzeige, text = "Schnell", value = 1, variable = wendigkeit)
-    ausgeglichen = Radiobutton(master = prozess.aktuelleAnzeige, text = "Ausgeglichen", value = 2, variable = wendigkeit)
-    wendig = Radiobutton(master = prozess.aktuelleAnzeige, text = "Wendig", value = 3, variable = wendigkeit)
+    schnell = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Schnell", value = 1, variable = wendigkeit)
+    ausgeglichen = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Ausgeglichen", value = 2, variable = wendigkeit)
+    wendig = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Wendig", value = 3, variable = wendigkeit)
     schnell.pack()
     ausgeglichen.pack()
     wendig.pack()

@@ -2,6 +2,8 @@ from tkinter import filedialog
 import pickle
 import os
 
+from Aussehen import *
+
 try:
     pfad = filedialog.askopenfilename(title="Pickle-Datei auswählen", initialdir=os.path.dirname(os.path.abspath(__file__)), filetypes=[("Mebe-Dateien", "*.dat"), ("Alle Dateien", "*.*")])
 except:

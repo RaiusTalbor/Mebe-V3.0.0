@@ -4,6 +4,8 @@
 import Daten
 from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 
+from Aussehen import *
+
 class Fahrzeug:
     #stellt ein Fahrzeug dar - zur einfacheren und zentraleren Verwaltung der Fahrzeugen besonders beim erstellen und speichern
 

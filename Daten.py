@@ -5,6 +5,8 @@
 import pickle
 import os
 
+from Aussehen import *
+
 # Daten werden gelesen
 def lesen(pfad):
     f = open(pfad, mode = 'rb')

@@ -9,6 +9,8 @@ from Anzeige import prozess #das Objekt wird global importiert und für alle jed
 import Strecke
 import Daten
 
+from Aussehen import *
+
 def speichern():
     global strecke, entryName, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
 
@@ -54,7 +56,7 @@ def erstellen(name):
 
         prozess.hinzufügenLabel("Name der Strecke:")
 
-        entryName = Entry(master = prozess.aktuelleAnzeige)
+        entryName = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
         entryName.pack()
     else:
         strecke = Strecke.Strecke()
@@ -63,24 +65,28 @@ def erstellen(name):
         entryName = None #für Überprüfung, onb Bearbeitet wurde oder nicht
 
     #Parameter GUI
-    prozess.hinzufügenLabel("Wer ist der Rekordhater?")
+    prozess.hinzufügenLabel("Wer ist der Rekordhalter?")
 
-    entryRekordhalterAuswählen = Entry(master = prozess.aktuelleAnzeige)
+    entryRekordhalterAuswählen = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
     entryRekordhalterAuswählen.pack()
 
     entryRekordhalterAuswählen.delete(0, END)
     entryRekordhalterAuswählen.insert(0, strecke.rekordhalter)
     entryRekordhalterAuswählen.update_idletasks()
+
+    prozess.hinzufügenLabel("") #Platzhalter, damit der Button Abstand hält
     
-    buttonAuswählen = Button(master = prozess.aktuelleAnzeige, text = "Fahrer aus Datenbank auswählen...", command = FahrerAuswählen)
+    buttonAuswählen = Button(**aussehenButton, master = prozess.aktuelleAnzeige, text = "Fahrer aus Datenbank auswählen...", command = FahrerAuswählen)
     buttonAuswählen.pack()
+
+    prozess.hinzufügenLabel("") #Platzhalter, damit der Button Abstand hält
 
     prozess.hinzufügenLabel("Auswahl des Streckentps:")
 
     streckentyp = StringVar()
-    kurvig = Radiobutton(master = prozess.aktuelleAnzeige, text = "Kurvige Strecke", value = 1, variable = streckentyp)
-    ausgeglichen = Radiobutton(master = prozess.aktuelleAnzeige, text = "Ausgeglichene Strecke", value = 2, variable = streckentyp)
-    schnell = Radiobutton(master = prozess.aktuelleAnzeige, text = "Schnelle Strecke", value = 3, variable = streckentyp)
+    kurvig = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Kurvige Strecke", value = 1, variable = streckentyp)
+    ausgeglichen = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Ausgeglichene Strecke", value = 2, variable = streckentyp)
+    schnell = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = "Schnelle Strecke", value = 3, variable = streckentyp)
     kurvig.pack()
     ausgeglichen.pack()
     schnell.pack()
@@ -94,7 +100,7 @@ def erstellen(name):
 
     prozess.hinzufügenLabel("Auswahl der Schwierigkeit:")
 
-    scaleSchwierigkeit = Scale(master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
+    scaleSchwierigkeit = Scale(**aussehenScale, master = prozess.aktuelleAnzeige, from_= 1, to = 10, orient=HORIZONTAL)
     scaleSchwierigkeit.pack()
 
     scaleSchwierigkeit.set(strecke.schwierigkeit)
@@ -122,7 +128,7 @@ def FahrerAuswählen():
     Fahrer = StringVar()
     #für jedes Element der Liste (also alle Fahrer) wird ein Radiobutton erzeugt
     for i in range(0, len(listeFahrer)):
-        radioFahrer = Radiobutton(master = prozess.aktuelleAnzeige, text = listeFahrer[i], value = str(listeFahrer[i]), variable = Fahrer)
+        radioFahrer = Radiobutton(**aussehenRadio, master = prozess.aktuelleAnzeige, text = listeFahrer[i], value = str(listeFahrer[i]), variable = Fahrer)
         radioFahrer.pack()
 
     Fahrer.set(strecke.rekordhalter)

@@ -14,6 +14,8 @@ import Berechnen
 
 from Anzeige import prozess
 
+from Aussehen import *
+
 # ----------pass für Testzwecke
 
 def test():
@@ -32,7 +34,7 @@ prozess.hinzufügenButton("Bearbeiten", Bearbeiten.bearbeiten)
 
 prozess.hinzufügenButton("Berechnen", Berechnen.berechnen) #berechnen einer Meisterschaft
 
-prozess.hinzufügenButton("Hilfe", test) #Hilfe zu Mebe
+prozess.hinzufügenButton("Hilfe", test) #Hilfe zu Mebe; BTM-Website-Integration?
 
 prozess.hinzufügenButton("Beenden", prozess.beenden) #Programm beenden
 

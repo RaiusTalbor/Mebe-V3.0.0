@@ -14,6 +14,8 @@ import ErstelleStrecke
 import Fahrer
 import ErstelleFahrer
 
+from Aussehen import *
+
 global varweiter
 
 def erstellen():
@@ -120,14 +122,14 @@ def meisterschaftdefinieren():
 
     prozess.hinzufügenLabel("Name der Meisterschaft:")
 
-    entryNameMeisterschaft = Entry(master = prozess.aktuelleAnzeige)
+    entryNameMeisterschaft = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
     entryNameMeisterschaft.pack()
 
     prozess.hinzufügenLabel("Jahr der Meisterschaft:")
 
     aktuellesDatum = datetime.now()
 
-    entryJahrMeisterschaft = Entry(master = prozess.aktuelleAnzeige)
+    entryJahrMeisterschaft = Entry(**aussehenEntry, master = prozess.aktuelleAnzeige)
     entryJahrMeisterschaft.insert(0, str(aktuellesDatum.year)) #das aktuelle Jahr ist der Standard-Wert
     entryJahrMeisterschaft.pack()
 
@@ -186,7 +188,7 @@ def aktualisiereFenster():
     #alle Radios links hinzufügen
     radioAuswahl = StringVar()
     for i in range(len(liste)):
-        radio = Radiobutton(master=prozess.frameAnzeige1, text=liste[i], value=liste[i], variable=radioAuswahl)
+        radio = Radiobutton(**aussehenRadio, master=prozess.frameAnzeige1, text=liste[i], value=liste[i], variable=radioAuswahl)
         radio.pack(anchor='w')
     radioAuswahl.set(liste[0])
 
@@ -194,7 +196,7 @@ def aktualisiereFenster():
     if listeRechts:
         radioAuswahlRechts = IntVar()
         for i in range(len(listeRechts)):
-            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=listeRechts[i], value=i, variable=radioAuswahlRechts)
+            radioStrecken = Radiobutton(**aussehenRadio, master=prozess.frameAnzeige2, text=listeRechts[i], value=i, variable=radioAuswahlRechts)
             radioStrecken.pack(anchor='w')
         radioAuswahlRechts.set(0)
 
@@ -218,14 +220,14 @@ def rennkalendereinfügen():
 
     radioAuswahl = StringVar()
     for i in range(len(listeStrecken)):
-        radioStrecken = Radiobutton(master=prozess.frameAnzeige1, text=listeStrecken[i], value=listeStrecken[i], variable=radioAuswahl)
+        radioStrecken = Radiobutton(**aussehenRadio, master=prozess.frameAnzeige1, text=listeStrecken[i], value=listeStrecken[i], variable=radioAuswahl)
         radioStrecken.pack(anchor='w')
     radioAuswahl.set(listeStrecken[0])
 
     if rennkalenderListe:
         radioAuswahlRechts = IntVar()
         for i in range(len(rennkalenderListe)):
-            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=rennkalenderListe[i], value=i, variable=radioAuswahlRechts)
+            radioStrecken = Radiobutton(**aussehenRadio, master=prozess.frameAnzeige2, text=rennkalenderListe[i], value=i, variable=radioAuswahlRechts)
             radioStrecken.pack(anchor='w')
         radioAuswahlRechts.set(0)
 
@@ -246,14 +248,14 @@ def fahrereinfügen():
 
     radioAuswahl = StringVar()
     for i in range(len(listeFahrer)):
-        radioFahrer = Radiobutton(master=prozess.frameAnzeige1, text=listeFahrer[i], value=listeFahrer[i], variable=radioAuswahl)
+        radioFahrer = Radiobutton(**aussehenRadio, master=prozess.frameAnzeige1, text=listeFahrer[i], value=listeFahrer[i], variable=radioAuswahl)
         radioFahrer.pack(anchor='w')
     radioAuswahl.set(listeFahrer[0])
 
     if fahrerliste:
         radioAuswahlRechts = IntVar()
         for i in range(len(fahrerliste)):
-            radioStrecken = Radiobutton(master=prozess.frameAnzeige2, text=fahrerliste[i], value=i, variable=radioAuswahlRechts)
+            radioStrecken = Radiobutton(**aussehenRadio, master=prozess.frameAnzeige2, text=fahrerliste[i], value=i, variable=radioAuswahlRechts)
             radioStrecken.pack(anchor='w')
         radioAuswahlRechts.set(0)
 
