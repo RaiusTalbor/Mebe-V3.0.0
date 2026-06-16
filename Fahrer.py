@@ -2,6 +2,7 @@
 # Mebe V3.0.0
 
 import Daten
+from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 
 class Fahrer:
     #stellt einen Fahrer dar - zur einfacheren und zentraleren Verwaltung der Fahrer besonders beim erstellen und speichern
@@ -63,6 +64,7 @@ class Fahrer:
     def speichern(self):
         self.setpfad(self.name)
         Daten.schreiben(self.pfad, [int(self.gebjahr), int(self.erstesrennen), int(self.aggressivität), int(self.geschicklichkeit), int(self.grundkönnen), self.vorliebe, self.durchschnittlicheplatzierung, self.fahrzeug, int(self.seitWannFahrzeug), self.name])
+        prozess.wurdeGespeichert(self.pfad)
 
     #laden aus Datei
     def laden(self):

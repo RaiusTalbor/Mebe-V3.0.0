@@ -77,6 +77,7 @@ class Fenster:
     def setInfo(self, info):
         self.info = info 
         self.labelInfo.config(text=info, font=('', 15), wraplength = 800)
+        self.labelInfo.lift()  # legt das Label über alle anderen Widgets
         self.labelInfo.update_idletasks()
 
     def löscheInfo(self):
@@ -201,5 +202,16 @@ class Fenster:
     def hinzufügenLabel(self, text):
         label = Label(master = self.aktuelleAnzeige, text = text)
         label.pack()
+
+    def wurdeGespeichert(self, pfad):
+        #kann von einem Objekt benutzt werden, um zu prüfen, ob eine Speicherung erfolgreich war
+        try:
+            Daten.lesen(pfad)
+            self.setInfo("Speichern erfolgreich: " + pfad)
+        except:
+            self.setInfo("Ein unbekannter Fehler beim Speichern ist aufgetreten: " + pfad)
+
+        #time.sleep(1)
+        self.fenster.after(3000,self.löscheInfo) #nach 3000 ms führt prozess.fenster diese Aktion aus
 
 prozess = Fenster()

@@ -2,6 +2,7 @@
 # Mebe V3.0.0
 
 import Daten
+from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 
 class Fahrzeug:
     #stellt ein Fahrzeug dar - zur einfacheren und zentraleren Verwaltung der Fahrzeugen besonders beim erstellen und speichern
@@ -44,6 +45,7 @@ class Fahrzeug:
     def speichern(self):
         self.setpfad(self.name)
         Daten.schreiben(self.pfad, [self.leistung, self.wendigkeit])
+        prozess.wurdeGespeichert(self.pfad)
 
     #laden aus Datei
     def laden(self):

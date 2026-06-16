@@ -2,6 +2,7 @@
 # Mebe V3.0.0
 
 import Daten
+from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 
 class Meisterschaft:
     #stellt eine Meisterschaft dar - zur einfacheren und zentraleren Verwaltung der Meisterschaften
@@ -132,6 +133,7 @@ class Meisterschaft:
         Daten.schreiben(self.pfadFahrer, self.fahrerliste)
         Daten.schreiben(self.pfadRennkalender, self.rennkalender)
         Daten.schreiben(self.pfad, [self.pfadRennkalender, self.pfadFahrer])
+        prozess.wurdeGespeichert(self.pfad) #mehrere Prüfungen?
 
     #laden aus Datei
     def laden(self):
