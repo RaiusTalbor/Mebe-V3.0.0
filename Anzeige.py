@@ -164,11 +164,8 @@ class Fenster:
 
         #erstellt Frame, den er auf frameAnzeige legt --> der ist nun der aktuelle Frame
 
-        neuerFrame = Frame(master=self.frameAnzeigeInhalt) #Standard-Anzeige, legt den Frame über die anderen Frames
+        neuerFrame = Frame(master=self.frameAnzeige) #Standard-Anzeige, legt den Frame über die anderen Frames | frameAnzeige --> für Scrollbar-Logik ; davor: frameAnzeigeInhalt
         neuerFrame.place(relx=0, rely=0, relwidth=1, relheight=1)
-
-        #Scrollregion von Canvas anpassen
-        #neuerFrame.bind("<Configure>", lambda e: self.canvasScrollbar.configure(scrollregion=self.canvasScrollbar.bbox("all")))
 
         self.aktuelleAnzeige = neuerFrame #aktuelleAnzeige wird gesetzt
         self.alleAnzeigen.append(neuerFrame) #Liste wird richtig gepflegt

@@ -59,7 +59,7 @@ def erstellen(name):
     #Fenster initialisieren
     prozess.speicherCheckpoint()
 
-    prozess.zurückButton() #TODO nochmal überlegen
+    prozess.hinzufügenButton("Abbrechen", prozess.wiederherstellenCheckpoint)
     prozess.hinzufügenButton("Speichern", speichern)
     
     #Auswahl, ob bearbeiten oder nicht
