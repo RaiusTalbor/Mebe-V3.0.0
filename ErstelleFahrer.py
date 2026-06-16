@@ -19,6 +19,8 @@ def speichern():
 
     erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
 
+    prozess.löscheInfo() #zurücksetzen, um sauber zu machen
+
     if entryName != None:
         fahrer.name = entryName.get()
         erstellen = 1   
