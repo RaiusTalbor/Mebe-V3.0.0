@@ -9,6 +9,7 @@ import random
 from tkinter import *
 import Daten    #Lesen, Schreiben von Dateien
 import time
+import os
 
 class Fenster:
     #Blueprint für jedes Fenster, welches existiert
@@ -69,7 +70,15 @@ class Fenster:
         #self.checkpoint = [self.frameAnzeige, self.gespeicherteButtons] #speichert einen Frame, damit er wiederhergestellt werden kann
 
     def beenden(self):
+
         self.setInfo('Mebe V3.0.0 wird beendet! Auf Wiedersehen!')
+
+        #löscht den Ordner mit temporären Dateien; Pfad setzen, Elemente heraussuchen, einzeln zerstören
+        pfad = "temporäre Dateien"
+        liste = os.listdir(pfad)
+        for i in range(0, len(liste)):
+            os.remove(str(pfad + "/" + liste[i]))
+
         time.sleep(1)
         self.fenster.destroy()
 
