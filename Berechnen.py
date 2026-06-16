@@ -27,11 +27,11 @@ def berechnen():
     prozess.löscheButtons()
 
     prozess.setTitelFrame("Berechnen einer Meisterschaft")
-
-    #Auswahl der Meisterschaft
-
-    prozess.hinzufügenButton("Meisterschaft auswählen", auswahl)
+    
     prozess.zurückButton() 
+    
+    #Auswahl der Meisterschaft
+    prozess.hinzufügenButton("Meisterschaft auswählen", auswahl)
 
     VerzeichnisMeisterschaften = Daten.listeMeisterschaftsnamen()
 
