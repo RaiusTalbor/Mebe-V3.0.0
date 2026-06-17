@@ -57,4 +57,41 @@ Mit diesen Button wird das Programm sicher beendet. Dabei werden auch alle Daten
 
 ## Bedeutung der Parameter der Objekte
 
+### Meisterschaft
+Eine Meisterschaft hat zwei Listen. Die Liste "Rennkalender", wo alle Strecken in der richtigen Reihenfolge gespeichert sind und die Liste "Fahrerliste", wo alle Fahrer gespeichert sind, die an dieser Meisterschaft teilnehmen.  
+Gespeichert wird eine Meisterschaft im Ordner Datenbank und beinhaltet zwei Werte, abgespeichert als Array. Als erster Wert ist der Dateiname zum Rennkalender und als zweiter Wert der Dateiname zur Fahrerliste gespeichert, denn beide Listen werden noch mal extra als Datei gespeichert.  
+Mit anderen Worten besteht eine Meisterschaft aus drei Dateien:  
+- NAME_MEISTERSCHAFT.dat --> bestehend aus [Rennkalenderpfad, Fahrerlistepfad]
+- NAME_MEISTERSCHAFTStrecken.dat --> beinhaltet den Rennkalender, jede Strecke ebenfalls als Pfad
+- NAME_MEISTERSCHAFTFahrer.dat --> beinhaltet die Fahrerliste, jeden Fahrer ebenfalls als Pfad abgespeichert
+
+Das Objekt "Meisterschaft" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen.  
+
+#### ladenName und ladenPfad
+Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
+
+#### erstellen
+Das Objekt kann all seine eigenen Parameter festlegen, wenn es den eigenen Namen, den Rennkalender und die Fahrerliste übergeben bekommt. Dadurch werden sämtliche notwendigen Pfade gebaut, die das Objekt benötigt, um die Fahrerliste und den Rennkalender anschließend zu speichern.
+
+#### getRennkalenderNamen
+Manchmal ist es notwendig, den Rennkalender zu laden und dabei nur die Streckennamen herauszufiltern. Diese Methode gibt sämtliche Strecken in der richtigen Reihenfolge zurück, aber nicht als Pfad, wie es abgespeichert ist, sondern nur den Streckennamen.
+
+#### getFahrerNamen
+Analog wie bei Rennkalendern, nur für Fahrer.
+
+#### setRennkalenderNamen
+Mit Angabe aller Fahrer kann das Objekt Meisterschaft sich den Rennkalender selbst so zusammenbauen, wie es für die Abspeicherung anschließend benötigt wird.
+
+#### setfahrerlisteName
+Analog wie bei Rennkalendern, nur für Fahrer.
+
+#### setPfade
+Für eine erfolgreiche Speicherung hat die Meisterschaft die Pfade aller Dateien als Attribute. Da sich alle Dateinamen vom Namen der Meisterschaft ableiten lassen, wurde diese Methode implementiert, die genau das tut.
+
+#### speichern
+Speichert alle drei Dateien ab. Im Anschluss wird geprüft, ob die Meisterschaft gespeichert wurde und man kommt eine entsprechende Meldung zurück.
+
+#### laden
+Lädt die Meisterschaft anhand seines Namens. Zuerst werden alle drei Pfade ermittelt und danach alle drei Dateien eingelesen, die dann als Attributwerte im Objekt gespeichert werden und zur Verfügung stehen.
+
 ## Detaillierte Funktionsweise der Module

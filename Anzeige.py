@@ -5,7 +5,6 @@
 #Anzeige wird geladen, da steckt die komplette GUI drin. Dadurch, dass sie beim ersten Laden immer direkt ausgeführt wird, wird dabei auch das Objekt prozess erstellt, welches dadurch global zugreifbar gemacht wird - womit ich nicht immer alle Objekte oder Callbacks übergeben muss und so direkt auf die Methoden zugreifen kann.
 #nicht mit MebeV3.py zusammenführbar, da sonst durch die Imports ein Zyklus entsteht und ein Fehler erfolgt
 
-import random
 from tkinter import *
 import Daten    #Lesen, Schreiben von Dateien
 import time
