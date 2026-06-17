@@ -127,7 +127,8 @@ def erstellen(name):
 def fügeFahrerein():
     global Fahrer, strecke,entryRekordhalterAuswählen
 
-    #vielleicht vorher leeren
+    #Rekordhalter wird in das Entry hineingeschrieben, damit es von dort aus wieder herausgelesen werden kann
+    entryRekordhalterAuswählen.delete(0, END)
     entryRekordhalterAuswählen.insert(0, Fahrer.get())
     strecke.setrekordhalter = Fahrer.get()
 
