@@ -4,14 +4,11 @@
 
 from tkinter import *
 from datetime import datetime
-import time
 
 from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar 
 import Daten
 import Meisterschaft
-import Strecke
 import ErstelleStrecke
-import Fahrer
 import ErstelleFahrer
 
 from Aussehen import *
@@ -83,9 +80,11 @@ def weiter():
 def sammeln():
     #sammelt bei vaweiter die Eingaben ein und speichert die zwischen
 
-    global entryJahrMeisterschaft, entryNameMeisterschaft, rennkalenderListe, fahrerliste, bearbeitungsmodus
+    global entryJahrMeisterschaft, entryNameMeisterschaft, rennkalenderListe, fahrerliste, bearbeitungsmodus, varweiter
 
     global meisterschaft #globalen Objekte zum Speichern
+
+    prozess.löscheInfo() #sonst ist die Meldung nicht zu sehen, wenn es in weiter() steht ; Info wird gelöscht, bevor neue Meldung
 
     if varweiter == 1: #Meisterschaft
 
@@ -95,6 +94,19 @@ def sammeln():
 
             meisterschaft.setname(name)
             meisterschaft.setPfade()
+
+            #leere Eingaben Abfangen
+            if entryNameMeisterschaft.get() == '': #wenn kein Name vergeben wurde --> Jahr irrelevant
+                prozess.setInfo("Die Meisterschaft wurde noch nicht benannt!")
+                varweiter = 0 #da sonst in Sammeln weiterspringt
+                return
+            
+            #prüft, ob Fahrer schon existiert, aber nur bei erstellen
+            liste = Daten.listeMeisterschaftsnamen()
+            if meisterschaft.name in liste:
+                prozess.setInfo("Die Meisterschaft existiert bereits! Bitte gib einen anderen Namen oder ein anderes Jahr ein.")
+                varweiter = 0 #da sonst in Sammeln weiterspringt
+                return
 
             #Initialisieren der globalen Listen für Rennkalender und Speicherliste, weil ich sonst immer weitere globals definieren muss und davon will ich weg
             rennkalenderListe = []

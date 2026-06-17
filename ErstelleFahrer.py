@@ -13,21 +13,17 @@ import Daten
 from Aussehen import *
 
 def speichern():
-    global fahrer, entryName, entryGebJahr, entry1Rennen, scaleAggressivität, scaleGeschicklichkeit, scaleGrundkönnen, vorliebe, entryDurchschnittPlatzierung, labelFahrzeugAuswahl, entryFahrzeugwann, fahrzeugkontrolle
+    global fahrer, entryName, entryGebJahr, entry1Rennen, scaleAggressivität, scaleGeschicklichkeit, scaleGrundkönnen, vorliebe, entryDurchschnittPlatzierung, labelFahrzeugAuswahl, entryFahrzeugwann, fahrzeugkontrolle, namekontrolle
 
     #Informationen aus Widgets holen
 
-    erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
+    erstellen = 0 #um herauszufinden, ob erstellt (0) oder bearbeitet wird (1)
 
     prozess.löscheInfo() #zurücksetzen, um sauber zu machen
 
-    if entryName != None:
+    if entryName != None: #wenn entryName nicht existiert, dann bearbeitet
         fahrer.name = entryName.get()
         erstellen = 1   
-
-    if fahrzeugkontrolle == 0 and fahrer.fahrzeug == '[Kein Fahrzeug ausgewählt]': #wenn kein Fahrzeug ausgewählt wurde und keiner im Objekt hinterlegt wurde
-        prozess.setInfo("Kein Fahrzeug ausgewählt! Wähle ein Fahrzeug zum Fortfahren aus.")
-        return
 
     #Daten sammeln
 
@@ -39,6 +35,49 @@ def speichern():
     fahrer.vorliebe = vorliebe.get()
     fahrer.durchschnittlicheplatzierung = entryDurchschnittPlatzierung.get()
     fahrer.seitWannFahrzeug = entryFahrzeugwann.get()
+
+    #falsche Eingaben abfangen
+    if fahrzeugkontrolle == 0 and fahrer.fahrzeug == '[Kein Fahrzeug ausgewählt]': #wenn kein Fahrzeug ausgewählt wurde und keiner im Objekt hinterlegt wurde
+        prozess.setInfo("Kein Fahrzeug ausgewählt! Wähle ein Fahrzeug zum Fortfahren aus.")
+        return
+    
+    if fahrer.name == '': #wenn kein Name vergeben wurde
+        prozess.setInfo("Der/Die Fahrer/-in wurde noch nicht benannt!")
+        return
+    
+    if not(fahrer.gebjahr.isnumeric()): #wenn das Geburtsjahr nicht angegeben wurde oder keine Zahl ist (bei leer wird false zurückgegeben)
+        prozess.setInfo("Ungültige Eingabe beim Geburtsjahr! Bitte gib eine Zahl an.")
+        return
+    
+    if not(fahrer.erstesrennen.isnumeric()): #wenn das Startjahr nicht angegeben wurde oder keine Zahl ist (bei leer wird false zurückgegeben)
+        prozess.setInfo("Ungültige Eingabe beim ersten Rennen! Bitte gib eine Zahl mind. 10 Jahre größer als das Geburtsjahr an.")
+        return
+    
+    if int(fahrer.gebjahr)+10 > int(fahrer.erstesrennen): #wenn das erste Rennen vor dem 10. Lebensjahr stattfand
+        prozess.setInfo("Ungültige Eingabe beim ersten Rennen! Bitte gib eine Zahl mind. 10 Jahre größer als das Geburtsjahr an.")
+        return
+    
+    if not(fahrer.durchschnittlicheplatzierung.isnumeric()): #wenn die Durchschnittsplatzierung nicht angegeben wurde oder keine Zahl ist (bei leer wird false zurückgegeben)
+        prozess.setInfo("Ungültige Eingabe bei der Durchschnittsplatzierung! Bitte gib eine Zahl an.")
+        return
+    
+    if not(fahrer.durchschnittlicheplatzierung.isnumeric()): #wenn die Durchschnittsplatzierung nicht angegeben wurde oder keine Zahl ist (bei leer wird false zurückgegeben)
+        prozess.setInfo("Ungültige Eingabe bei der Durchschnittsplatzierung! Bitte gib eine Zahl an.")
+        return
+    
+    if not(fahrer.seitWannFahrzeug.isnumeric()): #wenn das Jahr mit der Fahrt des ersten Fahrzeugs nicht angegeben wurde oder keine Zahl ist (bei leer wird false zurückgegeben)
+        prozess.setInfo("Ungültige Eingabe bei der Angabe, seit wann das Fahrzeug gefahren wird! Bitte gib eine Zahl mind. 10 Jahre größer als das Geburtsjahr an.")
+        return
+    
+    if int(fahrer.gebjahr)+10 > int(fahrer.seitWannFahrzeug): #wenn der Wert vor dem 10. Lebensjahr stattfand (bei leer wird false zurückgegeben)
+        prozess.setInfo("Ungültige Eingabe bei der Angabe, seit wann das Fahrzeug gefahren wird! Bitte gib eine Zahl mind. 10 Jahre größer als das Geburtsjahr an.")
+        return
+    
+    #prüft, ob Fahrer schon existiert, aber nur bei erstellen
+    liste = Daten.listeNamen("Fahrer")
+    if erstellen == 0 and fahrer.name in liste:
+        prozess.setInfo("Der/Die Fahrer/-in existiert bereits. Die Werte werden beim Speichern überschrieben!")
+        namekontrolle = 1 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 
     if labelFahrzeugAuswahl.cget("text") == "[Kein Fahrzeug ausgewählt]":
         fahrer.fahrzeug = ''
@@ -56,9 +95,10 @@ def speichern():
 
 def erstellen(name):
     #erstellen und bearbeiten einer Strecke
-    global fahrer, entryName, entryGebJahr, entry1Rennen, scaleAggressivität, scaleGeschicklichkeit, scaleGrundkönnen, vorliebe, entryDurchschnittPlatzierung, labelFahrzeugAuswahl, entryFahrzeugwann, fahrzeugkontrolle
+    global fahrer, entryName, entryGebJahr, entry1Rennen, scaleAggressivität, scaleGeschicklichkeit, scaleGrundkönnen, vorliebe, entryDurchschnittPlatzierung, labelFahrzeugAuswahl, entryFahrzeugwann, fahrzeugkontrolle, namekontrolle
 
     fahrzeugkontrolle = 0 #dazu da, dass man nur mit gesetzten Fahrzeug weiter kann --> sonst Probleme
+    namekontrolle = 0 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 
     #Fenster initialisieren
     prozess.speicherCheckpoint()

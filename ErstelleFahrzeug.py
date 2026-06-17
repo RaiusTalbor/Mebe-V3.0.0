@@ -8,24 +8,35 @@ import Erstellen
 from Anzeige import prozess #das Objekt wird global importiert und für alle jederzeit zugreifbar gemacht
 import Fahrzeug
 import ErstelleFahrer
+import Daten
 
 from Aussehen import *
 
 def speichern():
-    global fahrzeug, entryName, leistung, wendigkeit
+    global fahrzeug, entryName, leistung, wendigkeit, namekontrolle
 
     #Informationen aus Widgets holen
 
-    erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
+    erstellen = 0 #um herauszufinden, ob erstellt (0) oder bearbeitet wird (1)
 
     if entryName != None:
         fahrzeug.name = entryName.get()
-        erstellen = 1   
+        erstellen = 1  
 
     #Daten sammeln
 
     fahrzeug.leistung = leistung.get()
     fahrzeug.wendigkeit = wendigkeit.get()
+
+    if fahrzeug.name == '': #wenn kein Name vergeben wurde
+        prozess.setInfo("Das Fahrzeug wurde noch nicht benannt!")
+        return 
+    
+    #prüft, ob Fahrzeug schon existiert
+    liste = Daten.listeNamen("Fahrzeuge")
+    if erstellen == 0 and fahrzeug.name in liste:
+        prozess.setInfo("Das Fahrzeug existiert bereits. Die Werte werden beim Speichern überschrieben!")
+        namekontrolle = 1 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 
     #Fahrer speichern
 
@@ -40,7 +51,9 @@ def speichern():
 
 def erstellen(name):
     #erstellen und bearbeiten einer Strecke
-    global fahrzeug, entryName, leistung, wendigkeit
+    global fahrzeug, entryName, leistung, wendigkeit, namekontrolle
+
+    namekontrolle = 0 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 
     #Fenster initialisieren
     prozess.speicherCheckpoint()

@@ -12,21 +12,36 @@ import Daten
 from Aussehen import *
 
 def speichern():
-    global strecke, entryName, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
+    global strecke, entryName, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit, rekordhalterkontrolle, namekontrolle
 
     #Informationen aus Widgets holen
 
-    erstellen = 0 #um herauszufinden, ob erstellt oder bearbeitet wird
+    erstellen = 0 #um herauszufinden, ob erstellt (0) oder bearbeitet wird (1)
 
     if entryName != None:
         strecke.name = entryName.get()
         erstellen = 1   
 
+    #Daten sammeln
     strecke.rekordhalter = entryRekordhalterAuswählen.get()
-
     strecke.streckentyp = int(streckentyp.get())
-
     strecke.schwierigkeit = scaleSchwierigkeit.get()
+
+    #falsche EIngaben abfangen
+    if rekordhalterkontrolle == 0 and strecke.rekordhalter == '': #wenn die Kontrollvariable 0 ist (noch nicht hier durchgelaufen) und der Rekordhalter leer gelassen wurde
+        prozess.setInfo("Keinen/Keine Rekordhalter/-in angegeben! Klicke auf Speichern, wenn dies gewollt ist.")
+        rekordhalterkontrolle = 1 #wenn kein Rekordhalter ausgewählt, wird auf 1 gesetzt. Beim zweiten Mal speichern wird der leere Wert ignoriert
+        return
+    
+    if strecke.name == '': #wenn kein Name vergeben wurde
+        prozess.setInfo("Die Strecke wurde noch nicht benannt!")
+        return
+    
+    #prüft, ob Strecke schon existiert
+    liste = Daten.listeNamen("Strecken")
+    if erstellen == 0 and strecke.name in liste:
+        prozess.setInfo("Die Strecke existiert bereits. Die Werte werden beim Speichern überschrieben!")
+        namekontrolle = 1 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 
     strecke.speichern()
 
@@ -37,12 +52,15 @@ def speichern():
 
 def erstellen(name):
     #erstellen und bearbeiten einer Strecke
-    global strecke, entryName, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit
+    global strecke, entryName, entryRekordhalterAuswählen, streckentyp, scaleSchwierigkeit, rekordhalterkontrolle, namekontrolle
 
     #Radios
     global kurvig
     global ausgeglichen
     global schnell
+
+    rekordhalterkontrolle = 0 #wenn kein Rekordhalter ausgewählt, wird auf 1 gesetzt. Beim zweiten Mal speichern wird der leere Wert ignoriert
+    namekontrolle = 0 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 
     #Fenster initialisieren
     prozess.speicherCheckpoint()
