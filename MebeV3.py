@@ -21,6 +21,18 @@ from Aussehen import *
 def test():
     pass   
 
+# ----------Hilfe
+
+import os
+import subprocess
+import sys
+
+def hilfe():
+    if sys.platform == "win32":
+        os.startfile("README.pdf")
+    else:
+        subprocess.run(["xdg-open", "README.pdf"])
+
 # ----------View
 
 # Hauptmenü - Steuereinheit Mebe V3 ------------------------------------------
@@ -34,7 +46,7 @@ prozess.hinzufügenButton("Bearbeiten", Bearbeiten.bearbeiten)
 
 prozess.hinzufügenButton("Berechnen", Berechnen.berechnen) #berechnen einer Meisterschaft
 
-prozess.hinzufügenButton("Hilfe", test) #Hilfe zu Mebe; BTM-Website-Integration?
+prozess.hinzufügenButton("Hilfe", hilfe) #Hilfe zu Mebe; BTM-Website-Integration?
 
 prozess.hinzufügenButton("Beenden", prozess.beenden) #Programm beenden
 
