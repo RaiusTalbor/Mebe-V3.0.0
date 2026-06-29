@@ -57,6 +57,36 @@ Mit diesen Button wird das Programm sicher beendet. Dabei werden auch alle Daten
 
 ## Bedeutung der Parameter der Objekte
 
+Für die Berechnung sind vier Objekte wichtig: Die Meisterschaft, Fahrer, Fahrzeuge und Strecken.
+Die Meisterschaft dient lediglich zur eindeutigen Identifizierung einer Zusammenstellung der übrigen drei Objekte.
+
+Jedes Objekt beeinflusst das Ergebnis einer Meisterschaft. Objekte unterscheiden sich anhand von Parametern, die individuell festgelegt werden können.
+Jedes Objekt hat einen eindeutigen Namen, über den das Objekt identifiziert wird.
+Da jedes Objekt mit einer .dat-Datei repräsentiert wird, sind doppelte Namen ausgeschlossen.
+
+Für detailiertere Einblicke: siehe mehr in der Berechnungsmechanik.
+
+### Strecken
+
+Strecken sind diejenigen Objekte, an denen ein Ergebnis gebunden wird.
+Jedes Ergebnis wird pro Strecke erstellt. Ein Meisterschaftsergebnis besteht aus der Summe aller Streckenergebnisse.
+
+Der Rennkalender einer Meisterschaft definiert dabei, welche Strecken in welcher Reihenfolge in der Meisterschaft absolviert werden.
+
+Parameter:
+- Rekordhalter: Sollte der Rekordhalter in einer Meisterschaft mit teilnehmen, so erhält dieser bei der Platzierung einen Vorteil.
+- Streckentyp: Eine Strecke kann kurvig (Streckentyp 1), schnell (Streckentyp 3) oder ausgeglichen (Streckentyp 2) sein. Je nach Eigenschaften des gefahrenen Fahrzeugs des Fahrers erhält dieser einen Vorteil oder Nachteil.
+- Schwierigkeit: Gibt an, wie anspruchsvoll eine Strecke im Vergleich zu den anderen (der Meisterschaft bspw.) ist. Dabei können Werte von 1 bis 10 angegeben werden, je höher die Zahl, desto schwieriger ist die Strecke. Die Schwierigkeit erhöht die Unfallwahrscheinlichkeit eines Fahrers in einem Rennen.
+
+### Fahrer
+Fahrer sind diejenigen Objekte, die im Ergebnis gemessen werden. Ein Fahrer kann Platzierungen erhalten und entsprechend Ergebnisse gewinnen.
+
+Die Fahrerliste in einer Meisterschaft definiert dabei, welche Fahrer bei dieser Meisterschaft teilnehmen und Ergebniss erzielen können.
+
+### Strecken
+
+## Detaillierte Funktionsweise der Module
+
 ### Meisterschaft
 Eine Meisterschaft hat zwei Listen. Die Liste "Rennkalender", wo alle Strecken in der richtigen Reihenfolge gespeichert sind und die Liste "Fahrerliste", wo alle Fahrer gespeichert sind, die an dieser Meisterschaft teilnehmen.  
 Gespeichert wird eine Meisterschaft im Ordner Datenbank und beinhaltet zwei Werte, abgespeichert als Array. Als erster Wert ist der Dateiname zum Rennkalender und als zweiter Wert der Dateiname zur Fahrerliste gespeichert, denn beide Listen werden noch mal extra als Datei gespeichert.  
@@ -93,5 +123,3 @@ Speichert alle drei Dateien ab. Im Anschluss wird geprüft, ob die Meisterschaft
 
 #### laden
 Lädt die Meisterschaft anhand seines Namens. Zuerst werden alle drei Pfade ermittelt und danach alle drei Dateien eingelesen, die dann als Attributwerte im Objekt gespeichert werden und zur Verfügung stehen.
-
-## Detaillierte Funktionsweise der Module
