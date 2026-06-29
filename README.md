@@ -109,11 +109,11 @@ Ausgeglichene Fahrzeuge haben weder Vor- noch Nachteile.
 In der Regel sind Leistung und Wendigkeit gegensätzlich.
 Andererseits gibt es auch keine Mechanik, die dies überprüft.
 
-## Detaillierte Funktionsweise der Module
+## Detaillierte Funktionsweise der Objekte
 
 ### Meisterschaft
 Eine Meisterschaft hat zwei Listen. Die Liste "Rennkalender", wo alle Strecken in der richtigen Reihenfolge gespeichert sind und die Liste "Fahrerliste", wo alle Fahrer gespeichert sind, die an dieser Meisterschaft teilnehmen.  
-Gespeichert wird eine Meisterschaft im Ordner Datenbank und beinhaltet zwei Werte, abgespeichert als Array. Als erster Wert ist der Dateiname zum Rennkalender und als zweiter Wert der Dateiname zur Fahrerliste gespeichert, denn beide Listen werden noch mal extra als Datei gespeichert.  
+Gespeichert wird eine Meisterschaft im Ordner Datenbank und beinhaltet zwei Werte, abgespeichert als Array. Als erster Wert ist der Dateiname zum Rennkalender und als zweiter Wert der Dateiname zur Fahrerliste gespeichert, denn beide Listen werden noch mal extra als Datei im Ordner Datenbank gespeichert.  
 Mit anderen Worten besteht eine Meisterschaft aus drei Dateien:  
 - NAME_MEISTERSCHAFT.dat --> bestehend aus [Rennkalenderpfad, Fahrerlistepfad]
 - NAME_MEISTERSCHAFTStrecken.dat --> beinhaltet den Rennkalender, jede Strecke ebenfalls als Pfad
@@ -147,3 +147,94 @@ Speichert alle drei Dateien ab. Im Anschluss wird geprüft, ob die Meisterschaft
 
 #### laden
 Lädt die Meisterschaft anhand seines Namens. Zuerst werden alle drei Pfade ermittelt und danach alle drei Dateien eingelesen, die dann als Attributwerte im Objekt gespeichert werden und zur Verfügung stehen.
+
+### Fahrer
+Das Objekt "Fahrer" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
+
+Speicherwerte: gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug
+
+#### ladenName und ladenPfad
+Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
+
+#### erstellen
+Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Fahrer instanziiert.
+Parameter: name, gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug
+
+#### setPfad
+Setzt seinen eigenen Pfad.
+Fahrer sind unter /Datenbank/Fahrer gespeichert.
+
+#### setPfadFahrzeug
+Setzt den Pfad des Fahrzeugs (s. da).
+
+#### speichern
+Speichert das Objekt "Fahrer" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
+
+#### laden
+Lädt einen Fahrer aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
+Es ist zwingend erforderlich, dass ein Fahrer bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
+
+
+### Strecke
+Das Objekt "Strecke" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
+
+Speicherwerte: rekordhalter, streckentyp, schwierigkeit
+
+#### ladenName und ladenPfad
+Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
+
+#### erstellen
+Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Strecke instanziiert.
+Parameter: name, rekordhalter, streckentyp, schwierigkeit
+
+#### setPfad
+Setzt seinen eigenen Pfad.
+Strecken sind unter /Datenbank/Strecken gespeichert.
+
+#### setPfadRekordhalter
+Setzt den Pfad des Rekordhalters, ein Fahrer (s. da).
+
+#### speichern
+Speichert das Objekt "Strecke" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
+
+#### laden
+Lädt eine Strecke aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
+Es ist zwingend erforderlich, dass eine Strecke bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
+
+### Fahrzeug
+Das Objekt "Fahrzeug" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
+
+Speicherwerte: leistung, wendigkeit
+
+#### ladenName und ladenPfad
+Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
+
+#### erstellen
+Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Fahrzeug instanziiert.
+Parameter: name, rekordhalter, leistung, wendigkeit
+
+#### setPfad
+Setzt seinen eigenen Pfad.
+Fahrzeuge sind unter /Datenbank/Fahrzeuge gespeichert.
+
+#### speichern
+Speichert das Objekt "Fahrzeug" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
+
+#### laden
+Lädt ein Fahrzeug aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
+Es ist zwingend erforderlich, dass ein Fahrzeug bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
+
+## Datenspeicherung
+
+## Technische Betrachtung Erstellen
+
+## Technische Betrachtung Bearbeiten
+
+## Berechnungsmechanik (MebeAl1)
+
+## Anzeige
+(Programmstart, Prozess, Aufgaben und Aussehen)
+
+## Hilfsmodul Daten
+
+## Hilfsmodul Z-Hilfe-Leser (HiLe1)
