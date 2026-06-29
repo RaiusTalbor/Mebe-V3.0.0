@@ -67,7 +67,6 @@ Da jedes Objekt mit einer .dat-Datei repräsentiert wird, sind doppelte Namen au
 Für detailiertere Einblicke: siehe mehr in der Berechnungsmechanik.
 
 ### Strecken
-
 Strecken sind diejenigen Objekte, an denen ein Ergebnis gebunden wird.
 Jedes Ergebnis wird pro Strecke erstellt. Ein Meisterschaftsergebnis besteht aus der Summe aller Streckenergebnisse.
 
@@ -75,15 +74,40 @@ Der Rennkalender einer Meisterschaft definiert dabei, welche Strecken in welcher
 
 Parameter:
 - Rekordhalter: Sollte der Rekordhalter in einer Meisterschaft mit teilnehmen, so erhält dieser bei der Platzierung einen Vorteil.
-- Streckentyp: Eine Strecke kann kurvig (Streckentyp 1), schnell (Streckentyp 3) oder ausgeglichen (Streckentyp 2) sein. Je nach Eigenschaften des gefahrenen Fahrzeugs des Fahrers erhält dieser einen Vorteil oder Nachteil.
+- Streckentyp: Eine Strecke kann kurvig (Streckentyp 1), schnell (Streckentyp 3) oder ausgeglichen (Streckentyp 2) sein. Je nach Eigenschaften des gefahrenen Fahrzeugs des Fahrers erhält dieser einen Vorteil oder Nachteil. Passt außerdem die Vorliebe des Fahrers zum Streckentyp, so verbessert sich das Ergebnis.
 - Schwierigkeit: Gibt an, wie anspruchsvoll eine Strecke im Vergleich zu den anderen (der Meisterschaft bspw.) ist. Dabei können Werte von 1 bis 10 angegeben werden, je höher die Zahl, desto schwieriger ist die Strecke. Die Schwierigkeit erhöht die Unfallwahrscheinlichkeit eines Fahrers in einem Rennen.
 
 ### Fahrer
 Fahrer sind diejenigen Objekte, die im Ergebnis gemessen werden. Ein Fahrer kann Platzierungen erhalten und entsprechend Ergebnisse gewinnen.
 
-Die Fahrerliste in einer Meisterschaft definiert dabei, welche Fahrer bei dieser Meisterschaft teilnehmen und Ergebniss erzielen können.
+Die Fahrerliste in einer Meisterschaft definiert dabei, welche Fahrer bei dieser Meisterschaft teilnehmen und Ergebnis erzielen können.
 
-### Strecken
+Parameter:
+- Geburtsjahr: Aus dem Alter wird eine Grunderfahrung berechnet, die sich positiv auf das Ergebnis auswirkt.
+- Erstes Rennen: Die Fahrerfahrung ist ein Teil der Berechnung der Grunderfahrung.
+- Aggressivität: Wert von 1-10. Gibt an, wie aggressiv im Vergleich zu anderen ein Pilot fährt. Je höher die Aggressivität, desto wahrscheinlicher ist ein Unfall oder eine Strafzeit.
+- Geschicklichkeit: Wert von 1-10. Gibt an, wie souverän ein Fahrer im Vergleich zu anderen in besonderen Situationen agieren kann. Je höher die Geschicklichkeit, desto geringer ist die Wahrscheinlichkeit für Dreher.
+- Grundkönnen: Wert von 1-100. Gibt an, wie talentiert ein Fahrer im Vergleich zu anderen ist. Das Grundkönnen hat den größten direkten Einfluss auf das Endergebnis. Je höher das Grundkönnen, desto besser das Ergebnis.
+- Vorliebe: Die Vorliebe gibt an, ob ein Fahrer eher kurvige oder schnelle Strecken beherrscht. Es gibt einen Vorteil, wenn die Vorliebe mit dem Streckentyp übereinstimmt.
+- Durchschnittliche Platzierung: Die durchschnittliche Platzierung gibt an, welchen Rang ein Fahrer statistisch gesehen erreicht. In der Berechnung hat dieser Wert derzeit keinen Einfluss.
+- Fahrzeug: Jedem Fahrer wird exakt ein Fahrzeug zugeordnet. Dieses Fahrzeug hat ebenso Einfluss auf das Ergebnis. Fährt ein Fahrer bei mehreren Meisterschaften mit, so ist es ggf. notwendig, mehrere Fahrerprofile zu erstellen.
+- Fahrzeug wird gefahren seit: Gibt an, wie lang ein Fahrer bereits das Fahrzeug fährt und spiegelt die Erfahrung zur Funktion und Beherrschung des Fahrzeugs wider. Je länger ein Pilot ein Fahrzeug bereits gefahren ist, desto besser ist das Ergebnis.
+
+### Fahrzeug
+Fahrzeuge sind diejenigen Objekte, mit deren Einfluss Fahrer Ergebnisse erzielen.
+
+Jedem Fahrer ist exakt einem Fahrzeug zugeordnet.
+
+Parameter:
+- Leistung: Wert von 1-3. Gibt an, wie viel Leistung das Fahrzeug im Vergleich zu anderen hat.
+- Wendigkeit: Wert von 1-3. Gibt an, wie wendig ein Fahrzug im Vergleich zu anderen ist.
+
+Auf schnellen Strecken gibt es einen Wagenvorteil für den Fahrer, wenn das Fahrzeug schnell und nicht wendig ist. Es gibt aber einen Nachteil, wenn es nicht leistungsstark und wendig ist.
+Auf kurvigen Strecken gibt es einen Vorteil, wenn das Fahrzeug wendig und nicht schnell ist. Es gibt einen Nachteil, wenn es leistungsstark und nicht wendig ist.
+Ausgeglichene Fahrzeuge haben weder Vor- noch Nachteile.
+
+In der Regel sind Leistung und Wendigkeit gegensätzlich.
+Andererseits gibt es auch keine Mechanik, die dies überprüft.
 
 ## Detaillierte Funktionsweise der Module
 
