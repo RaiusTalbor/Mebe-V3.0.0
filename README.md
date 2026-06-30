@@ -1,23 +1,23 @@
 # MEBE V3.0.0
 
-## Vorwort und Historie
+# Vorwort und Historie
 Mebe ist ein Motorsport-Meisterschaftsberechnungsprogramm. Ein Tool, um fiktive Motorsportmeisterschaften ausgeben zu lassen.  
 Es ist komplett in Python 3 entwickelt worden.  
 Mebe V1 ist der Vorläufer und ist als Konsolenedition voll funktionsfähig. Aufgrund der umständlichen und fehleranfälligen Bedienung in der Konsole, wurde Mebe V2 entwickelt, welches den Vorgänger ablöste und grundsätzlich denselben Funktionsumfang aufwies, wie die erste Version. Version 2 ergänzte dabei die Möglichkeit, Objekte zu bearbeiten.  
 Aufgrund mehrerer Probleme bei Zugriffen und Speicherungen wurde die Plattform neu konzipiert und Mebe V3 entwickelt. Viele Funktionen wurden aus Mebe V2.0.0 (Stand 05.01.2026 - https://github.com/RaiusTalbor/Mebe-V2.0.0) aber übernommen.  
 Alle Versionen, V1, V2 und V3, sind aber zueinander kompatibel. Die Datenbank, Rechenergebnisse und andere gespeicherte Daten können ohne Anpassung übernommen und migriert werden. Auch die Pfade mussten nicht angepasst werden.
 
-## Grundfunktionen
+# Grundfunktionen
 Mebe kann Meisterschaften erstellen. Zu diesen Meisterschaften können Strecken und Fahrer hinzugefügt werden, die an dieser Meisterschaft teilnehmen.  
 Wird eine Meisterschaft berechnet, so wird jedes einzelne Rennergebnis ermittelt. Dabei werden die Parameter jedes einzelnen Objekts gegeneinander nach bestimmten Kriterien aufgewogen und eine Rangfolge ermittelt. Zufallswerte ermöglichen eine unvorhersehbare Berechnung des Ergebnisses.  
 Man kann eine Meisterschaft beliebig oft berechnen lassen.  
 Eine Meisterschaft (nicht die Ergebnisse) oder auch jedes einzelne Objekt kann auch nachträglich bearbeitet werden. So ist es möglich, die Parameter über einen längeren Zeitraum anzupassen.
 
-## Bedienung
-### Hauptmenü
+# Bedienung
+## Hauptmenü
 Im Hauptmenü hat man Zugang zu sämtlichen Grundfunktionen des Programms: Erstellen, Bearbeiten und Berechnen. Außerdem kann man hier die Dokumentation aufrufen.
 
-### Erstellen
+## Erstellen
 Klickt man auf Erstellen, so kann man eine Meisterschaft erstellen.
 
 Man kann keine Objekte einzeln erstellen, da es gedacht ist, sie in einen Meisterschaftskontext zu bringen. Um einzelne Objekte hinzuzufügen, muss also entweder eine Meisterschaft erstellt oder bearbeitet werden.
@@ -38,24 +38,24 @@ Die Erstellung des Fahrzeugs ist relativ übersichtlich und verhält sich analog
 Hat man die gewünschten Strecken, Fahrer und Fahrzeuge hinzugefügt, dann kann man die Meisterschaft speichern und sie wird in der Datenbank abgelegt.  
 Möchte man zwischendurch den Prozess abbrechen, so gelangt man über den Button "Abbrechen" jederzeit ins Hauptmenü.
 
-### Bearbeiten
+## Bearbeiten
 Bearbeiten ist sehr ähnlich dem Erstellungsprozess.  
 Im Zwischenmenü kann man zunächst auswählen, welche Art von Objekt man bearbeiten möchte. Entscheidet man sich für eine Art, wird man in ein weiteres Untermenü weitergeleitet, bei dem man entscheiden kann, welches konkrete Objekt man bearbeiten. Möchte. Auch hier erfolgt die Auswahl über Radiobuttons und dem Knopf "Auswählen".  
 Nach der Auswahl sieht man dieselbe Oberfläche, wie man sie aus der "Erstellen"-Ansicht kennt, mit dem Unterschied, dass der Name nicht mehr editierbar ist. Dieser bleibt unveränderlich.
 
-### Berechnen
+## Berechnen
 Als Hauptaufgabe besitzt Mebe, Meisterschaften zu berechnen. Dies kann man über den dritten Menüpunkt "Berechnen" tun.  
 Im Untermenü kann man sich dann noch für eine Meisterschaft entscheiden, mit "Meisterschaft auswählen" wird die Berechnung gestartet. Die Ausgabe erfolgt am unteren Rand des Bildschirms. Eine Berechnung kann dabei beliebig oft gestartet werden.  
 Die Rennergebnisse werden als DAT-Datei gespeichert, werden aber derzeit noch nicht weiterverarbeitet oder sind zugänglich.  
 Den Kern bildet der Berechnungsalgorithmus aus Mebe V1 (MebeAl1). Angepasst wurden entsprechende Ausgaben, Anzeigen und Zugriffe, die Logik aber ist unverändert. Dementsprechend ist auch die gesamte Datenbank, gespeicherte Daten und Ergebnisse mit Mebe V1 und Mebe V2 rückwärts als auch vorwärts kompatibel.
 
-### Hilfe
+## Hilfe
 Über den Hilfe-Button im Hauptmenü gelangt man zu dieser Dokumentation, welche sich im Standard-PDF-Viewer öffnet.
 
-### Beenden
+## Beenden
 Mit diesen Button wird das Programm sicher beendet. Dabei werden auch alle Daten aus dem temporären Ordner entfernt.
 
-## Bedeutung der Parameter der Objekte
+# Bedeutung der Parameter der Objekte
 
 Für die Berechnung sind vier Objekte wichtig: Die Meisterschaft, Fahrer, Fahrzeuge und Strecken.
 Die Meisterschaft dient lediglich zur eindeutigen Identifizierung einer Zusammenstellung der übrigen drei Objekte.
@@ -66,7 +66,7 @@ Da jedes Objekt mit einer .dat-Datei repräsentiert wird, sind doppelte Namen au
 
 Für detailiertere Einblicke: siehe mehr in der Berechnungsmechanik.
 
-### Strecken
+## Strecken
 Strecken sind diejenigen Objekte, an denen ein Ergebnis gebunden wird.
 Jedes Ergebnis wird pro Strecke erstellt. Ein Meisterschaftsergebnis besteht aus der Summe aller Streckenergebnisse.
 
@@ -77,7 +77,7 @@ Parameter:
 - Streckentyp: Eine Strecke kann kurvig (Streckentyp 1), schnell (Streckentyp 3) oder ausgeglichen (Streckentyp 2) sein. Je nach Eigenschaften des gefahrenen Fahrzeugs des Fahrers erhält dieser einen Vorteil oder Nachteil. Passt außerdem die Vorliebe des Fahrers zum Streckentyp, so verbessert sich das Ergebnis.
 - Schwierigkeit: Gibt an, wie anspruchsvoll eine Strecke im Vergleich zu den anderen (der Meisterschaft bspw.) ist. Dabei können Werte von 1 bis 10 angegeben werden, je höher die Zahl, desto schwieriger ist die Strecke. Die Schwierigkeit erhöht die Unfallwahrscheinlichkeit eines Fahrers in einem Rennen.
 
-### Fahrer
+## Fahrer
 Fahrer sind diejenigen Objekte, die im Ergebnis gemessen werden. Ein Fahrer kann Platzierungen erhalten und entsprechend Ergebnisse gewinnen.
 
 Die Fahrerliste in einer Meisterschaft definiert dabei, welche Fahrer bei dieser Meisterschaft teilnehmen und Ergebnis erzielen können.
@@ -93,7 +93,7 @@ Parameter:
 - Fahrzeug: Jedem Fahrer wird exakt ein Fahrzeug zugeordnet. Dieses Fahrzeug hat ebenso Einfluss auf das Ergebnis. Fährt ein Fahrer bei mehreren Meisterschaften mit, so ist es ggf. notwendig, mehrere Fahrerprofile zu erstellen.
 - Fahrzeug wird gefahren seit: Gibt an, wie lang ein Fahrer bereits das Fahrzeug fährt und spiegelt die Erfahrung zur Funktion und Beherrschung des Fahrzeugs wider. Je länger ein Pilot ein Fahrzeug bereits gefahren ist, desto besser ist das Ergebnis.
 
-### Fahrzeug
+## Fahrzeug
 Fahrzeuge sind diejenigen Objekte, mit deren Einfluss Fahrer Ergebnisse erzielen.
 
 Jedem Fahrer ist exakt einem Fahrzeug zugeordnet.
@@ -109,9 +109,9 @@ Ausgeglichene Fahrzeuge haben weder Vor- noch Nachteile.
 In der Regel sind Leistung und Wendigkeit gegensätzlich.
 Andererseits gibt es auch keine Mechanik, die dies überprüft.
 
-## Detaillierte Funktionsweise der Objekte
+# Detaillierte Funktionsweise der Objekte
 
-### Meisterschaft
+## Meisterschaft
 Eine Meisterschaft hat zwei Listen. Die Liste "Rennkalender", wo alle Strecken in der richtigen Reihenfolge gespeichert sind und die Liste "Fahrerliste", wo alle Fahrer gespeichert sind, die an dieser Meisterschaft teilnehmen.  
 Gespeichert wird eine Meisterschaft im Ordner Datenbank und beinhaltet zwei Werte, abgespeichert als Array. Als erster Wert ist der Dateiname zum Rennkalender und als zweiter Wert der Dateiname zur Fahrerliste gespeichert, denn beide Listen werden noch mal extra als Datei im Ordner Datenbank gespeichert.  
 Mit anderen Worten besteht eine Meisterschaft aus drei Dateien:  
@@ -121,120 +121,132 @@ Mit anderen Worten besteht eine Meisterschaft aus drei Dateien:
 
 Das Objekt "Meisterschaft" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen.  
 
-#### ladenName und ladenPfad
+### ladenName und ladenPfad
 Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
 
-#### erstellen
+### erstellen
 Das Objekt kann all seine eigenen Parameter festlegen, wenn es den eigenen Namen, den Rennkalender und die Fahrerliste übergeben bekommt. Dadurch werden sämtliche notwendigen Pfade gebaut, die das Objekt benötigt, um die Fahrerliste und den Rennkalender anschließend zu speichern.
 
-#### getRennkalenderNamen
+### getRennkalenderNamen
 Manchmal ist es notwendig, den Rennkalender zu laden und dabei nur die Streckennamen herauszufiltern. Diese Methode gibt sämtliche Strecken in der richtigen Reihenfolge zurück, aber nicht als Pfad, wie es abgespeichert ist, sondern nur den Streckennamen.
 
-#### getFahrerNamen
+### getFahrerNamen
 Analog wie bei Rennkalendern, nur für Fahrer.
 
-#### setRennkalenderNamen
+### setRennkalenderNamen
 Mit Angabe aller Fahrer kann das Objekt Meisterschaft sich den Rennkalender selbst so zusammenbauen, wie es für die Abspeicherung anschließend benötigt wird.
 
-#### setfahrerlisteName
+### setfahrerlisteName
 Analog wie bei Rennkalendern, nur für Fahrer.
 
-#### setPfade
+### setPfade
 Für eine erfolgreiche Speicherung hat die Meisterschaft die Pfade aller Dateien als Attribute. Da sich alle Dateinamen vom Namen der Meisterschaft ableiten lassen, wurde diese Methode implementiert, die genau das tut.
 
-#### speichern
+### speichern
 Speichert alle drei Dateien ab. Im Anschluss wird geprüft, ob die Meisterschaft gespeichert wurde und man kommt eine entsprechende Meldung zurück.
 
-#### laden
+### laden
 Lädt die Meisterschaft anhand seines Namens. Zuerst werden alle drei Pfade ermittelt und danach alle drei Dateien eingelesen, die dann als Attributwerte im Objekt gespeichert werden und zur Verfügung stehen.
 
-### Fahrer
+## Fahrer
 Das Objekt "Fahrer" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
 
 Speicherwerte: gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug
 
-#### ladenName und ladenPfad
+### ladenName und ladenPfad
 Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
 
-#### erstellen
+### erstellen
 Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Fahrer instanziiert.
 Parameter: name, gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug
 
-#### setPfad
+### setPfad
 Setzt seinen eigenen Pfad.
 Fahrer sind unter /Datenbank/Fahrer gespeichert.
 
-#### setPfadFahrzeug
+### setPfadFahrzeug
 Setzt den Pfad des Fahrzeugs (s. da).
 
-#### speichern
+### speichern
 Speichert das Objekt "Fahrer" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
 
-#### laden
+### laden
 Lädt einen Fahrer aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
 Es ist zwingend erforderlich, dass ein Fahrer bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
 
 
-### Strecke
+## Strecke
 Das Objekt "Strecke" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
 
 Speicherwerte: rekordhalter, streckentyp, schwierigkeit
 
-#### ladenName und ladenPfad
+### ladenName und ladenPfad
 Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
 
-#### erstellen
+### erstellen
 Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Strecke instanziiert.
 Parameter: name, rekordhalter, streckentyp, schwierigkeit
 
-#### setPfad
+### setPfad
 Setzt seinen eigenen Pfad.
 Strecken sind unter /Datenbank/Strecken gespeichert.
 
-#### setPfadRekordhalter
+### setPfadRekordhalter
 Setzt den Pfad des Rekordhalters, ein Fahrer (s. da).
 
-#### speichern
+### speichern
 Speichert das Objekt "Strecke" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
 
-#### laden
+### laden
 Lädt eine Strecke aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
 Es ist zwingend erforderlich, dass eine Strecke bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
 
-### Fahrzeug
+## Fahrzeug
 Das Objekt "Fahrzeug" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
 
 Speicherwerte: leistung, wendigkeit
 
-#### ladenName und ladenPfad
+### ladenName und ladenPfad
 Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
 
-#### erstellen
+### erstellen
 Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Fahrzeug instanziiert.
 Parameter: name, rekordhalter, leistung, wendigkeit
 
-#### setPfad
+### setPfad
 Setzt seinen eigenen Pfad.
 Fahrzeuge sind unter /Datenbank/Fahrzeuge gespeichert.
 
-#### speichern
+### speichern
 Speichert das Objekt "Fahrzeug" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
 
-#### laden
+### laden
 Lädt ein Fahrzeug aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
 Es ist zwingend erforderlich, dass ein Fahrzeug bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
 
-## Datenspeicherung
+# Datenspeicherung
 
-## Technische Betrachtung Erstellen
+Mebe V3 speichert Daten permanent. Dafür werden Binär-Dateien mit der Dateiendung ".dat" im Ordner "Datenbanken" angelegt.
+Zwischengespeicherte Daten, die während der Berechnung benötigt werden, werden im Ordner "temporäre Dateien" gespeichert und nach Programmende, wenn das Programm sauber verlassen wird, gelöscht. Auch das sind binärer DAT-Dateien.
 
-## Technische Betrachtung Bearbeiten
+Im Ordner "Datenbank" befinden sich alle Meisterschaftsdateien (beschrieben zum Objekt "Meisterschaft") und vier weitere Ordner: "Fahrer", "Fahrzeuge", "Strecken" und "Meisterschaften".
+Die ersten drei Ordner beinhalten alle gespeicherten, gleichnamigen Objekte (bspw. Fahrer XYZ im Ordner Fahrer). Alle gespeicherten Parameter des Objekts sind dabei als Array in der DAT-Datei abgespeichert. Der Name der Datei ohne Dateiendung entspricht dabei den Namen des Objekts.
 
-## Berechnungsmechanik (MebeAl1)
+Eine Ausnahme bildet der Ordner "Meisterschaften". In diesem Ordner sind alle Ergebnisse gespeichert, die Mebe V3 jemals berechnet hatte, ebenfalls als DAT-Datei. Damit war geplant, die Rennergebnisse zurückzuverfolgen und nachvollziehbar zu machen, auch wenn die Berechnung selbst schon lang zurückliegt.
+Derzeit werden die Ergebnisse allerdings nicht weiterverwendet und nur abgespeichert. 
 
-## Anzeige
+Meisterschaftsgesamtergebnisse haben dabei folgende Namenskonvention: [Meisterschaftsname][Nummer des Durchlaufs]Meisterschaftsergebnisse.dat
+Einzelne Streckenergebnisse erkennt man so: [Meisterschaftsname][Nummer des Durchlaufs]Rennergebnisse[Name der Strecke].dat
+
+# Technische Betrachtung Erstellen
+
+# Technische Betrachtung Bearbeiten
+
+# Berechnungsmechanik (MebeAl1)
+
+# Anzeige
 (Programmstart, Prozess, Aufgaben und Aussehen)
 
-## Hilfsmodul Daten
+# Hilfsmodul Daten
 
-## Hilfsmodul Z-Hilfe-Leser (HiLe1)
+# Hilfsmodul Z-Hilfe-Leser (HiLe1)
