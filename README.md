@@ -238,7 +238,90 @@ Derzeit werden die Ergebnisse allerdings nicht weiterverwendet und nur abgespeic
 Meisterschaftsgesamtergebnisse haben dabei folgende Namenskonvention: [Meisterschaftsname][Nummer des Durchlaufs]Meisterschaftsergebnisse.dat
 Einzelne Streckenergebnisse erkennt man so: [Meisterschaftsname][Nummer des Durchlaufs]Rennergebnisse[Name der Strecke].dat
 
+## Modul Daten - Objekt- und Datenhandling
+Das Modul "Daten.py" ist eine ausgelagerte Konsolidierung von Methoden, die die Handhabung von Daten vereinfachen soll.
+Vorrangig ist das Modul dazu zuständig, dass die Daten gelesen und geschrieben werden können und dass Informationen über Objekte aus der Datenbank herausgeholt werden können.
+
+### lesen
+In einem Stream werden die binären Daten gelesen und direkt zurückgegeben.
+
+### schreiben
+Als Parameter wird der Pfad übergeben und die Daten, die dann als binäre Daten gespeichert werden.
+Es wird nicht automatisch die Dateiendung .dat angefügt.
+
+### listeMeisterschaftspfade
+Diese Methode gibt alle Pfade zurück, die auf eine Meisterschaft zeigen.
+
+Funktionsweise:
+Zuallererst werden alle Objekte im Datenbank-Ordner in eine Liste zwischengespeichert.
+Für jedes dieses Element wird dann eine Prüfung gemacht. Es handelt sich um eine Meisterschaftsdatei, wenn...
+- Wenn es nicht mit "Fahrer.dat" endet (Fahrerliste)
+- Wenn es nicht mit "Strecken.dat" endet (Rennkalender)
+- Wenn es auf ".dat" endet (andere Ordner)
+Alle Objekte des Ordners Datenbank, die durch den Filter gekommen sind, sind Meisterschaftsdateien. Diese werden mit dem Präfix "Datenbank/" erweitert, wodurch dann der vollständige relative Pfad fertig erstellt ist.
+
+Dieser wird dann in einer weiteren Liste zwischengespeichert. Ist die Liste vollständig, dann wird sie wieder zurück ans aufrufende Modul übergeben.
+
+### listeMeisterschaftsnamen
+Diese Methode liefert alle existierenden Meisterschaften als Liste.
+
+Funktionsweise:
+Sie nutzt listeMeisterschaftspfade, um die Meisterschaften herauszunehmen. In einer weiteren Schleife wird jedem Element der Präfix und die Dateiendung entfernt, sodass nur noch der reine Meisterschaftsname übrig bleibt.
+
+### listePfade
+Diese Methode dient dazu, eine Liste mit Pfaden von existierenden Objekten (Fahrer, Strecken oder Fahrzeuge) zu erstellen.
+Meisterschaften müssen anders wiedergegeben werden, deshalb müssen existierende Meisterschaften anders ermittelt werden.
+
+Als Übergabeparameter wird der Objekttyp erfordert. Erlaubt sind dabei "Strecken", "Fahrer" und "Fahrzeuge", was den Ordnernamen im Ordner "Datenbank" entspricht.
+
+Funktionsweise:
+Zuallererst wird der Pfad ermittelt, aus dem die Objekte herausgelesen werden sollen. Dazu wird der übergebene Parameter mit dem Präfix "Datenbank" kombiniert, sodass der korrekte relative Pfad zwischengespeichert werden kann.
+
+Innerhalb dieses Pfades werden dann alle Objekte in einer Liste gespeichert.
+Für jedes Objekt dieser Liste wird dann der gesamte korrekte relative Pfad zusammengebaut, indem der Ordnerpfad von eben mit einem "/" versehen wird und dann der Name der Datei ergänzt wird.
+
+Zurückgegeben wird die Liste mit allen relativen Pfaden der angefragten Objekte.
+
+### listeNamen
+Diese Methode dient dazu, eine Liste von existierenden Objekten (Fahrer, Strecken oder Fahrzeuge) zu erstellen.
+Meisterschaften müssen anders wiedergegeben werden, deshalb müssen existierende Meisterschaften anders ermittelt werden.
+
+Als Übergabeparameter wird der Objekttyp erfordert. Erlaubt sind dabei "Strecken", "Fahrer" und "Fahrzeuge", was den Ordnernamen im Ordner "Datenbank" entspricht.
+
+Funktionsweise:
+Zuallererst wird der Pfad ermittelt, aus dem die Objekte herausgelesen werden sollen. Dazu wird der übergebene Parameter mit dem Präfix "Datenbank" kombiniert, sodass der korrekte relative Pfad zwischengespeichert werden kann.
+
+Innerhalb dieses Pfades werden dann alle Objekte in einer Liste gespeichert.
+Für jedes Objekt dieser Liste wird dann die Dateiendung entfernt, sodass nur noch der Name des Objekts über bleibt.
+
+Zurückgegeben wird die Liste mit allen Namen der angefragten Objekte.
+
 # Technische Betrachtung Erstellen
+Ein Erstellungsprozess ist zwingend notwendig, um Daten berechnen zu können. Dieser ist allerdings auch sehr komplex.
+
+In diesem Kapitel soll chronologisch aufgeführt werden, welchen Ablauf das Modul durchläuft.
+
+## 1. Erstellen()
+
+Vom Hauptmenü aus, wenn man "Erstellen" auswählt, wird diese Methode ausgeführt.
+
+Es müssen zwei Variablen gesetzt werden:
+- Die Variable "varweiter" muss initialisiert werden: 0. Das sagt aus, dass der Prozess beginnt.
+- Die Variable "bearbeitungsmodus" mit dem Wert 0 zeigt an, dass sich das Programm aktuell eine Meisterschaft erstellt und nicht bearbeitet.
+
+Im nächsten Schritt wird ein Objekt "Meisterschaft" initialisiert.
+Das Objekt hilft, die Daten zu händeln.
+
+Nachdem der Bildtitel gesetzt wurde, wird weiter() ausgeführt.
+
+## 1. MeisterschaftBearbeiten
+
+Meisterschaften können aber auch bearbeitet werden. In diesem Fall unterscheidet sich die Methode von erstellen() nur sofern, dass neben der Objektinstanziierung das Objekt noch geladen wird.
+Außerdem werden die Variablen "bearbeitungsmodus" und "varweiter" auf 1 gesetzt, um zu kennzeichnen, dass es ein Berbeitungsprozess ist.
+Was varweiter macht, ist im nächsten Kapitel ersichtlich.
+
+## 2. weiter()
+
 
 # Technische Betrachtung Bearbeiten
 
