@@ -1,9 +1,9 @@
 # MEBE V3.0.0
 
 # Vorwort und Historie
-Mebe ist ein Motorsport-Meisterschaftsberechnungsprogramm. Ein Tool, um fiktive Motorsportmeisterschaften ausgeben zu lassen.  
+Mebe ist ein Motorsport-Meisterschaftsberechnungsprogramm. Ein Tool, um Ergebnisse von fiktiven Motorsportmeisterschaften ausgeben zu lassen.  
 Es ist komplett in Python 3 entwickelt worden.  
-Mebe V1 ist der Vorläufer und ist als Konsolenedition voll funktionsfähig. Aufgrund der umständlichen und fehleranfälligen Bedienung in der Konsole, wurde Mebe V2 entwickelt, welches den Vorgänger ablöste und grundsätzlich denselben Funktionsumfang aufwies, wie die erste Version. Version 2 ergänzte dabei die Möglichkeit, Objekte zu bearbeiten.  
+Mebe V1 ist der Vorläufer und ist als Konsolenedition voll funktionsfähig. Aufgrund der umständlichen und fehleranfälligen Bedienung in der Konsole wurde Mebe V2 entwickelt, welches den Vorgänger ablöste und grundsätzlich denselben Funktionsumfang aufwies, wie die erste Version. Version 2 ergänzte dabei die Möglichkeit, Objekte zu bearbeiten.  
 Aufgrund mehrerer Probleme bei Zugriffen und Speicherungen wurde die Plattform neu konzipiert und Mebe V3 entwickelt. Viele Funktionen wurden aus Mebe V2.0.0 (Stand 05.01.2026 - https://github.com/RaiusTalbor/Mebe-V2.0.0) aber übernommen.  
 Alle Versionen, V1, V2 und V3, sind aber zueinander kompatibel. Die Datenbank, Rechenergebnisse und andere gespeicherte Daten können ohne Anpassung übernommen und migriert werden. Auch die Pfade mussten nicht angepasst werden.
 
@@ -296,7 +296,7 @@ Für jedes Objekt dieser Liste wird dann die Dateiendung entfernt, sodass nur no
 
 Zurückgegeben wird die Liste mit allen Namen der angefragten Objekte.
 
-# Technische Betrachtung Erstellen
+# Technische Betrachtung Erstellen.py
 Ein Erstellungsprozess ist zwingend notwendig, um Daten berechnen zu können. Dieser ist allerdings auch sehr komplex.
 
 In diesem Kapitel soll chronologisch aufgeführt werden, welchen Ablauf das Modul durchläuft.
@@ -430,6 +430,10 @@ Da Fahrer aber eindeutig ist und entweder rechts oder links vorkommen kann, müs
 Anschließend werden die Radiobuttons wieder neu gesetzt, wie sie in den anderen Methoden erstellt worden sind.
 
 Ganz zum Schluss wird tkinter geupdatet.
+
+# Technische Betrachtung ErstelleFahrer.py 
+# Technische Betrachtung ErstelleFahrzeug.py 
+# Technische Betrachtung ErstelleStrecke.py
 
 # Technische Betrachtung Bearbeiten
 
