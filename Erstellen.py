@@ -76,10 +76,8 @@ def weiter():
         #time.sleep(2)
         #prozess.löscheInfo()
 
-#einem speziellen Erstellen-Code wird immer ein Wert übergeben: ein entsprechender Pfad oder "leer". Bei leer wird etwas neues erstellt, mit Pfad wird dieser geladen und die Werte von dem Ding gespeichert
-
 def sammeln():
-    #sammelt bei vaweiter die Eingaben ein und speichert die zwischen
+    #sammelt bei varweiter die Eingaben ein und speichert die zwischen
 
     global entryJahrMeisterschaft, entryNameMeisterschaft, rennkalenderListe, fahrerliste, bearbeitungsmodus, varweiter
 
@@ -194,7 +192,7 @@ def aktualisiereFenster():
         liste = Daten.listeNamen("Fahrer")
         listeRechts = fahrerliste
         
-        #entfernt alle Inhalte, die rechts schon vorkommen
+        #entfernt alle Inhalte aus liste (links), die rechts schon vorkommen
         for i in fahrerliste:
             liste.remove(i)
 

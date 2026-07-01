@@ -394,7 +394,9 @@ Anschließend wird über Daten.py die jeweilige Liste geladen, die benötigt wir
 Danach wird im linken Fenster in einer For-Schleife für jedes Element ein Radiobutton erstellt. Als Text bekommt es den Namen des Elements, als Wert ebenso.
 Anschließend wird das allererste Element ausgewählt.
 
-Wenn die Fahrerliste bzw. Rennkalenderliste nicht leer ist, so wird der Vorgang für das rechte Fenster wiederholt, allerdings mit den Elementen aus der Fahrer- bzw. Rennkalenderliste und als Wert nur die Indexnummer in der Liste. So kann eindeutig sichergestellt werden, dass der richtige Wert gewählt wird, da Strecken auch doppelt vorkommen können. Bei der Auswahlseite (links) ist es nicht notwendig, da jedes Element eindeutig sein muss.
+Wenn die Fahrerliste bzw. Rennkalenderliste nicht leer ist, so wird der Vorgang für das rechte Fenster wiederholt, allerdings mit den Elementen aus der Fahrer- bzw. Rennkalenderliste und als Wert nur die Indexnummer (Int, kein String) in der Liste. So kann eindeutig sichergestellt werden, dass der richtige Wert gewählt wird, da Strecken auch doppelt vorkommen können. Bei der Auswahlseite (links) ist es nicht notwendig, da jedes Element eindeutig sein muss.
+
+Über die rennkalenderliste und die fahrerliste können andere Meisterschaften bearbeitet werden. Diese Listen ermöglichen es auch, während des Erstellen-Prozesses zum vorigen Fenster zurückzukehren oder den Frame neu zu laden (aktualisiereFenster oder bei Checkpoints), ohne dass die Werte verloren gehen.
 
 Anders als in rennkalendereinfügen() muss in fahrereinfügen() abschließend aktualisiereFenster() ausgeführt werden, weil sonst falsche Radiobuttons angezeigt werden. Der Grund ist aber ungeklärt.
 
@@ -422,9 +424,12 @@ Zuerst werden sowohl die linke als auch die rechte Anzeige zurückgesetzt (Forge
 
 Danach wird über varweiter herausgefunden, ob die Rennkalender- oder Fahrerliste bearbeitet werden soll.
 
-Über listeNamen aus Daten.py wird die entsprechende Liste aller existierenden Elemente neu gesetzt. 
+Über listeNamen aus Daten.py wird die entsprechende Liste aller existierenden Elemente neu gesetzt. Auch die rechte Liste wird wieder neu gesetzt.
+Da Fahrer aber eindeutig ist und entweder rechts oder links vorkommen kann, müssen noch alle Elemente auf der linken Seite entfernt werden, die schon rechts sind.
 
-eihfb eslkufh  kesjhb fleshjb flkjesbs lkfjb lsk jh<fen lkjn ljkn s<lefjk<lö jkn n esmf . f  fe>>>
+Anschließend werden die Radiobuttons wieder neu gesetzt, wie sie in den anderen Methoden erstellt worden sind.
+
+Ganz zum Schluss wird tkinter geupdatet.
 
 # Technische Betrachtung Bearbeiten
 
