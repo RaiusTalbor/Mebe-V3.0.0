@@ -320,8 +320,111 @@ Meisterschaften können aber auch bearbeitet werden. In diesem Fall unterscheide
 Außerdem werden die Variablen "bearbeitungsmodus" und "varweiter" auf 1 gesetzt, um zu kennzeichnen, dass es ein Berbeitungsprozess ist.
 Was varweiter macht, ist im nächsten Kapitel ersichtlich.
 
-## 2. weiter()
+## 2. sammeln() in weiter()
 
+Als allererstes in weiter() wird sammeln() ausgeführt. sammeln() dient dazu, die eingegebenen Informationen aufzugreifen und zwischenzuspeichern, sodass sie weiter genutzt werden können.
+
+Vor jeder Aktion wird die aktuelle Statusmeldung gelöscht, da es sein kann, dass Infomeldungen erscheinen - die dann nicht weg gehen.
+
+Je nachdem, welchen Wert varweiter hat, werden andere Informationen abgerufen.
+
+### Keine Aktion: varweiter == 0
+Wenn die Meisterschaft erstellt wird, so gibt es im allerersten Durchlauf keine Benutzerinteraktion, weshalb der Fall varweiter == 0 nicht näher definiert ist und keine Aktion ausführt.
+
+### Meisterschaftsdaten sammeln: varweiter == 1
+Es wird direkt geprüft, ob der Bearbeitungsmodus (1) an ist. Wenn nicht (0), dann wird eine Meisterschaft erstellt. Wenn nicht, dann werden die meisten Aktionen übersprungen und dem Objekt Meisterschaft, was im ersten Schritt erstellt worden ist, die Werte zugeordnet, die in der Datei gespeichert sind.
+
+Wird eine Meisterschaft erstellt, sind noch weitere Schritte notwendig.
+1. Es wird der Name aus dem Eingabefeld herausgenommen. Daraufhin wird er mit dem Jahr, welches ebenso eingegeben werden soll, kombiniert. Daraufhin wird dem Objekt Meisterschaft der Wert zugeordnet und es erstellt seine Pfade.
+2. Anschließend wird geprüft, ob der Name der Meisterschaft leer ist. Wenn ja, wird eine Infomeldung gesendet, varweiter auf 0 gesetzt, damit das ganze Modul wieder von vorne beginnt und dann wird return ausgeführt, damit die Methode an der Stelle abbricht.
+3. Sollte die erste Prüfung erfolgreich im Sinne des Fortschritts sein, dann wird die Liste aller existierenden Meisterschaften gelesen. Befindet sich der eingegebene Name bereits in der Liste der existierenden Meisterschaften, so wird auch hier eine Meldung gesendet und der Prozess abgebrochen. Andernfalls könnte es sein, dass die bestehende Meisterschaft überschrieben wird.
+4. Erst, wenn die Überprüfung des Namens erfolgreich wird, werden zwei Arrays initialisiert, die die Fahrerliste und den Rennkalender lokal zwischenspeichern. Sie sind an der Stelle, um weitere globale Variablen zu vermeiden. An dieser Stelle geht das Programm aber mitunter als Erstes durch.
+
+### Strecken hinzufügen: varweiter == 2
+Zuallererst wird die Zwei-Fenster-Anzeige beendet. Durch die Funktionsweise der anderen Module muss es an der Stelle erfolgen, da sonst eine unsaubere Anzeige erscheint.
+Als Nächstes wird der Rennkalender der Meisterschaft zugewiesen.
+
+### Fahrer hinzufügen: varweiter == 3
+Zuallererst wird die Zwei-Fenster-Anzeige beendet. Durch die Funktionsweise der anderen Module muss es an der Stelle erfolgen, da sonst eine unsaubere Anzeige erscheint.
+Als Letztes wird die Fahrerliste der Meisterschaft zugewiesen.
+
+### varweiter > 3 || varweiter < 0
+Diese Fälle werden abgefangen und es passiert nichts, weil es nicht definiert ist.
+
+## weiter()
+Nach sammeln() springt das Programm zurück in weiter().
+Weiter wird auch dann aufgerufen, wenn der Button "Weiter" bzw. "Meisterschaft erstellen" aufgerufen wird.
+
+Dabei wird der Frameinhalt geleert und die Buttons zurückgesetzt, bevor es wieder befüllt wird.
+Danach wird varweiter um eins erhöht - bevor etwas anderes passiert ist. So ist es einfacher, die verschiedenen Programmzustände nachzuvollziehen.
+
+Als nächstes wird der Weiter-Knopf noch angepasst. Ist varweiter ungleich drei, so wird der Knopf "Weiter" genannt, ansonsten "Meisterschaft erstellen".
+Das soll für weniger Verwirrung im letzten Bildschirm sorgen.
+
+Erst jetzt wird unterschieden, im welchen Zustand sich das Programm jetzt befinden soll. Nach diesem Aufruf ist weiter() beendet.
+
+### Meisterschaftsnamen definieren: varweiter == 1
+Der Meisterschaftsname wird festgelegt.
+Es wird meisterschaftdefinieren() aufgerufen.
+
+### Rennkalender einfügen: varweiter == 2
+Der Rennkalender wird bearbeitet.
+Es wird rennkalendereinfügen() aufgerufen.
+
+### Fahrerliste einfügen: varweiter == 3
+Die Fahrerliste wird bearbeitet.
+Es wird fahrereinfügen() aufgerufen.
+
+### varweiter == 4
+Nachdem im letzten Bildschirm auf "Meisterschaft erstellen" geklickt wurde (der Weiter-Knopf wurde in diesem Bildschirm modifiziert!), dann wird das Hauptmenü aufgerufen und das Objekt Meisterschaft, welches über den gesamten Prozess hinweg existierte, gespeichert.
+
+## meisterschaftdefinieren()
+meisterschaftdefinieren() wird in weiter() aufgerufen.
+Das Fenster wird mit einem Label, darunter einem Eingabefenster, noch einem Label und noch einem Fenster ausgemschmückt.
+Im zweiten Eingabefenster, wo das Jahr eingegeben werden soll, wird das aktuelle Jahr ermittelt und als Standardwert dort eingetragen.
+Danach ist diese Methode vorbei und das Programm wartet auf eine Aktion des Nutzenden.
+
+## rennkalendereinfügen() und fahrereinfügen()
+Beide Methoden sind sich fast identisch.
+
+Zuerst wird der Anzeigemodus umgestellt, auf die Zwei-Fenster-Anzeige. Danach werden alle nötigen Buttons eingefügt, einer der ein neues Element erstellen kann, einer, der ein Element auswählt und einer, der ein Element entfernen kann.
+
+Anschließend wird über Daten.py die jeweilige Liste geladen, die benötigt wird. Entweder die Liste aller existierenden Fahrer oder die Liste aller existierenden Strecken.
+
+Danach wird im linken Fenster in einer For-Schleife für jedes Element ein Radiobutton erstellt. Als Text bekommt es den Namen des Elements, als Wert ebenso.
+Anschließend wird das allererste Element ausgewählt.
+
+Wenn die Fahrerliste bzw. Rennkalenderliste nicht leer ist, so wird der Vorgang für das rechte Fenster wiederholt, allerdings mit den Elementen aus der Fahrer- bzw. Rennkalenderliste und als Wert nur die Indexnummer in der Liste. So kann eindeutig sichergestellt werden, dass der richtige Wert gewählt wird, da Strecken auch doppelt vorkommen können. Bei der Auswahlseite (links) ist es nicht notwendig, da jedes Element eindeutig sein muss.
+
+Anders als in rennkalendereinfügen() muss in fahrereinfügen() abschließend aktualisiereFenster() ausgeführt werden, weil sonst falsche Radiobuttons angezeigt werden. Der Grund ist aber ungeklärt.
+
+Je nachdem, welcher Button gedrückt wird, geht das Programm weiter
+
+## erstelleElement()
+Wird der Knopf "Fahrer erstellen" oder "Strecke erstellen" gedrückt, so wird die Funktion erstelleElement() aufgerufen. Je nach Wert von varweiter kann die Methode herausfinden, ob gerade ein Fahrer oder eine Strecke erstellt werden muss. Entsprechendes Modul wird anschließend aufgerufen. Wenn dieses Modul beendet wird, wird aktualisiereFenster() aufgerufen und erstelleElement terminiert.
+
+## auswählen()
+Wird der Knopf "auswählen" gedrückt, wird diese Funktion ausgeführt. Auch diese Methode kann über varweiter herausfinden, ob die Rennkalenderliste oder die Fahrerliste bearbeitet werden muss.
+Entsprechend wird append() auf die jeweilige Liste ausgeführt und der Wert des gewählten Radiobuttons auf der linken Seite (Auswahl) zur Liste hinzugefügt.
+
+Abschließend wird aktualisiereFenster() aufgerufen. 
+
+## entfernen()
+Wird der Knopf "Entfernen" gedrückt, wird diese Funktion ausgeführt. Auch diese Methode kann über varweiter herausfinden, ob die Rennkalenderliste oder die Fahrerliste bearbeitet werden muss.
+Entsprechend wird pop() auf die jeweilige Liste ausgeführt und der Wert (der Index!) des gewählten Radiobuttons auf der rechten Seite (für Meisterschaft ausgewählt) von der Liste entfernt. Durch den Index ist nun jedes Element eindeutig.
+
+Abschließend wird aktualisiereFenster() aufgerufen. 
+
+## aktualisiereFenster()
+Diese Methode hilft im Zwei-Fenster-Modus beide Listen zu aktualisieren, um die Radiobuttons mit den neuen bzw. gelöschten Elementen zu ergänzen.
+
+Zuerst werden sowohl die linke als auch die rechte Anzeige zurückgesetzt (Forget).
+
+Danach wird über varweiter herausgefunden, ob die Rennkalender- oder Fahrerliste bearbeitet werden soll.
+
+Über listeNamen aus Daten.py wird die entsprechende Liste aller existierenden Elemente neu gesetzt. 
+
+eihfb eslkufh  kesjhb fleshjb flkjesbs lkfjb lsk jh<fen lkjn ljkn s<lefjk<lö jkn n esmf . f  fe>>>
 
 # Technische Betrachtung Bearbeiten
 

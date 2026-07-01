@@ -55,12 +55,13 @@ def weiter():
 
     prozess.hinzufügenButton("Abbrechen", prozess.hauptmenü) #geändert, um weniger verwirrend
 
-    if varweiter != 2:
+    varweiter += 1 #vorher erhöht, um überall gleiche Zahlen stehen zu haben (läuft ja durch)
+
+    #jetzt werden Köpfe noch angepasst
+    if varweiter != 3:
         prozess.hinzufügenButton("Weiter", weiter)
     else:
         prozess.hinzufügenButton("Meisterschaft erstellen", weiter)
-
-    varweiter += 1 #vorher erhöht, um überall gleiche Zahlen stehen zu haben (läuft ja durch)
 
     if varweiter == 1: #Meisterschaft
         meisterschaftdefinieren()
@@ -101,7 +102,7 @@ def sammeln():
                 varweiter = 0 #da sonst in Sammeln weiterspringt
                 return
             
-            #prüft, ob Fahrer schon existiert, aber nur bei erstellen
+            #prüft, ob Meisterschaft schon existiert, aber nur bei erstellen
             liste = Daten.listeMeisterschaftsnamen()
             if meisterschaft.name in liste:
                 prozess.setInfo("Die Meisterschaft existiert bereits! Bitte gib einen anderen Namen oder ein anderes Jahr ein.")
