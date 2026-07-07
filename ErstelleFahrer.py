@@ -75,7 +75,7 @@ def speichern():
     
     #prüft, ob Fahrer schon existiert, aber nur bei erstellen
     liste = Daten.listeNamen("Fahrer")
-    if erstellen == 0 and fahrer.name in liste:
+    if namekontrolle == 0 and fahrer.name in liste:
         prozess.setInfo("Der/Die Fahrer/-in existiert bereits. Die Werte werden beim Speichern überschrieben!")
         namekontrolle = 1 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 

@@ -34,11 +34,11 @@ def speichern():
     
     #prüft, ob Fahrzeug schon existiert
     liste = Daten.listeNamen("Fahrzeuge")
-    if erstellen == 0 and fahrzeug.name in liste:
+    if namekontrolle == 0 and fahrzeug.name in liste:
         prozess.setInfo("Das Fahrzeug existiert bereits. Die Werte werden beim Speichern überschrieben!")
         namekontrolle = 1 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 
-    #Fahrer speichern
+    #Fahrzeug speichern
 
     fahrzeug.speichern()
 

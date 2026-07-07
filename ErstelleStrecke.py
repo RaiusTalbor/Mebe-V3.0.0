@@ -39,7 +39,7 @@ def speichern():
     
     #prüft, ob Strecke schon existiert
     liste = Daten.listeNamen("Strecken")
-    if erstellen == 0 and strecke.name in liste:
+    if namekontrolle == 0 and strecke.name in liste:
         prozess.setInfo("Die Strecke existiert bereits. Die Werte werden beim Speichern überschrieben!")
         namekontrolle = 1 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 

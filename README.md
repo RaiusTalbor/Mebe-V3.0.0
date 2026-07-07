@@ -431,9 +431,47 @@ Anschließend werden die Radiobuttons wieder neu gesetzt, wie sie in den anderen
 
 Ganz zum Schluss wird tkinter geupdatet.
 
-# Technische Betrachtung ErstelleFahrer.py 
-# Technische Betrachtung ErstelleFahrzeug.py 
-# Technische Betrachtung ErstelleStrecke.py
+# Weitere Erstell-Module
+Der Erstell-Prozess ist recht komplex. Um ihn ein bisschen aufzuteilen, wurde für jedes Objekt ein Modul gebaut, um die Erstellung zu vereinfachen.
+Sie sind sich auch sehr ähnlich, weshalb in den spezifischen Abschnitten nur auf die unterscheidenden Merkmale eingegangen wird. Sie bestehen alle aus mind. zwei Modulen: speichern() und erstellen(name).
+
+### speichern()
+Wie der Name schon sagt, ist diese Methode dazu da, das entsprechende Objekt zu speichern. Dem vorangegangen werden Prüfungen gemacht, ob die Erstellung vollständig erfolgt ist bzw. ob das Objekt schon existiert. Mit der Objektmethode .speichern() im Objekt werden alle Angaben gespeichert, bevor angewiesen wird, den Erstell-Prozess zu beenden.
+Da Erstellen-Module als Checkpoint aufgerufen werden, muss dieser nun zerstört und der alte wiederhergestellt werden (mehr zur Mechanik später mehr).
+Da Erstellen-Module auch dazu gebaut sind, Objekte zu bearbeiten, muss zum Abschluss auch geprüft werden, ob bearbeitet oder erstellt wurde. Denn wenn ein Objekt erstellt wurde, muss das Fenster noch einmal aktualisiert werden (s. aktualisiereFenster).
+
+### erstellen(name)
+Zuerst muss ein neuer Checkpoint (s. da) erstellt werden, damit der Erstell-Prozess richtig angezeigt werden kann.
+Hier werden jetzt sämtliche grafischen Elemente definiert, die angezeigt werden sollen, um das Objekt zu bearbeiten. Ausgelesen werden die Werte dann speichern().
+
+### Bearbeitung
+Auch der Bearbeitungsprozess wird hier abgehandelt. Dazu wird der Methode erstellen() ein Parameter übergeben.
+Da das Modul nur eine bestimmte Art von Objekt bearbeiten (Fahrzeug, Fahrer, Strecke) kann, kann alleine anhand des Namens das Objekt geladen werden und in das temporäre Objekt geladen werden. In die grafischen Elemente werden dann die gespeicherten Werte als Startwerte festgelegt.
+Im weiteren Verlauf wird das Objekt behandelt, als wäre es ein neues Objekt, mit dem Unterschied, dass der Name nicht bearbeitet werden kann.
+Wenn das Objekt gespeichert, wird das alte Objekt vom neuen Objekt überschrieben.
+Anhand des fehlenden Eingabefelds wird auch erkannt, ob es sich um ein Erstellen- oder Bearbeitungs-Prozess handelt. Dies ist lediglich für den Ausgang aus dem Modul und die Zurückführung zum aufrufenden Modul wichtig.
+
+### Kontrollen
+Es gibt einen Wert, der geprüft wird, um die Erstellung erfolgreich abzuschließen. Ist der Wert im Eingabefeld leer (also kein Name eingegeben), so wird nicht gespeichert.
+Des Weiteren wird geprüft, ob das Objekt schon existiert. Dafür wird aus Daten.py die Liste gezogen, welche Objekte dieser Art überhaupt existieren. Kommt der Name in dieser Liste vor, dann wird eine Warnung ausgegeben und die Variable "namekontrolle" auf 1 gesetzt. Wird wieder das Objekt gespeichert, so erscheint die Warnung nicht (weil namekontrolle auf 0 steht) und das existierende Objekt wird überschrieben, wenn die Namen immer noch gleich sind.
+
+Alle weiteren Kontrollen werden so gelöst, indem alle Widgets, wo Daten erwartet werden, ausgelesen und in das temporäre Objekt geladen werden.
+Auf diese Attribute wird geprüft, ob sie bspw. leer sind oder andere ungültige Werte enthalten. Ist dies der Fall, so wird eine Info gesetzt und der Speichern-Prozess abgebrochen.
+
+## Technische Betrachtung ErstelleFahrzeug.py 
+ErstelleFahrzeug unterscheidet sich nur unwesentlich vom Blueprint.
+Der einzige Unterschied befindet sich in der Übergabe und der Wiederherstellung des Checkpoints. Da ErstelleFahrzeuge aus der Fahrzeugauswahl aufgerufen wird, aber wieder zurück an ErstelleFahrer übergeben werden muss, muss der Checkpoint zwei Mal wiederhergestellt werden, da sonst die Widgets des Fahrers in den zu löschenden Frame gesetzt werden.
+Anschließend muss ErstelleFahrer.FahrzeugAuswählen() erneut aufgerufen werden, damit die Fahrzeugauswahl neu geladen werden kann und das neu erstellte Fahrzeug erscheint.
+
+### Voraussetzungen zum Speichern
+- Name muss angegeben werden
+
+### Namenskontrolle
+
+
+## Technische Betrachtung ErstelleFahrer.py 
+
+## Technische Betrachtung ErstelleStrecke.py
 
 # Technische Betrachtung Bearbeiten
 
@@ -441,7 +479,5 @@ Ganz zum Schluss wird tkinter geupdatet.
 
 # Anzeige
 (Programmstart, Prozess, Aufgaben und Aussehen)
-
-# Hilfsmodul Daten
 
 # Hilfsmodul Z-Hilfe-Leser (HiLe1)
