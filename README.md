@@ -1,23 +1,23 @@
 # MEBE V3.0.0
 
-# Vorwort und Historie
+# 1. Vorwort und Historie
 Mebe ist ein Motorsport-Meisterschaftsberechnungsprogramm. Ein Tool, um Ergebnisse von fiktiven Motorsportmeisterschaften ausgeben zu lassen.  
 Es ist komplett in Python 3 entwickelt worden.  
 Mebe V1 ist der Vorläufer und ist als Konsolenedition voll funktionsfähig. Aufgrund der umständlichen und fehleranfälligen Bedienung in der Konsole wurde Mebe V2 entwickelt, welches den Vorgänger ablöste und grundsätzlich denselben Funktionsumfang aufwies, wie die erste Version. Version 2 ergänzte dabei die Möglichkeit, Objekte zu bearbeiten.  
 Aufgrund mehrerer Probleme bei Zugriffen und Speicherungen wurde die Plattform neu konzipiert und Mebe V3 entwickelt. Viele Funktionen wurden aus Mebe V2.0.0 (Stand 05.01.2026 - https://github.com/RaiusTalbor/Mebe-V2.0.0) aber übernommen.  
 Alle Versionen, V1, V2 und V3, sind aber zueinander kompatibel. Die Datenbank, Rechenergebnisse und andere gespeicherte Daten können ohne Anpassung übernommen und migriert werden. Auch die Pfade mussten nicht angepasst werden.
 
-# Grundfunktionen
+# 2. Grundfunktionen
 Mebe kann Meisterschaften erstellen. Zu diesen Meisterschaften können Strecken und Fahrer hinzugefügt werden, die an dieser Meisterschaft teilnehmen.  
 Wird eine Meisterschaft berechnet, so wird jedes einzelne Rennergebnis ermittelt. Dabei werden die Parameter jedes einzelnen Objekts gegeneinander nach bestimmten Kriterien aufgewogen und eine Rangfolge ermittelt. Zufallswerte ermöglichen eine unvorhersehbare Berechnung des Ergebnisses.  
 Man kann eine Meisterschaft beliebig oft berechnen lassen.  
 Eine Meisterschaft (nicht die Ergebnisse) oder auch jedes einzelne Objekt kann auch nachträglich bearbeitet werden. So ist es möglich, die Parameter über einen längeren Zeitraum anzupassen.
 
-# Bedienung
-## Hauptmenü
+# 3. Bedienung
+## 3.1 Hauptmenü
 Im Hauptmenü hat man Zugang zu sämtlichen Grundfunktionen des Programms: Erstellen, Bearbeiten und Berechnen. Außerdem kann man hier die Dokumentation aufrufen.
 
-## Erstellen
+## 3.2 Erstellen
 Klickt man auf Erstellen, so kann man eine Meisterschaft erstellen.
 
 Man kann keine Objekte einzeln erstellen, da es gedacht ist, sie in einen Meisterschaftskontext zu bringen. Um einzelne Objekte hinzuzufügen, muss also entweder eine Meisterschaft erstellt oder bearbeitet werden.
@@ -38,24 +38,24 @@ Die Erstellung des Fahrzeugs ist relativ übersichtlich und verhält sich analog
 Hat man die gewünschten Strecken, Fahrer und Fahrzeuge hinzugefügt, dann kann man die Meisterschaft speichern und sie wird in der Datenbank abgelegt.  
 Möchte man zwischendurch den Prozess abbrechen, so gelangt man über den Button "Abbrechen" jederzeit ins Hauptmenü.
 
-## Bearbeiten
+## 3.3 Bearbeiten
 Bearbeiten ist sehr ähnlich dem Erstellungsprozess.  
 Im Zwischenmenü kann man zunächst auswählen, welche Art von Objekt man bearbeiten möchte. Entscheidet man sich für eine Art, wird man in ein weiteres Untermenü weitergeleitet, bei dem man entscheiden kann, welches konkrete Objekt man bearbeiten. Möchte. Auch hier erfolgt die Auswahl über Radiobuttons und dem Knopf "Auswählen".  
 Nach der Auswahl sieht man dieselbe Oberfläche, wie man sie aus der "Erstellen"-Ansicht kennt, mit dem Unterschied, dass der Name nicht mehr editierbar ist. Dieser bleibt unveränderlich.
 
-## Berechnen
+## 3.4 Berechnen
 Als Hauptaufgabe besitzt Mebe, Meisterschaften zu berechnen. Dies kann man über den dritten Menüpunkt "Berechnen" tun.  
 Im Untermenü kann man sich dann noch für eine Meisterschaft entscheiden, mit "Meisterschaft auswählen" wird die Berechnung gestartet. Die Ausgabe erfolgt am unteren Rand des Bildschirms. Eine Berechnung kann dabei beliebig oft gestartet werden.  
 Die Rennergebnisse werden als DAT-Datei gespeichert, werden aber derzeit noch nicht weiterverarbeitet oder sind zugänglich.  
 Den Kern bildet der Berechnungsalgorithmus aus Mebe V1 (MebeAl1). Angepasst wurden entsprechende Ausgaben, Anzeigen und Zugriffe, die Logik aber ist unverändert. Dementsprechend ist auch die gesamte Datenbank, gespeicherte Daten und Ergebnisse mit Mebe V1 und Mebe V2 rückwärts als auch vorwärts kompatibel.
 
-## Hilfe
+## 3.5 Hilfe
 Über den Hilfe-Button im Hauptmenü gelangt man zu dieser Dokumentation, welche sich im Standard-PDF-Viewer öffnet.
 
-## Beenden
+## 3.6 Beenden
 Mit diesen Button wird das Programm sicher beendet. Dabei werden auch alle Daten aus dem temporären Ordner entfernt.
 
-# Bedeutung der Parameter der Objekte
+# 4 Bedeutung der Parameter der Objekte
 
 Für die Berechnung sind vier Objekte wichtig: Die Meisterschaft, Fahrer, Fahrzeuge und Strecken.
 Die Meisterschaft dient lediglich zur eindeutigen Identifizierung einer Zusammenstellung der übrigen drei Objekte.
@@ -66,7 +66,7 @@ Da jedes Objekt mit einer .dat-Datei repräsentiert wird, sind doppelte Namen au
 
 Für detailiertere Einblicke: siehe mehr in der Berechnungsmechanik.
 
-## Strecken
+## 4.1 Strecken
 Strecken sind diejenigen Objekte, an denen ein Ergebnis gebunden wird.
 Jedes Ergebnis wird pro Strecke erstellt. Ein Meisterschaftsergebnis besteht aus der Summe aller Streckenergebnisse.
 
@@ -77,7 +77,7 @@ Parameter:
 - Streckentyp: Eine Strecke kann kurvig (Streckentyp 1), schnell (Streckentyp 3) oder ausgeglichen (Streckentyp 2) sein. Je nach Eigenschaften des gefahrenen Fahrzeugs des Fahrers erhält dieser einen Vorteil oder Nachteil. Passt außerdem die Vorliebe des Fahrers zum Streckentyp, so verbessert sich das Ergebnis.
 - Schwierigkeit: Gibt an, wie anspruchsvoll eine Strecke im Vergleich zu den anderen (der Meisterschaft bspw.) ist. Dabei können Werte von 1 bis 10 angegeben werden, je höher die Zahl, desto schwieriger ist die Strecke. Die Schwierigkeit erhöht die Unfallwahrscheinlichkeit eines Fahrers in einem Rennen.
 
-## Fahrer
+## 4.2 Fahrer
 Fahrer sind diejenigen Objekte, die im Ergebnis gemessen werden. Ein Fahrer kann Platzierungen erhalten und entsprechend Ergebnisse gewinnen.
 
 Die Fahrerliste in einer Meisterschaft definiert dabei, welche Fahrer bei dieser Meisterschaft teilnehmen und Ergebnis erzielen können.
@@ -93,7 +93,7 @@ Parameter:
 - Fahrzeug: Jedem Fahrer wird exakt ein Fahrzeug zugeordnet. Dieses Fahrzeug hat ebenso Einfluss auf das Ergebnis. Fährt ein Fahrer bei mehreren Meisterschaften mit, so ist es ggf. notwendig, mehrere Fahrerprofile zu erstellen.
 - Fahrzeug wird gefahren seit: Gibt an, wie lang ein Fahrer bereits das Fahrzeug fährt und spiegelt die Erfahrung zur Funktion und Beherrschung des Fahrzeugs wider. Je länger ein Pilot ein Fahrzeug bereits gefahren ist, desto besser ist das Ergebnis.
 
-## Fahrzeug
+## 4.3 Fahrzeug
 Fahrzeuge sind diejenigen Objekte, mit deren Einfluss Fahrer Ergebnisse erzielen.
 
 Jedem Fahrer ist exakt einem Fahrzeug zugeordnet.
@@ -109,9 +109,9 @@ Ausgeglichene Fahrzeuge haben weder Vor- noch Nachteile.
 In der Regel sind Leistung und Wendigkeit gegensätzlich.
 Andererseits gibt es auch keine Mechanik, die dies überprüft.
 
-# Detaillierte Funktionsweise der Objekte
+# 5 Detaillierte Funktionsweise der Objekte
 
-## Meisterschaft
+## 5.1 Meisterschaft
 Eine Meisterschaft hat zwei Listen. Die Liste "Rennkalender", wo alle Strecken in der richtigen Reihenfolge gespeichert sind und die Liste "Fahrerliste", wo alle Fahrer gespeichert sind, die an dieser Meisterschaft teilnehmen.  
 Gespeichert wird eine Meisterschaft im Ordner Datenbank und beinhaltet zwei Werte, abgespeichert als Array. Als erster Wert ist der Dateiname zum Rennkalender und als zweiter Wert der Dateiname zur Fahrerliste gespeichert, denn beide Listen werden noch mal extra als Datei im Ordner Datenbank gespeichert.  
 Mit anderen Worten besteht eine Meisterschaft aus drei Dateien:  
@@ -121,110 +121,110 @@ Mit anderen Worten besteht eine Meisterschaft aus drei Dateien:
 
 Das Objekt "Meisterschaft" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen.  
 
-### ladenName und ladenPfad
+### 5.1.1 ladenName und ladenPfad
 Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
 
-### erstellen
+### 5.1.2 erstellen
 Das Objekt kann all seine eigenen Parameter festlegen, wenn es den eigenen Namen, den Rennkalender und die Fahrerliste übergeben bekommt. Dadurch werden sämtliche notwendigen Pfade gebaut, die das Objekt benötigt, um die Fahrerliste und den Rennkalender anschließend zu speichern.
 
-### getRennkalenderNamen
+### 5.1.3 getRennkalenderNamen
 Manchmal ist es notwendig, den Rennkalender zu laden und dabei nur die Streckennamen herauszufiltern. Diese Methode gibt sämtliche Strecken in der richtigen Reihenfolge zurück, aber nicht als Pfad, wie es abgespeichert ist, sondern nur den Streckennamen.
 
-### getFahrerNamen
+### 5.1.4 getFahrerNamen
 Analog wie bei Rennkalendern, nur für Fahrer.
 
-### setRennkalenderNamen
+### 5.1.5 setRennkalenderNamen
 Mit Angabe aller Fahrer kann das Objekt Meisterschaft sich den Rennkalender selbst so zusammenbauen, wie es für die Abspeicherung anschließend benötigt wird.
 
-### setfahrerlisteName
+### 5.1.6 setfahrerlisteName
 Analog wie bei Rennkalendern, nur für Fahrer.
 
-### setPfade
+### 5.1.7 setPfade
 Für eine erfolgreiche Speicherung hat die Meisterschaft die Pfade aller Dateien als Attribute. Da sich alle Dateinamen vom Namen der Meisterschaft ableiten lassen, wurde diese Methode implementiert, die genau das tut.
 
-### speichern
+### 5.1.8 speichern
 Speichert alle drei Dateien ab. Im Anschluss wird geprüft, ob die Meisterschaft gespeichert wurde und man kommt eine entsprechende Meldung zurück.
 
-### laden
+### 5.1.9 laden
 Lädt die Meisterschaft anhand seines Namens. Zuerst werden alle drei Pfade ermittelt und danach alle drei Dateien eingelesen, die dann als Attributwerte im Objekt gespeichert werden und zur Verfügung stehen.
 
-## Fahrer
+## 5.2 Fahrer
 Das Objekt "Fahrer" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
 
 Speicherwerte: gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug
 
-### ladenName und ladenPfad
+### 5.2.1 ladenName und ladenPfad
 Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
 
-### erstellen
+### 5.2.2 erstellen
 Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Fahrer instanziiert.
 Parameter: name, gebjahr, erstesrennen, aggressivität, geschicklichkeit, grundkönnen, vorliebe, durchschnittlicheplatzierung, fahrzeug, seitWannFahrzeug
 
-### setPfad
+### 5.2.3 setPfad
 Setzt seinen eigenen Pfad.
 Fahrer sind unter /Datenbank/Fahrer gespeichert.
 
-### setPfadFahrzeug
+### 5.2.4 setPfadFahrzeug
 Setzt den Pfad des Fahrzeugs (s. da).
 
-### speichern
+### 5.2.5 speichern
 Speichert das Objekt "Fahrer" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
 
-### laden
+### 5.2.6 laden
 Lädt einen Fahrer aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
 Es ist zwingend erforderlich, dass ein Fahrer bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
 
 
-## Strecke
+## 5.3 Strecke
 Das Objekt "Strecke" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
 
 Speicherwerte: rekordhalter, streckentyp, schwierigkeit
 
-### ladenName und ladenPfad
+### 5.3.1 ladenName und ladenPfad
 Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
 
-### erstellen
+### 5.3.2 erstellen
 Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Strecke instanziiert.
 Parameter: name, rekordhalter, streckentyp, schwierigkeit
 
-### setPfad
+### 5.3.2 setPfad
 Setzt seinen eigenen Pfad.
 Strecken sind unter /Datenbank/Strecken gespeichert.
 
-### setPfadRekordhalter
+### 5.3.3 setPfadRekordhalter
 Setzt den Pfad des Rekordhalters, ein Fahrer (s. da).
 
-### speichern
+### 5.3.4 speichern
 Speichert das Objekt "Strecke" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
 
-### laden
+### 5.3.5 laden
 Lädt eine Strecke aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
 Es ist zwingend erforderlich, dass eine Strecke bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
 
-## Fahrzeug
+## 5.4 Fahrzeug
 Das Objekt "Fahrzeug" wird dazu verwendet, um das Datenhandling um das Objekt möglichst einfach zu gestalten, was sich im Bezug auf die Erstellung bewährt hat. Entsprechend wurden auch verschiedene Methoden implementiert, um sämtliche Funktionen zu unterstützen. 
 
 Speicherwerte: leistung, wendigkeit
 
-### ladenName und ladenPfad
+### 5.4.1 ladenName und ladenPfad
 Wenn ein Objekt aufgefordert wird, gespeicherte Daten aus der Datenbank zu laden, so kann das Objekt dies mithilfe des Pfades oder mithilfe des übergebenen Namens tun. Mit der Angabe kann die Methode laden aufgerufen werden. 
 
-### erstellen
+### 5.4.2 erstellen
 Mit erstellen() und der Übergabe aller Parameter wird ein Objekt Fahrzeug instanziiert.
 Parameter: name, rekordhalter, leistung, wendigkeit
 
-### setPfad
+### 5.4.3 setPfad
 Setzt seinen eigenen Pfad.
 Fahrzeuge sind unter /Datenbank/Fahrzeuge gespeichert.
 
-### speichern
+### 5.4.4 speichern
 Speichert das Objekt "Fahrzeug" ab. Anschließend wird geprüft, ob die Speicherung erfolgreich war und gibt eine entsprechende Meldung zurück.
 
-### laden
+### 5.4.5 laden
 Lädt ein Fahrzeug aus einer Datei und überträgt die gespeicherten Daten ins Objekt.
 Es ist zwingend erforderlich, dass ein Fahrzeug bereits einen Namen hat. Dies ist zum Bearbeiten dieser Datei gedacht.
 
-# Datenspeicherung
+# 6. Datenspeicherung
 
 Mebe V3 speichert Daten permanent. Dafür werden Binär-Dateien mit der Dateiendung ".dat" im Ordner "Datenbanken" angelegt.
 Zwischengespeicherte Daten, die während der Berechnung benötigt werden, werden im Ordner "temporäre Dateien" gespeichert und nach Programmende, wenn das Programm sauber verlassen wird, gelöscht. Auch das sind binärer DAT-Dateien.
@@ -238,18 +238,18 @@ Derzeit werden die Ergebnisse allerdings nicht weiterverwendet und nur abgespeic
 Meisterschaftsgesamtergebnisse haben dabei folgende Namenskonvention: [Meisterschaftsname][Nummer des Durchlaufs]Meisterschaftsergebnisse.dat
 Einzelne Streckenergebnisse erkennt man so: [Meisterschaftsname][Nummer des Durchlaufs]Rennergebnisse[Name der Strecke].dat
 
-## Modul Daten - Objekt- und Datenhandling
+## 6.1 Modul Daten - Objekt- und Datenhandling
 Das Modul "Daten.py" ist eine ausgelagerte Konsolidierung von Methoden, die die Handhabung von Daten vereinfachen soll.
 Vorrangig ist das Modul dazu zuständig, dass die Daten gelesen und geschrieben werden können und dass Informationen über Objekte aus der Datenbank herausgeholt werden können.
 
-### lesen
+### 6.1.1 lesen
 In einem Stream werden die binären Daten gelesen und direkt zurückgegeben.
 
-### schreiben
+### 6.1.2 schreiben
 Als Parameter wird der Pfad übergeben und die Daten, die dann als binäre Daten gespeichert werden.
 Es wird nicht automatisch die Dateiendung .dat angefügt.
 
-### listeMeisterschaftspfade
+### 6.1.3 listeMeisterschaftspfade
 Diese Methode gibt alle Pfade zurück, die auf eine Meisterschaft zeigen.
 
 Funktionsweise:
@@ -262,13 +262,13 @@ Alle Objekte des Ordners Datenbank, die durch den Filter gekommen sind, sind Mei
 
 Dieser wird dann in einer weiteren Liste zwischengespeichert. Ist die Liste vollständig, dann wird sie wieder zurück ans aufrufende Modul übergeben.
 
-### listeMeisterschaftsnamen
+### 6.1.4 listeMeisterschaftsnamen
 Diese Methode liefert alle existierenden Meisterschaften als Liste.
 
 Funktionsweise:
 Sie nutzt listeMeisterschaftspfade, um die Meisterschaften herauszunehmen. In einer weiteren Schleife wird jedem Element der Präfix und die Dateiendung entfernt, sodass nur noch der reine Meisterschaftsname übrig bleibt.
 
-### listePfade
+### 6.1.5 listePfade
 Diese Methode dient dazu, eine Liste mit Pfaden von existierenden Objekten (Fahrer, Strecken oder Fahrzeuge) zu erstellen.
 Meisterschaften müssen anders wiedergegeben werden, deshalb müssen existierende Meisterschaften anders ermittelt werden.
 
@@ -282,7 +282,7 @@ Für jedes Objekt dieser Liste wird dann der gesamte korrekte relative Pfad zusa
 
 Zurückgegeben wird die Liste mit allen relativen Pfaden der angefragten Objekte.
 
-### listeNamen
+### 6.1.6 listeNamen
 Diese Methode dient dazu, eine Liste von existierenden Objekten (Fahrer, Strecken oder Fahrzeuge) zu erstellen.
 Meisterschaften müssen anders wiedergegeben werden, deshalb müssen existierende Meisterschaften anders ermittelt werden.
 
@@ -296,12 +296,12 @@ Für jedes Objekt dieser Liste wird dann die Dateiendung entfernt, sodass nur no
 
 Zurückgegeben wird die Liste mit allen Namen der angefragten Objekte.
 
-# Technische Betrachtung Erstellen.py
+# 7 Technische Betrachtung Erstellen.py
 Ein Erstellungsprozess ist zwingend notwendig, um Daten berechnen zu können. Dieser ist allerdings auch sehr komplex.
 
 In diesem Kapitel soll chronologisch aufgeführt werden, welchen Ablauf das Modul durchläuft.
 
-## 1. Erstellen()
+## 7.1 Erstellen()
 
 Vom Hauptmenü aus, wenn man "Erstellen" auswählt, wird diese Methode ausgeführt.
 
@@ -314,13 +314,13 @@ Das Objekt hilft, die Daten zu händeln.
 
 Nachdem der Bildtitel gesetzt wurde, wird weiter() ausgeführt.
 
-## 1. MeisterschaftBearbeiten
+## 7.2 MeisterschaftBearbeiten
 
 Meisterschaften können aber auch bearbeitet werden. In diesem Fall unterscheidet sich die Methode von erstellen() nur sofern, dass neben der Objektinstanziierung das Objekt noch geladen wird.
 Außerdem werden die Variablen "bearbeitungsmodus" und "varweiter" auf 1 gesetzt, um zu kennzeichnen, dass es ein Berbeitungsprozess ist.
 Was varweiter macht, ist im nächsten Kapitel ersichtlich.
 
-## 2. sammeln() in weiter()
+## 7.3 sammeln() in weiter()
 
 Als allererstes in weiter() wird sammeln() ausgeführt. sammeln() dient dazu, die eingegebenen Informationen aufzugreifen und zwischenzuspeichern, sodass sie weiter genutzt werden können.
 
@@ -328,10 +328,10 @@ Vor jeder Aktion wird die aktuelle Statusmeldung gelöscht, da es sein kann, das
 
 Je nachdem, welchen Wert varweiter hat, werden andere Informationen abgerufen.
 
-### Keine Aktion: varweiter == 0
+### 7.3.1 Keine Aktion: varweiter == 0
 Wenn die Meisterschaft erstellt wird, so gibt es im allerersten Durchlauf keine Benutzerinteraktion, weshalb der Fall varweiter == 0 nicht näher definiert ist und keine Aktion ausführt.
 
-### Meisterschaftsdaten sammeln: varweiter == 1
+### 7.3.2 Meisterschaftsdaten sammeln: varweiter == 1
 Es wird direkt geprüft, ob der Bearbeitungsmodus (1) an ist. Wenn nicht (0), dann wird eine Meisterschaft erstellt. Wenn nicht, dann werden die meisten Aktionen übersprungen und dem Objekt Meisterschaft, was im ersten Schritt erstellt worden ist, die Werte zugeordnet, die in der Datei gespeichert sind.
 
 Wird eine Meisterschaft erstellt, sind noch weitere Schritte notwendig.
@@ -340,18 +340,18 @@ Wird eine Meisterschaft erstellt, sind noch weitere Schritte notwendig.
 3. Sollte die erste Prüfung erfolgreich im Sinne des Fortschritts sein, dann wird die Liste aller existierenden Meisterschaften gelesen. Befindet sich der eingegebene Name bereits in der Liste der existierenden Meisterschaften, so wird auch hier eine Meldung gesendet und der Prozess abgebrochen. Andernfalls könnte es sein, dass die bestehende Meisterschaft überschrieben wird.
 4. Erst, wenn die Überprüfung des Namens erfolgreich wird, werden zwei Arrays initialisiert, die die Fahrerliste und den Rennkalender lokal zwischenspeichern. Sie sind an der Stelle, um weitere globale Variablen zu vermeiden. An dieser Stelle geht das Programm aber mitunter als Erstes durch.
 
-### Strecken hinzufügen: varweiter == 2
+### 7.3.3 Strecken hinzufügen: varweiter == 2
 Zuallererst wird die Zwei-Fenster-Anzeige beendet. Durch die Funktionsweise der anderen Module muss es an der Stelle erfolgen, da sonst eine unsaubere Anzeige erscheint.
 Als Nächstes wird der Rennkalender der Meisterschaft zugewiesen.
 
-### Fahrer hinzufügen: varweiter == 3
+### 7.3.4 Fahrer hinzufügen: varweiter == 3
 Zuallererst wird die Zwei-Fenster-Anzeige beendet. Durch die Funktionsweise der anderen Module muss es an der Stelle erfolgen, da sonst eine unsaubere Anzeige erscheint.
 Als Letztes wird die Fahrerliste der Meisterschaft zugewiesen.
 
-### varweiter > 3 || varweiter < 0
+### 7.3.5 varweiter > 3 || varweiter < 0
 Diese Fälle werden abgefangen und es passiert nichts, weil es nicht definiert ist.
 
-## weiter()
+## 7.4 weiter()
 Nach sammeln() springt das Programm zurück in weiter().
 Weiter wird auch dann aufgerufen, wenn der Button "Weiter" bzw. "Meisterschaft erstellen" aufgerufen wird.
 
@@ -363,28 +363,28 @@ Das soll für weniger Verwirrung im letzten Bildschirm sorgen.
 
 Erst jetzt wird unterschieden, im welchen Zustand sich das Programm jetzt befinden soll. Nach diesem Aufruf ist weiter() beendet.
 
-### Meisterschaftsnamen definieren: varweiter == 1
+### 7.4.1 Meisterschaftsnamen definieren: varweiter == 1
 Der Meisterschaftsname wird festgelegt.
 Es wird meisterschaftdefinieren() aufgerufen.
 
-### Rennkalender einfügen: varweiter == 2
+### 7.4.2 Rennkalender einfügen: varweiter == 2
 Der Rennkalender wird bearbeitet.
 Es wird rennkalendereinfügen() aufgerufen.
 
-### Fahrerliste einfügen: varweiter == 3
+### 7.4.3 Fahrerliste einfügen: varweiter == 3
 Die Fahrerliste wird bearbeitet.
 Es wird fahrereinfügen() aufgerufen.
 
-### varweiter == 4
+### 7.4.4 varweiter == 4
 Nachdem im letzten Bildschirm auf "Meisterschaft erstellen" geklickt wurde (der Weiter-Knopf wurde in diesem Bildschirm modifiziert!), dann wird das Hauptmenü aufgerufen und das Objekt Meisterschaft, welches über den gesamten Prozess hinweg existierte, gespeichert.
 
-## meisterschaftdefinieren()
+## 7.5 meisterschaftdefinieren()
 meisterschaftdefinieren() wird in weiter() aufgerufen.
 Das Fenster wird mit einem Label, darunter einem Eingabefenster, noch einem Label und noch einem Fenster ausgemschmückt.
 Im zweiten Eingabefenster, wo das Jahr eingegeben werden soll, wird das aktuelle Jahr ermittelt und als Standardwert dort eingetragen.
 Danach ist diese Methode vorbei und das Programm wartet auf eine Aktion des Nutzenden.
 
-## rennkalendereinfügen() und fahrereinfügen()
+## 7.6 rennkalendereinfügen() und fahrereinfügen()
 Beide Methoden sind sich fast identisch.
 
 Zuerst wird der Anzeigemodus umgestellt, auf die Zwei-Fenster-Anzeige. Danach werden alle nötigen Buttons eingefügt, einer der ein neues Element erstellen kann, einer, der ein Element auswählt und einer, der ein Element entfernen kann.
@@ -402,22 +402,22 @@ Anders als in rennkalendereinfügen() muss in fahrereinfügen() abschließend ak
 
 Je nachdem, welcher Button gedrückt wird, geht das Programm weiter
 
-## erstelleElement()
+## 7.7 erstelleElement()
 Wird der Knopf "Fahrer erstellen" oder "Strecke erstellen" gedrückt, so wird die Funktion erstelleElement() aufgerufen. Je nach Wert von varweiter kann die Methode herausfinden, ob gerade ein Fahrer oder eine Strecke erstellt werden muss. Entsprechendes Modul wird anschließend aufgerufen. Wenn dieses Modul beendet wird, wird aktualisiereFenster() aufgerufen und erstelleElement terminiert.
 
-## auswählen()
+## 7.8 auswählen()
 Wird der Knopf "auswählen" gedrückt, wird diese Funktion ausgeführt. Auch diese Methode kann über varweiter herausfinden, ob die Rennkalenderliste oder die Fahrerliste bearbeitet werden muss.
 Entsprechend wird append() auf die jeweilige Liste ausgeführt und der Wert des gewählten Radiobuttons auf der linken Seite (Auswahl) zur Liste hinzugefügt.
 
 Abschließend wird aktualisiereFenster() aufgerufen. 
 
-## entfernen()
+## 7.9 entfernen()
 Wird der Knopf "Entfernen" gedrückt, wird diese Funktion ausgeführt. Auch diese Methode kann über varweiter herausfinden, ob die Rennkalenderliste oder die Fahrerliste bearbeitet werden muss.
 Entsprechend wird pop() auf die jeweilige Liste ausgeführt und der Wert (der Index!) des gewählten Radiobuttons auf der rechten Seite (für Meisterschaft ausgewählt) von der Liste entfernt. Durch den Index ist nun jedes Element eindeutig.
 
 Abschließend wird aktualisiereFenster() aufgerufen. 
 
-## aktualisiereFenster()
+## 7.10 aktualisiereFenster()
 Diese Methode hilft im Zwei-Fenster-Modus beide Listen zu aktualisieren, um die Radiobuttons mit den neuen bzw. gelöschten Elementen zu ergänzen.
 
 Zuerst werden sowohl die linke als auch die rechte Anzeige zurückgesetzt (Forget).
@@ -431,53 +431,90 @@ Anschließend werden die Radiobuttons wieder neu gesetzt, wie sie in den anderen
 
 Ganz zum Schluss wird tkinter geupdatet.
 
-# Weitere Erstell-Module
+# 8 Weitere Erstell-Module
+## 8.1 Gemeinsames
 Der Erstell-Prozess ist recht komplex. Um ihn ein bisschen aufzuteilen, wurde für jedes Objekt ein Modul gebaut, um die Erstellung zu vereinfachen.
 Sie sind sich auch sehr ähnlich, weshalb in den spezifischen Abschnitten nur auf die unterscheidenden Merkmale eingegangen wird. Sie bestehen alle aus mind. zwei Modulen: speichern() und erstellen(name).
 
-### speichern()
+### 8.1.1 speichern()
 Wie der Name schon sagt, ist diese Methode dazu da, das entsprechende Objekt zu speichern. Dem vorangegangen werden Prüfungen gemacht, ob die Erstellung vollständig erfolgt ist bzw. ob das Objekt schon existiert. Mit der Objektmethode .speichern() im Objekt werden alle Angaben gespeichert, bevor angewiesen wird, den Erstell-Prozess zu beenden.
 Da Erstellen-Module als Checkpoint aufgerufen werden, muss dieser nun zerstört und der alte wiederhergestellt werden (mehr zur Mechanik später mehr).
 Da Erstellen-Module auch dazu gebaut sind, Objekte zu bearbeiten, muss zum Abschluss auch geprüft werden, ob bearbeitet oder erstellt wurde. Denn wenn ein Objekt erstellt wurde, muss das Fenster noch einmal aktualisiert werden (s. aktualisiereFenster).
 
-### erstellen(name)
+### 8.1.2 erstellen(name)
 Zuerst muss ein neuer Checkpoint (s. da) erstellt werden, damit der Erstell-Prozess richtig angezeigt werden kann.
 Hier werden jetzt sämtliche grafischen Elemente definiert, die angezeigt werden sollen, um das Objekt zu bearbeiten. Ausgelesen werden die Werte dann speichern().
 
-### Bearbeitung
+### 8.1.3 Bearbeitung
 Auch der Bearbeitungsprozess wird hier abgehandelt. Dazu wird der Methode erstellen() ein Parameter übergeben.
 Da das Modul nur eine bestimmte Art von Objekt bearbeiten (Fahrzeug, Fahrer, Strecke) kann, kann alleine anhand des Namens das Objekt geladen werden und in das temporäre Objekt geladen werden. In die grafischen Elemente werden dann die gespeicherten Werte als Startwerte festgelegt.
 Im weiteren Verlauf wird das Objekt behandelt, als wäre es ein neues Objekt, mit dem Unterschied, dass der Name nicht bearbeitet werden kann.
 Wenn das Objekt gespeichert, wird das alte Objekt vom neuen Objekt überschrieben.
 Anhand des fehlenden Eingabefelds wird auch erkannt, ob es sich um ein Erstellen- oder Bearbeitungs-Prozess handelt. Dies ist lediglich für den Ausgang aus dem Modul und die Zurückführung zum aufrufenden Modul wichtig.
 
-### Kontrollen
+### 8.1.4 Kontrollen
 Es gibt einen Wert, der geprüft wird, um die Erstellung erfolgreich abzuschließen. Ist der Wert im Eingabefeld leer (also kein Name eingegeben), so wird nicht gespeichert.
 Des Weiteren wird geprüft, ob das Objekt schon existiert. Dafür wird aus Daten.py die Liste gezogen, welche Objekte dieser Art überhaupt existieren. Kommt der Name in dieser Liste vor, dann wird eine Warnung ausgegeben und die Variable "namekontrolle" auf 1 gesetzt. Wird wieder das Objekt gespeichert, so erscheint die Warnung nicht (weil namekontrolle auf 0 steht) und das existierende Objekt wird überschrieben, wenn die Namen immer noch gleich sind.
 
 Alle weiteren Kontrollen werden so gelöst, indem alle Widgets, wo Daten erwartet werden, ausgelesen und in das temporäre Objekt geladen werden.
 Auf diese Attribute wird geprüft, ob sie bspw. leer sind oder andere ungültige Werte enthalten. Ist dies der Fall, so wird eine Info gesetzt und der Speichern-Prozess abgebrochen.
 
-## Technische Betrachtung ErstelleFahrzeug.py 
+## 8.2 Technische Betrachtung ErstelleFahrzeug.py 
 ErstelleFahrzeug unterscheidet sich nur unwesentlich vom Blueprint.
 Der einzige Unterschied befindet sich in der Übergabe und der Wiederherstellung des Checkpoints. Da ErstelleFahrzeuge aus der Fahrzeugauswahl aufgerufen wird, aber wieder zurück an ErstelleFahrer übergeben werden muss, muss der Checkpoint zwei Mal wiederhergestellt werden, da sonst die Widgets des Fahrers in den zu löschenden Frame gesetzt werden.
 Anschließend muss ErstelleFahrer.FahrzeugAuswählen() erneut aufgerufen werden, damit die Fahrzeugauswahl neu geladen werden kann und das neu erstellte Fahrzeug erscheint.
 
-### Voraussetzungen zum Speichern
+### 8.2.1 Voraussetzungen zum Speichern
 - Name muss angegeben werden
+- Das Fahrzeug darf noch nicht existieren.
+Die Kontrolle funktioniert nach Blueprint.
 
-### Namenskontrolle
+## 8.3 Technische Betrachtung ErstelleFahrer.py 
+ErstelleFahrer.py ist der umfangreichste Erstellprozess neben den Meisterschaften, weil er am meisten Attribute enthält. Die Komplexität wurde allerdings nur geringfügig erweitert.
 
+### 8.3.1 Fahrzeugauswahl
+Der wesentliche Unterschied zu anderen Erstellprozessen ist, dass jedem Fahrer ein Fahrzeug zugeordnet werden muss. Dafür wird ein einfacher String ins Objekt geschrieben. Doch bis dahin, sind weitere Schritte notwendig.
 
-## Technische Betrachtung ErstelleFahrer.py 
+1. Es kann kein freier Name gewählt werden, um sicherzustellen, dass das Fahrzeug auch wirklich existiert. Es muss also ein existierendes Fahrzeug aus der Datenbank herausgesucht werden. Dafür muss man den Button "Fahrzeug auswählen" klicken.
+2. Es wird ein Checkpoint (s. da) erstellt.
+3. Die Liste aller Fahrzeuge wird über das Modul "Daten" ausgelesen.
+4. Es werden die benötigten Buttons hinzugefügt.
+5. Es wird die Fahrzeugkontrollvariable gesetzt (siehe Kontrollen)
+6. Für jedes Element (also jedes Fahrzeug-Element) wird ein Radiobutton erstellt, welcher dann ausgewählt werden kann.
+7. Klickt man nun auf "Neues Fahrzeug erstellen", dann wird neuesFahrzeug() ausgeführt. Dieser Zwischenschritt ist notwendig, damit "ErstelleFahrzeug.py" nicht direkt bei der Erstellung des Buttons ausgeführt wird, da das Argument eines leeren Strings mitgegeben werden muss, um nicht den Bearbeiten-Prozess auszulösen.
+8. Wenn das Fahrzeug erstellt wurde, erscheint es nun als Auswahlmöglichkeit, da der Checkpoint wiederhergestellt wird, also die Radiobuttons neu erstellt werden.
+9. Man wählt ein Fahrzeug und klickt auf "Fahrzeug auswählen". fügeFahrzeugein() wird ausgeführt.
+10. Das Label, was den Namen des Fahrzeugs anzeigt, wird umbenannt, sodass der richtige Name angezeigt wird. Dieser Wert wird dann beim Objekt "Fahrer" gespeichert.
 
-## Technische Betrachtung ErstelleStrecke.py
+### 8.3.2 Voraussetzungen zum Speichern
+- Fahrzeug muss zugeordnet sein
+    - Wenn gar nicht erst der Button zur Fahrzeugauswahl gedrückt wurde, kann ausgeschlossen werden, dass ein Fahrzeug ausgewählt wurde. Daher wird in der Funktion die Variable "fahrzeugkontrolle" auf 1 gesetzt. Wenn in speichern() geprüft wird, ob ein Fahrzeug ausgewählt wurde, muss die Variable 1 sein.
+    - Bei Bearbeitungen kann es allerdings sein, dass ein Fahrzeug nicht geändert werden muss. Daher ist diese Kontrolle nicht möglich. Stattdessen wird kontrolliert, ob der standardmäßige Text "[Kein Fahrzeug ausgewählt]" ins Objekt geschrieben wurde. So kann ausgeschlossen werden, dass ein Fahrzeug ausgewählt wurde.
+    - Sobald eine Bedingung falsch ist, also der Button geklickt wurde ODER ein anderes Fahrzeug im Objekt gespeichert wurde, erst dann ist ein Speichern möglich. Sind beide Bedingungen wahr, so wird ein Fehler geworfen.
 
-# Technische Betrachtung Bearbeiten
+- Name muss angegeben werden
+- Das Geburtsdatum muss eine Zahl sein.
+    - fahrer.gebjahr.isnumeric()
+    - Wenn das Geburtsjahr nicht angegeben wurde oder keine Zahl ist, wird falsch zurückgegeben.
+    - Durch die Negation wird die Verzweigung ausgelöst und der Fehler ausgegeben.
+    - Analog zu den anderen Integer-Prüfungen.
+- Das Jahr des ersten Rennens muss eine Zahl sein.
+- Das Jahr des ersten Rennens darf nicht weniger als 10 Jahre nach dem Geburtsjahr liegen --> der Fahrer darf frühestens im zehnten Lebensjahr mit dem Motorsport beginnen.
+    - int(fahrer.gebjahr)+10 > int(fahrer.erstesrennen)
+    - Wenn der Zahlwert addiert mit 10 von dem Geburtsjahr größer ist als das Jahr des ersten Rennens, wird der Fehler ausgegeben.
+- Die Angabe der Durschnitssplatzierung muss eine Zahl sein.
+- Jahr mit der Fahrt des aktuellen Fahrzeugs muss eine Zahl sein.
+- Jahr mit der Fahrt des aktuellen Fahrzeugs darf nicht weniger als 10 Jahre nach dem Geburtsjahr liegen.
+- Fahrer darf noch nicht existieren
 
-# Berechnungsmechanik (MebeAl1)
+## 8.4 Technische Betrachtung ErstelleStrecke.py
+HIER WEITER. 8.1 beachten.
 
-# Anzeige
-(Programmstart, Prozess, Aufgaben und Aussehen)
+# 9 Technische Betrachtung Bearbeiten
 
-# Hilfsmodul Z-Hilfe-Leser (HiLe1)
+# 10 Berechnungsmechanik (MebeAl1)
+
+# 11 Anzeige
+(Programmstart, Prozess, Aufgaben und Aussehen, Checkpoint)
+
+# 12 Hilfsmodul Z-Hilfe-Leser (HiLe1)

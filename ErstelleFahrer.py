@@ -37,7 +37,7 @@ def speichern():
     fahrer.seitWannFahrzeug = entryFahrzeugwann.get()
 
     #falsche Eingaben abfangen
-    if fahrzeugkontrolle == 0 and fahrer.fahrzeug == '[Kein Fahrzeug ausgewählt]': #wenn kein Fahrzeug ausgewählt wurde und keiner im Objekt hinterlegt wurde
+    if fahrzeugkontrolle == 0 and fahrer.fahrzeug == '[Kein Fahrzeug ausgewählt]': #wenn kein Fahrzeug ausgewählt wurde und keiner im Objekt hinterlegt wurde - erste Bedingung nötig?
         prozess.setInfo("Kein Fahrzeug ausgewählt! Wähle ein Fahrzeug zum Fortfahren aus.")
         return
     
@@ -61,10 +61,6 @@ def speichern():
         prozess.setInfo("Ungültige Eingabe bei der Durchschnittsplatzierung! Bitte gib eine Zahl an.")
         return
     
-    if not(fahrer.durchschnittlicheplatzierung.isnumeric()): #wenn die Durchschnittsplatzierung nicht angegeben wurde oder keine Zahl ist (bei leer wird false zurückgegeben)
-        prozess.setInfo("Ungültige Eingabe bei der Durchschnittsplatzierung! Bitte gib eine Zahl an.")
-        return
-    
     if not(fahrer.seitWannFahrzeug.isnumeric()): #wenn das Jahr mit der Fahrt des ersten Fahrzeugs nicht angegeben wurde oder keine Zahl ist (bei leer wird false zurückgegeben)
         prozess.setInfo("Ungültige Eingabe bei der Angabe, seit wann das Fahrzeug gefahren wird! Bitte gib eine Zahl mind. 10 Jahre größer als das Geburtsjahr an.")
         return
@@ -80,7 +76,7 @@ def speichern():
         namekontrolle = 1 #wenn Objekt schon in Datenbank existiert, wird auf 1 gesetzt. Beim zweiten Mal speichern wird das Objekt überschrieben
 
     if labelFahrzeugAuswahl.cget("text") == "[Kein Fahrzeug ausgewählt]":
-        fahrer.fahrzeug = ''
+        fahrer.fahrzeug = '' #dürfte niemals vorkommen, wegen obiger Kontrolle
     else:
         fahrer.fahrzeug = labelFahrzeugAuswahl.cget("text") #Achtung!! Leerer Wert wird schlecht abgefangen
 
