@@ -449,7 +449,7 @@ Hier werden jetzt sämtliche grafischen Elemente definiert, die angezeigt werden
 Auch der Bearbeitungsprozess wird hier abgehandelt. Dazu wird der Methode erstellen() ein Parameter übergeben.
 Da das Modul nur eine bestimmte Art von Objekt bearbeiten (Fahrzeug, Fahrer, Strecke) kann, kann alleine anhand des Namens das Objekt geladen werden und in das temporäre Objekt geladen werden. In die grafischen Elemente werden dann die gespeicherten Werte als Startwerte festgelegt.
 Im weiteren Verlauf wird das Objekt behandelt, als wäre es ein neues Objekt, mit dem Unterschied, dass der Name nicht bearbeitet werden kann.
-Wenn das Objekt gespeichert, wird das alte Objekt vom neuen Objekt überschrieben.
+Wenn das Objekt gespeichert wird, wird das alte Objekt vom neuen Objekt überschrieben.
 Anhand des fehlenden Eingabefelds wird auch erkannt, ob es sich um ein Erstellen- oder Bearbeitungs-Prozess handelt. Dies ist lediglich für den Ausgang aus dem Modul und die Zurückführung zum aufrufenden Modul wichtig.
 
 ### 8.1.4 Kontrollen
@@ -508,11 +508,38 @@ Der wesentliche Unterschied zu anderen Erstellprozessen ist, dass jedem Fahrer e
 - Fahrer darf noch nicht existieren
 
 ## 8.4 Technische Betrachtung ErstelleStrecke.py
-HIER WEITER. 8.1 beachten.
+Wie bei ErstelleFahrer.py ist die Besonderheit an diesem Modul, dass ein weiteres Objekt referenziert werden muss. Anders als bei den Fahrern ist es bei einer Strecke nicht zwingend notwendig, dass der Rekordhalter dem Programm bekannt sein muss. Wenn er Mebe unbekannt ist, so entsteht schlicht kein Vorteil, wie bei MebeAl1 dann zu sehen ist.
+
+### 8.4.1 Rekordhalter aus der Datenbank einfügen
+Das Feature dient dazu, Schreibfehler zu vermeiden, in dem der Name des Rekordhalters in das Entry eingegeben wird, der bereits der Datenbank bekannt ist, anstatt den Namen Freihand einzutragen. Ein Freihand-Eintrag ist nichtsdestotrotz weiterhin möglich und schränkt die Funktionalität des Programms nicht ein.
+Es besteht aus zwei Funktionen und wird durch den Button "Fahrer aus Datenbank auswählen..." über die Funktion "FahrerAuswählen" ausgelöst. Anders als alle anderen Buttons in Programm wurde dieser direkt erstellt und nicht über die Anzeige, da dieser Button nicht in der Buttonleiste auftauchen sollte, sondern direkt im Frame des Inhalts.
+
+Mit FahrerAuswählen wird ein Checkpoint und darin eine Liste von Fahrern erstellt, die aktuell in der Datenbank hinterlegt worden sind. Ein Button wird hinzugefügt, dass nach der Auswahl der richtige Name eingetragen wird. Über eine For-Schleife werden Radiobuttons für jeden Fahrer eingefügt. Drückt der User nun den Button "Fahrer auswählen", dann wird die Funktion "fügeFahrerein" aufgerufen, die direkt in das Entry des anderen Frames schreibt (Frames sind nur verdeckt, nicht gelöscht). Nachdem der Checkpoint gelöscht wurde und das vorherige Fenster wieder zu sehen ist, sieht man die Änderung direkt.
+
+### 8.4.2 Voraussetzungen zum Speichern
+- Name muss angegeben werden
+- Strecke darf noch nicht existieren
+- Rekordhalterangabe wird geprüft
+    - Es ist nur optional, dass ein Rekordhalter/Fahrer mit angegeben wird. Dennoch wird es geprüft, weil es einen Vorteil für die Berechnung sein kann. Die Variable "namekontrolle" ist standardmäßig gleich 0 und wird auf 1 gesetzt, wenn der Name erstmals nicht eingegeben wurde. Wenn ein zweites Mal auf Speichern geklickt wird, ohne den Rekordhalter anzugeben, dann wird die Kontrolle des Rekordhalters nicht wieder ausgelöst und das Objekt wird ohne Rekordhalter gespeichert.
 
 # 9 Technische Betrachtung Bearbeiten
+Um eine Bearbeitung der Objekte zu ermöglichen, wird auf die Erstell-Module zurückgegriffen, um Konsistenz zu bewahren und eine Verwaltung der Objekt-Features zu vereinfachen. Denn wenn eine Eigenschaft zum Objekt eingefügt wird, dann muss sie so nur in den Erstell-Modulen gepflegt werden. Bearbeiten greift direkt darauf zu. Unter "erstellen(name)" unter "Gemeinsames" in Kapitel "Weitere Erstell-Module" (8.1.3) wurde das genaue Vorgehen des Bearbeitens in den Erstell-Modulen abgehandelt. Nun fehlt allerdings ein Oberbau, um auf das Feature zugreifen zu können und den Namen entsprechend auch setzen zu können, der bearbeitet werden soll.
+
+Wie in den anderen Modulen auch, wird das Fenster zuerst gebaut. Dafür wird der Frame bereinigt, der Titel gesetzt und die Buttons hinzugefügt. Die Buttons sind "Meisterschaft bearbeiten", "Strecke bearbeiten", "Fahrer bearbeiten" und "Fahrzeug bearbeiten", denn als erste Abfrage muss erfolgen, um welche Art von Objekt es sich handelt, um das richtige Erstell-Modul auswählen zu können.
+Jeder Button löst eine Funktion aus, die die Variable "ausgewählteAktion" jeweils setzt (Meisterschaft 1, Strecke 2, Fahrer 3, Fahrzeug 4) und danach die Funktion auswahl() aufruft.
+auswahl() ist ein eigenes Fenster und setzt die Buttons neu. Danach muss evaluiert werden, welche Objektliste geladen werden muss. Dafür wird geprüft, welcher Wert der Funktion übergeben worden ist, welcher von den Buttons jeweils mitgegeben wurde. Ist das Objekt "Meisterschaft", so wird aus dem Modul Daten direkt die Liste gezogen. Bei allen anderen Objekten muss die Objektart zuerst dem Modul Daten übergeben werden, welche dem Übergabewert entspricht.
+Nachdem die Objektliste erstellt worden ist, können wie gewohnt die Radiobuttons gesetzt werden.
+Mit dem Button "Auswählen", der zu Beginn der Funktion "auswahl()" angelegt wurde, wird dann ein Wert, der im radiobutton hinterlegt ist, einem Erstell-Modul übergeben werden, sodass der restliche Bearbeitungsprozess nun von einem Erstell-Modul übernommen wird. 
+Da die Erstellmodule auf Checkpoints basieren, kehrt man nach der Bearbeitung wieder in das letzte Bearbeitungsfenster, also die Rodiobuttonauswahl, zurück und kann von dort weiter bearbeiten oder zurück ins Hauptmenü.
 
 # 10 Berechnungsmechanik (MebeAl1)
+Im Grunde wurde die Berechnungsmechanik aus Mebe V1 übernommen. Lediglich für die Integration wurden Änderungen vorgenommen, die im Wesentlichen aber nicht die Ergebnisberechnung beeinflussen.
+
+## 10.1 Meisterschaftsauswahl
+
+## 10.2 Berechnung einer einzelnen Strecke
+
+## 10.3 Berechnung der Meisterschaft
 
 # 11 Anzeige
 (Programmstart, Prozess, Aufgaben und Aussehen, Checkpoint)

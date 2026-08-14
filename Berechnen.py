@@ -1,6 +1,6 @@
 # Motorsportmeisterschaftsberechner
 # Mebe V3.0.0
-#berechnet eine Meisterschaft und gibt das Ergebnis aus
+# berechnet eine Meisterschaft und gibt das Ergebnis aus
 
 import random
 import time

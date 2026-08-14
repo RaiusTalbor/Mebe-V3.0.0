@@ -27,7 +27,7 @@ def speichern():
     strecke.streckentyp = int(streckentyp.get())
     strecke.schwierigkeit = scaleSchwierigkeit.get()
 
-    #falsche EIngaben abfangen
+    #falsche Eingaben abfangen
     if rekordhalterkontrolle == 0 and strecke.rekordhalter == '': #wenn die Kontrollvariable 0 ist (noch nicht hier durchgelaufen) und der Rekordhalter leer gelassen wurde
         prozess.setInfo("Keinen/Keine Rekordhalter/-in angegeben! Klicke auf Speichern, wenn dies gewollt ist.")
         rekordhalterkontrolle = 1 #wenn kein Rekordhalter ausgewählt, wird auf 1 gesetzt. Beim zweiten Mal speichern wird der leere Wert ignoriert
