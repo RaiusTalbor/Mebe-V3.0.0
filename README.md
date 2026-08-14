@@ -536,10 +536,23 @@ Da die Erstellmodule auf Checkpoints basieren, kehrt man nach der Bearbeitung wi
 Im Grunde wurde die Berechnungsmechanik aus Mebe V1 übernommen. Lediglich für die Integration wurden Änderungen vorgenommen, die im Wesentlichen aber nicht die Ergebnisberechnung beeinflussen.
 
 ## 10.1 Meisterschaftsauswahl
+Die Berechnung startet i.A. in der Funktion "berechnen()". Dort wird das Fenster initialisiert und vorbereitet, in dem alle Buttons gelöscht werden, der Titel des Frames gesetzt wird und die neuen Buttons, "Zurück" und "Meisterschaft auswählen" hinzugefügt werden.
+Direkt danach wird die Liste aller Meisterschaften aus dem Modul Daten gelesen. Danach werden im Frame Radiobuttons erstellt, sodass bei Knopfdruck auf "Meisterschaft auswählen" eine konkrete Meisterschaft ausgewählt werden kann, wofür die Funktion auswahl() zuständig ist.
+auswahl() liest dabei wie gewohnt den Wert der Radiobuttonauswahl aus startet dann mit dem Aufruf der Funktion "berechnenStarten()" die jeweilige Meisterschaft.
+Außerdem erscheint eine Bestätigung über das Infolabel am unteren Rand des Bildschirms, dass die Berechnung gestartet wurde. 
 
-## 10.2 Berechnung einer einzelnen Strecke
+Durch die umfangreiche Berechnung, das viele Schreiben der Dateien und der vielen Schleifen kann der Prozess je nach Größe der Meisterschaft einen Moment dauern.
 
-## 10.3 Berechnung der Meisterschaft
+## 10.2 Vorbereitung der Berechnung
+Bevor die Berechnung gestartet werden kann, müssen zuvor alle benötigten Parameter geladen werden. Dafür werden alle drei Meisterschaftsdateien geladen und über Variablen zur Verfügung gestellt. Diese drei Listen sind fundamental für die Berechnung, denn darüber erfolgt jeder Zugriff.
+
+Eine Meisterschaft besteht aus mehreren Rennen. Jedes Rennen wird einzeln berechnet. Daher ist eine For-Schleife nötig, wo für jede Strecke eine Berechnung notwendig ist. Dazu wird strecke_berechnen() aufgerufen. Zuvor werden die richtigen Streckendaten aus dem Rennkalender gelesen und der Funktion übergeben. Durch den Index im Rennkalender weiß MebeAl1, in welcher Reihenfolge die Meisterschaft stattfindet und wann wie oft welche Strecke gefahren wird. 
+
+Für jede Strecke sind noch weitere Berechnungen notwendig, sie werden in Kapitel "Berechnung der Meisterschaft" (10.4) beschrieben. Zuvor soll aber auf die Berechnung der Strecken eingegangen werden.
+
+## 10.3 Berechnung einer einzelnen Strecke
+
+## 10.4 Berechnung der Meisterschaft
 
 # 11 Anzeige
 (Programmstart, Prozess, Aufgaben und Aussehen, Checkpoint)
