@@ -551,6 +551,125 @@ Eine Meisterschaft besteht aus mehreren Rennen. Jedes Rennen wird einzeln berech
 Für jede Strecke sind noch weitere Berechnungen notwendig, sie werden in Kapitel "Berechnung der Meisterschaft" (10.4) beschrieben. Zuvor soll aber auf die Berechnung der Strecken eingegangen werden.
 
 ## 10.3 Berechnung einer einzelnen Strecke
+### 10.3.1 Grundlegende Idee
+Um die aktuelle Strecke berechnen zu können, muss die aktuelle Strecke der Funktion übergeben werden. Auch alle Pfade der teilnehmenden Fahrer wird übermittelt.
+
+Mebe basiert darauf, ein Rennergebnis für jeden Fahrer zu berechnen. Dieses Ergebnis ist eine einfache ganze Zahl. Diese Zahl sagt aus, wie gut ein Fahrer die Strecke absolviert hat. Wird dies für alle Fahrer gemacht, so entsteht eine Abstufung für alle Fahrer. Derjenige Fahrer mit dem höchsten Wert gewinnt.
+
+Beim Berechnen der einzelnen Strecke geht es also darum, das Rennergbenis für jeden einzelnen Fahrer auf dieser Strecke zu ermitteln.
+Deshalb ist hier auch wieder eine For-Schleife nötig, die die gesamte Fahrerliste durchgeht und dabei die Werte für jeden Fahrer für diese Strecke ermittelt.
+
+### 10.3.2 Wie setzt sich das Rennergebnis zusammen?
+Nach dem Einlesen der Daten werden zwei Zufallszahlen generiert: Zufallszahl 1 und Zufallszahl 2.
+Anschließend wird das Alter und die Fahrerfahrung berechnet, inkl. der Fahrerfahrung mit dem aktuellen Fahrzeug.
+
+Die Grunderfahrung setzt sich entsprechend aus dem Alter addiert mit der Erfahrung im Renngeschehen.
+
+Die Grundstärke addiert zusätzlich noch das Grundkönnen sowie das doppelte der Jahre, die der Fahrer bereits das Auto fährt.
+
+Neben diesen Grundwerten gibt es noch weitere Einflüsse auf das Ergebnis.
+
+#### Rekordhalter 
+Ist der Fahrer Rekordhalter, so erhält er einen Streckenbonus von 5.
+
+#### Vorliebe
+Wie bereits in vorangegangenen Kapiteln angerissen spielt auch die Vorliebe des Fahrers eine Rolle. Stimmt der Streckentyp mit der Vorliebe überein, so gibt es einen Bonus von 5.
+
+#### Fahrzeugeignung
+Für jeden Streckentyp zeichnet sich auch ein Fahrzeug heraus, welches durch die Leistung oder Wendigkeit einen Vorteil hat. 
+Dabei kann ein Vorteil von 5 oder ein Nachteil von -5 erfahren werden.
+
+Dabei verlangt eine schnelle Strecke ein Fahrzeug mit viel Leistung, aber geringer Wendigkeit, wohingegen eine kurvige Strecke ein weniger leistungstarkes Fahrzeug Vorteile bietet, welches dafür wendig ist. Ein ausgeglichenes Fahrzeug erlebt weder Vor- noch Nachteile.
+
+#### Zufallsbonus
+Anhand der Zufallszahl 2 wird ermittelt, ob der Fahrer einen Glückstag hat oder nicht. Ist die Zahl > 98, so bekommt der Fahrer einen Bonus von 50. Ist die Zahl < 4, so erhält er zusätzlich -50.
+
+#### Strafe
+Strafen sind abhängig von der Aggressivität der Fahrer und auch abhängig von den Zufallszahlen.
+Ein Fahrer erhält eine Strafe, wenn beide Zufallszahlen addiert insgesamt kleiner sind als das doppelte der Aggressivität des Fahrers.
+Eine Strafe führt einen Bonus von -20 mit sich.
+
+#### Dreher
+Bei schlechten Wetterbedingungen kann es sein, dass ein Fahrzeug sich bei einem Manöver dreht. Es hat -40 zur Folge.
+Ein Dreher tritt ein, wenn die Geschicklichkeit des Fahrers addiert mit der Zufallszahl 2, welche durch zehn geteilt wird, kleiner ist, als das Doppelte des Wettertyps geteilt durch 2,5.
+
+`if zufallszahl2 / 10 + fahrerdatenAktuell[3] < Wetter + Wetter / 2.5`
+
+Die Gewichtung wurde experimentell entwickelt.
+
+Das Wetter selbst wird auch mit Ganzzahlen dargestellt, wobei 1-3 sonniges Wetter repräsentieren, 3-4 nasse Verhältnisse und 5-6 Regen. Es wird bei jedem Fahrer neu zufällig generiert. Fahrer haben also u.U. nicht die gleiche Bedingungen.
+
+#### Boxenfehler
+Fehler in der Boxengasse ziehen einen Bonus von -50 nach sich.
+Dieser tritt ein, sobald die erste Zufallszahl kleiner als 3 ist.
+
+#### Unfall
+Ein Unfall führt zu -70.
+Ein Unfall tritt dann ein, wenn die erste Zufallszahl genau 1 ist und das Produkt aus Aggressivität des Fahrers, Schwierigkeitsgrad der Strecke und Streckentyp minus der Grunderfahrung größer als 190 ist.
+
+Je aggressiver und unerfahrener der Fahrer, je schneller eine Strecke ist, desto höher ist die Unfallwahrscheinlichkeit. Das Wetter spielt keine Rolle, da es bereits mit Dreher in die Berechnung einfließt. 
+
+#### Schwerer Unfall
+Ist ein Unfall passiert, so handelt es sich um einen schweren Unfall, wenn die erste Zufallszahl 1 ist. Dazu kommt ein Bonus von -100.
+
+#### Aus
+Mit einer Wahrscheinlichkeit von 11 % bedeutet ein schwerer Unfall das Aus eines Fahrers. Bei Eintreten werden -500 als Bonus berechnet, welches in jedem Fall den letzten Platz bedeutet.
+
+#### Neustart
+Für zukünftige Updates soll eine Neustart-Chance offengehalten werden. So sollen Fahrer, die durch einen Unfall Minuspunkte haben, durch einen Neustart die Chance haben, die Minuspunkte wieder loszuwerden. Allerdings ist eine Implementierung noch nicht erfolgt.
+
+### 10.3.3 Rennergebnisberechnung
+Nun werden alle Bestandteile zusammengerechnet. Dazu werden alle aufgelistete Ereignisse mit ihren Boni addiert. Zusätzlich werden noch die erste Zufallszahl und die Grundstärke mit dazugerechnet.
+
+Anschließend wird das individuelle Rennergebnis mit 100.000 multipliziert und daraufhin mit der Grundstärke addiert. Haben nun zwei Fahrer einen Punktgleichstand erzielt, so gewinnt derjenige Fahrer mit der höheren Grundstärke.
+
+Der Fahrer wird abschließend mit seinem Ergebnis zurückgeben, sodass am Ende eine Liste für jede Strecke entsteht, wie gut welcher Fahrer sich quasi geschlagen hat.
+
+### 10.3.4 Auswertung des Rennergebnisses und Punkte
+Die aus dem letzten Kapitel berechnete Liste wird nun sortiert. Da aber der niedriste Wert ganz vorne ist, aber derjenige mit dem höchsten Rennergebnis gewinnt, muss die Liste nun umgedreht (reversed) werden.
+
+Anschließend werden Punkte vergeben. Dabei erhält:
+Platz 1: 20 Punkte
+Platz 2: 18 Punkte
+Platz 3: 15 Punkte
+Platz 4: 14 Punkte
+Platz 5: 12 Punkte
+Platz 6: 10 Punkte
+Platz 7: 8 Punkte
+Platz 8: 5 Punkte
+Platz 9: 4 Punkte
+Platz 10: 2 Punkte
+Platz 11: 1 Punkt
+alle weiteren Ränge: 0 Punkte
+
+#### persistente Speicherung der Gesamtpunktzahl
+Ein Problem stellt die Funktion dar. Da Mebe eher rekursiv arbeitet und die eben ermittelten Daten aber nur lokal vorliegen, ist nun eine Mechanik notwendig, damit Mebe sich die Gesamtpunktzahl merken kann.
+
+Dafür werden die Punkte in eine Variable "Punkte", dann als "Streckenergebnis" geschrieben.
+Aus der Ergebnisliste wird anschließend der Name des Fahrers extrahiert.
+
+Danach wird eine temporäre Datei für jeden Fahrer geschrieben unter dem Pfad "temporäre Dateien". Wenn die Datei bereits existiert, dann wird der Inhalt gelesen. Wenn nicht, wird die Datei erstellt und "0" wird gelesen.
+
+Nun werden die Punkte der Strecke dem Fahrer gut geschrieben, indem sie dem Wert aus der temporären Datei addiert werden. In der Datei befindet sich als genau die Punktzahl, die der Fahrer während dieser Meisterschaft bereits erreicht hat.
+
+Nun können beliebig viele Strecken berechnet werden. Das Streckenergebnis wird daraufhin immer zufällig zur Gesamtpunktzahl des Fahrers addiert.
+
+## 10.4 Speicherung der Ergebniss
+Nachdem Kapitel 10.3 von Mebe ausgeführt wurde, wurde ein Ergebnis für jede Strecke berechnet.
+
+Doch was kommt als nächstes?
+
+Als Nächstes wird das Ergebnis persistent gespeichert. Da Mebe sie allerdings nicht wieder lesen kann, ist diese Funktion eher als zukünftiges Feature zu verstehen.
+
+Es soll ein Meistersachaftsergebnis gespeichert werden. Nun kann es sein, dass die Meisterschaft bereits durchgeführt wurde und das Ergebnis bereits abgespeichert wurde. 
+
+In dem Fall soll Mebe trotzdem Probieren, ob es die Datei ohne Konflikte schreiben kann. Wenn nein, dann existiert die Datei bereits und es wird die Prüfziffer um 1 erhöht.
+Die Prüfziffer entspricht der Anzahl der durchgeführten Berechnungen der Meisterschaft und ist als letztes Zeichen im Dateinamen geschrieben. Gestartet wird bei der Prüfziffer 1.
+
+Irgendwann kann Mebe die Datei erfollgreich schreiben. In dem Fall wird kein weiterer Versuch mehr probiert und die Auswertung geht weiter.
+
+## 10.5 Ermittlung der Rangliste
+Codezeile 322 in berechnen.py.
 
 ## 10.4 Berechnung der Meisterschaft
 
