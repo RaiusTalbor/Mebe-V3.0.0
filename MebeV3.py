@@ -21,7 +21,7 @@ from Aussehen import *
 def test():
     pass   
 
-# ----------Hilfe
+# ----------Hilfe - je nach OS anders aufgerufen
 
 import os
 import subprocess

@@ -648,11 +648,11 @@ Ein Problem stellt die Funktion dar. Da Mebe eher rekursiv arbeitet und die eben
 Dafür werden die Punkte in eine Variable "Punkte", dann als "Streckenergebnis" geschrieben.
 Aus der Ergebnisliste wird anschließend der Name des Fahrers extrahiert.
 
-Danach wird eine temporäre Datei für jeden Fahrer geschrieben unter dem Pfad "temporäre Dateien". Wenn die Datei bereits existiert, dann wird der Inhalt gelesen. Wenn nicht, wird die Datei erstellt und "0" wird gelesen.
+Danach wird eine temporäre Datei für jeden Fahrer geschrieben unter dem Pfad "temporäre Dateien". Wenn die Datei bereits existiert, dann wird der Inhalt gelesen. Wenn nicht, wird die Datei erstellt und "0" wird gelesen. Sie wird als Liste interpretiert.
 
-Nun werden die Punkte der Strecke dem Fahrer gut geschrieben, indem sie dem Wert aus der temporären Datei addiert werden. In der Datei befindet sich als genau die Punktzahl, die der Fahrer während dieser Meisterschaft bereits erreicht hat.
+Nun werden die Punkte der Strecke dem Fahrer gut geschrieben, in dem dieser Wert als weiteres Element dieser Punkteliste angehangen wird.
 
-Nun können beliebig viele Strecken berechnet werden. Das Streckenergebnis wird daraufhin immer zufällig zur Gesamtpunktzahl des Fahrers addiert.
+Nun können beliebig viele Strecken berechnet werden. Das Streckenergebnis wird daraufhin immer an die Punkteliste angehangen.
 
 ## 10.4 Speicherung der Ergebniss
 Nachdem Kapitel 10.3 von Mebe ausgeführt wurde, wurde ein Ergebnis für jede Strecke berechnet.
@@ -661,19 +661,46 @@ Doch was kommt als nächstes?
 
 Als Nächstes wird das Ergebnis persistent gespeichert. Da Mebe sie allerdings nicht wieder lesen kann, ist diese Funktion eher als zukünftiges Feature zu verstehen.
 
-Es soll ein Meistersachaftsergebnis gespeichert werden. Nun kann es sein, dass die Meisterschaft bereits durchgeführt wurde und das Ergebnis bereits abgespeichert wurde. 
+Es soll ein Meisterschaftsergebnis gespeichert werden. Nun kann es sein, dass die Meisterschaft bereits durchgeführt wurde und das Ergebnis bereits abgespeichert wurde. 
 
 In dem Fall soll Mebe trotzdem Probieren, ob es die Datei ohne Konflikte schreiben kann. Wenn nein, dann existiert die Datei bereits und es wird die Prüfziffer um 1 erhöht.
 Die Prüfziffer entspricht der Anzahl der durchgeführten Berechnungen der Meisterschaft und ist als letztes Zeichen im Dateinamen geschrieben. Gestartet wird bei der Prüfziffer 1.
 
-Irgendwann kann Mebe die Datei erfollgreich schreiben. In dem Fall wird kein weiterer Versuch mehr probiert und die Auswertung geht weiter.
+Irgendwann kann Mebe die Datei erfolgreich schreiben. In dem Fall wird kein weiterer Versuch mehr probiert und die Auswertung geht weiter.
 
 ## 10.5 Ermittlung der Rangliste
-Codezeile 322 in berechnen.py.
+Da die Ergebnisse bisher nur einzeln für jedes Rennen vorliegen, muss nun die Summe berechnet werden, was über eine For-Schleife für jeden Fahrer geschieht.
 
-## 10.4 Berechnung der Meisterschaft
+Anschließend muss das Ergebnis noch konvertiert werden, da die Listen anhand der erreichten Punktzahl sortiert werden. Die Sortierung erfolgt allerdings als String, sodass 2 Punkte vor 10 Punkten kommen kann (höchster Wert als erstes). Um dies zu vermeiden, wird jeder Punktzahl, die kleiner als 10 ist, "00" vorneweg gestellt, bei Punktzahlen kleiner 100 (elif) entsprechend eine 0.
+Der höchste, garantiert richtig sortierte Punktwert wäre demnach 999.
+
+Da bei einer Sortierung der Rangliste die Zuordnung verloren gehen würde, wird nach der als String interpretierten Punktzahl ein Leerzeichen und dann der zuvor aus dem Dateinamen extrahierte Fahrername angehangen.
+
+Anschließend kann die Liste sortiert und dann umgekehrt werden, sodass nun derjenige Fahrer mit seiner Punktzahl als erstes Element auftaucht, der die höchste Punktzahl hat.
+
+## 10.6 Speicherung der Meisterschaft
+Als letzter Schritt, wie zuvor die Einzelergebniss in Kapitel 10.4 auch, werden die Meisterschaftsergebnisse abgespeichert.
+Dabei wird auch dieselbe Mechanik verwendet, ebenso als zukünftiges Feature gedacht, da Mebe sie nicht wieder lesen kann.
+
+## 10.7 Ausgabe der Ergebnisses
+Als letztes wird das Ergebnis sichtbar auf der Anzeige gemacht, in dem das Info-Label mit dem Ergebnis beschrieben wird.
 
 # 11 Anzeige
 (Programmstart, Prozess, Aufgaben und Aussehen, Checkpoint)
+## 11.1 Anzeige.py und ihre Aufgaben
+Die größte Herausforderung in Mebe V3 war die grafische Darstellung. Die Logik dahinter steckt hauptsächlich in Anzeige.py.
+
+Die Aufgabe hinter diesem Skript ist es, das Fenster zu instanziieren und entsprechend zu definieren. Anzeige.py hält entsprechend Funktionen bzw. Methoden bereit, mit der man die Anzeige modifizieren kann.
+
+Wird das Modul Anzeige.py geladen, wird automatisch ein Objekt der Klasse Fenster erstellt, welches als prozess aufgerufen werden kann. Folgend wird also von Prozess gesprochen, welches die Logik der Anzeige bereithält und das Fenster repräsentiert.
+
+## 11.2 Start des Programms
+Mebe V3 wird über die Datei MebeV3.py gestartet. Dort wird Anzeige.py importiert und entsprechend geladen. Dadurch, dass sie beim ersten Laden immer direkt ausgeführt wird, wird dabei auch das Objekt prozess erstellt, welches dadurch global zugreifbar gemacht wird - womit nicht immer alle Objekte oder Callbacks übergeben werden müssen und so direkt auf die Methoden zugegriffen werden kann.
+
+Beide Dateien sind allerdings auch nicht zusammenführbar, da sonst durch die Imports ein Zyklus entstehen würde.
+
+MebeV3.py selbst baut nur das Hauptmenü erstmalig zusammen, bevor dann prozess selbst übernimmt. Hier werden alle nötigen Module importiert und auch die Buttons hinzugefügt, die beim Hauptmenü erscheinen sollen. Über die Buttons können dann die anderen Module aufgerufen werden.
+
+## 11.3 weiter mit Anzeige.py - Achtung irgendwo noch die Erkennung ob ersdtmaliger Start (Buttons?)
 
 # 12 Hilfsmodul Z-Hilfe-Leser (HiLe1)
